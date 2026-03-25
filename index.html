@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山行筆記 - 我的登山行程</title>
+    <style>
+        :root {
+            --primary-color: #2d5a27;
+            --bg-color: #f4f7f1;
+        }
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 { color: var(--primary-color); }
+        
+        /* 搜尋框樣式 */
+        .search-container {
+            margin-bottom: 30px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            outline: none;
+        }
+
+        /* 文章卡片樣式 */
+        .article-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+        .article-tag {
+            background: #e8f5e9;
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .article-title {
+            margin: 10px 0;
+            color: #222;
+        }
+        .article-info {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .no-results {
+            text-align: center;
+            color: #999;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🏔️ 山行筆記</h1>
+        <p>探索台灣山林，分享最真實的登山記錄</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="搜尋山名、難度或地點... (例如：玉山, 初級)">
+    </div>
+
+    <div id="articleList">
+        </div>
+</div>
+
+<script>
+    // 這裡存放你的登山行程資料
+    const hikingData = [
+        {
+            title: "玉山主峰 - 東北亞第一高峰",
+            date: "2023-10-15",
+            difficulty: "中級",
+            location: "南投縣",
+            content: "玉山主峰海拔3952公尺，是台灣人的必爬清單。這次兩天一夜入住排雲山莊，清晨攻頂看日出..."
+        },
+        {
+            title: "合歡山北峰 - 絕美高山草原",
+            date: "2023-11-20",
+            difficulty: "初級",
+            location: "南投縣",
+            content: "合歡北峰是合歡群峰中最高的一座，步道展望極佳，滿山的紅毛杜鵑與草原非常壯觀..."
+        },
+        {
+            title: "加羅湖 - 散落的珍珠",
+            date: "2024-01-05",
+            difficulty: "中級",
+            location: "宜蘭縣",
+            content: "兩天一夜的重裝行程。在霧氣繚繞的加羅湖畔紮營，感受仙境般的清晨，這是我最難忘的野營經歷。"
+        },
+        {
+            title: "台北大縱走 第一段",
+            date: "2024-03-12",
+            difficulty: "入門",
+            location: "台北市",
+            content: "從關渡捷運站出發到二子坪。全程緩上，適合週末踏青運動，視野可以俯瞰整個淡水河口。"
+        }
+    ];
+
+    const searchInput = document.getElementById('searchInput');
+    const articleList = document.getElementById('articleList');
+
+    // 渲染文章的函式
+    function renderArticles(data) {
+        articleList.innerHTML = '';
+        
+        if (data.length === 0) {
+            articleList.innerHTML = '<div class="no-results">找不到相關行程，換個關鍵字試試吧！</div>';
+            return;
+        }
+
+        data.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'article-card';
+            card.innerHTML = `
+                <span class="article-tag">${item.difficulty}</span>
+                <h2 class="article-title">${item.title}</h2>
+                <div class="article-info">📍 ${item.location} | 📅 ${item.date}</div>
+                <p>${item.content}</p>
+            `;
+            articleList.appendChild(card);
+        });
+    }
+
+    // 搜尋邏輯
+    searchInput.addEventListener('input', (e) => {
+        const keyword = e.target.value.toLowerCase();
+        const filteredData = hikingData.filter(item => 
+            item.title.toLowerCase().includes(keyword) || 
+            item.content.toLowerCase().includes(keyword) ||
+            item.location.toLowerCase().includes(keyword) ||
+            item.difficulty.toLowerCase().includes(keyword)
+        );
+        renderArticles(filteredData);
+    });
+
+    // 初始載入
+    renderArticles(hikingData);
+</script>
+
+</body>
+</html>
