@@ -11,7 +11,7 @@
             --white: #ffffff;
         }
 
-        /* ✨ 新增：讓網頁捲動變得順滑 */
+        /* 讓網頁捲動變得順滑 */
         html {
             scroll-behavior: smooth;
         }
@@ -52,17 +52,19 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        /* ✨ 新增：防止錨點跳轉後標題被導覽列擋住 */
+        /* 防止錨點跳轉後標題被導覽列擋住 */
         h3[id] {
             scroll-margin-top: 80px;
         }
 
+        /* 封面大圖樣式 */
         .hero-img {
             width: 100%;
             max-height: 450px;
-            object-fit: cover;
+            object-fit: cover; /* 確保封面圖填滿但不變形 */
             border-radius: 12px;
             margin-bottom: 30px;
+            display: block;
         }
 
         h1 { color: #222; margin-top: 0; font-size: 2em; }
@@ -85,7 +87,7 @@
 
         .gear-box h3 { margin-top: 0; color: var(--primary-color); }
 
-        /* ✨ 目錄連結樣式 */
+        /* 目錄連結樣式 */
         .toc-list {
             list-style: none;
             padding-left: 0;
@@ -110,6 +112,16 @@
             padding-bottom: 8px;
             margin-top: 40px;
             color: #222;
+        }
+
+        /* ✨✨ 關鍵修正：解決文中所有圖片破版問題 ✨✨ */
+        .trip-section img {
+            max-width: 100%;    /* 寬度最大隻能是白色框框的 100% */
+            height: auto;       /* 高度依比例自動調整，避免圖片變形 */
+            display: block;     /* 移除圖片下方的小空白間隙 */
+            margin: 25px auto;  /* 讓圖片上下留白，且左右置中 */
+            border-radius: 12px; /* 圓角 */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 輕微陰影 */
         }
 
         /* 表格樣式 */
@@ -137,7 +149,9 @@
         
         @media (max-width: 600px) {
             .content-container { margin: 15px; padding: 25px; }
+            /* 行動版封面大圖高度縮小 */
             .hero-img { max-height: 250px; }
+            h1 { font-size: 1.6em; }
         }
     </style>
 </head>
