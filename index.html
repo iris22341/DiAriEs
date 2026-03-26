@@ -102,47 +102,35 @@
 </div>
 
 <script>
-    // 這裡存放你的登山行程資料
+    // 這裡存放你的資料
+    // img: 圖片網址 (可用 Unsplash 或 Imgur)
+    // link: 外部文章網址 (IG、部落格等)
     const hikingData = [
         {
-            title: "我的第39座-雪山東峰",
-            date: "2025-11-23",
-            difficulty: "易⭐",
-            location: "南投縣",
-            content: "玉山主峰海拔3952公尺，是台灣人的必爬清單。這次兩天一夜入住排雲山莊，清晨攻頂看日出..."
+            title: "雪山東峰單攻",
+            date: "2025/11/23",
+            difficulty: "難易程度：⭐",
+            content："推薦給剛入山坑的新新手",
+            img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800",
+            link: "https://www.google.com" // 換成你的文章網址
         },
         {
-            title: "合歡山北峰 - 絕美高山草原",
-            date: "2023-11-20",
-            difficulty: "初級",
-            location: "南投縣",
-            content: "合歡北峰是合歡群峰中最高的一座，步道展望極佳，滿山的紅毛杜鵑與草原非常壯觀..."
-        },
-        {
-            title: "加羅湖 - 散落的珍珠",
-            date: "2024-01-05",
-            difficulty: "中級",
-            location: "宜蘭縣",
-            content: "兩天一夜的重裝行程。在霧氣繚繞的加羅湖畔紮營，感受仙境般的清晨，這是我最難忘的野營經歷。"
-        },
-        {
-            title: "台北大縱走 第一段",
-            date: "2024-03-12",
-            difficulty: "入門",
-            location: "台北市",
-            content: "從關渡捷運站出發到二子坪。全程緩上，適合週末踏青運動，視野可以俯瞰整個淡水河口。"
+            title: "NO.37-38 雪山主東峰",
+            date: "2025/08/16-08/17",
+            difficulty: "進階A+B",
+            img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800",
+            link: "https://www.google.com" // 換成你的文章網址
         }
     ];
 
-    const searchInput = document.getElementById('searchInput');
+const searchInput = document.getElementById('searchInput');
     const articleList = document.getElementById('articleList');
 
-    // 渲染文章的函式
     function renderArticles(data) {
         articleList.innerHTML = '';
         
         if (data.length === 0) {
-            articleList.innerHTML = '<div class="no-results">找不到相關行程，換個關鍵字試試吧！</div>';
+            articleList.innerHTML = '<div class="no-results">找不到相關行程</div>';
             return;
         }
 
@@ -150,10 +138,13 @@
             const card = document.createElement('div');
             card.className = 'article-card';
             card.innerHTML = `
-                <span class="article-tag">${item.difficulty}</span>
-                <h2 class="article-title">${item.title}</h2>
-                <div class="article-info">📍 ${item.location} | 📅 ${item.date}</div>
-                <p>${item.content}</p>
+                <img src="${item.img}" class="card-img" alt="${item.title}">
+                <div class="card-body">
+                    <span class="article-tag">${item.difficulty}</span>
+                    <a href="${item.link}" target="_blank" class="article-title">${item.title}</a>
+                    <div class="article-info">📅 ${item.date}</div>
+                    <a href="${item.link}" target="_blank" class="read-more">閱讀全文</a>
+                </div>
             `;
             articleList.appendChild(card);
         });
@@ -164,8 +155,6 @@
         const keyword = e.target.value.toLowerCase();
         const filteredData = hikingData.filter(item => 
             item.title.toLowerCase().includes(keyword) || 
-            item.content.toLowerCase().includes(keyword) ||
-            item.location.toLowerCase().includes(keyword) ||
             item.difficulty.toLowerCase().includes(keyword)
         );
         renderArticles(filteredData);
