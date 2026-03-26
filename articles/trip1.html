@@ -10,6 +10,12 @@
             --bg-color: #f4f7f1;
             --white: #ffffff;
         }
+
+        /* ✨ 新增：讓網頁捲動變得順滑 */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
             line-height: 1.8;
@@ -18,6 +24,7 @@
             margin: 0;
             padding: 0;
         }
+
         .nav-bar {
             background: var(--white);
             padding: 15px 20px;
@@ -26,6 +33,7 @@
             top: 0;
             z-index: 1000;
         }
+
         .nav-bar a {
             text-decoration: none;
             color: var(--primary-color);
@@ -34,6 +42,7 @@
             align-items: center;
             gap: 5px;
         }
+
         .content-container {
             max-width: 750px;
             margin: 40px auto;
@@ -42,6 +51,12 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
+
+        /* ✨ 新增：防止錨點跳轉後標題被導覽列擋住 */
+        h3[id] {
+            scroll-margin-top: 80px;
+        }
+
         .hero-img {
             width: 100%;
             max-height: 450px;
@@ -49,7 +64,9 @@
             border-radius: 12px;
             margin-bottom: 30px;
         }
+
         h1 { color: #222; margin-top: 0; font-size: 2em; }
+
         .post-meta {
             color: #888;
             font-size: 0.9em;
@@ -58,7 +75,6 @@
             padding-bottom: 15px;
         }
         
-        /* 裝備區塊美化 */
         .gear-box {
             background: #f1f8f1;
             padding: 25px;
@@ -66,8 +82,28 @@
             margin: 30px 0;
             border-left: 5px solid var(--primary-color);
         }
+
         .gear-box h3 { margin-top: 0; color: var(--primary-color); }
-        .gear-box ul { margin-bottom: 0; }
+
+        /* ✨ 目錄連結樣式 */
+        .toc-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        .toc-list a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        .toc-list a:hover {
+            opacity: 0.7;
+            text-decoration: underline;
+        }
 
         .trip-section h3 {
             border-bottom: 2px solid #e8f5e9;
@@ -76,11 +112,25 @@
             color: #222;
         }
 
-        .trip-section img {
+        /* 表格樣式 */
+        .trip-table {
             width: 100%;
-            border-radius: 12px;
-            margin: 25px 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-collapse: collapse;
+            margin: 15px 0 25px 0;
+            font-size: 0.9em;
+            background: white;
+        }
+        .trip-table th {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: left;
+            padding: 12px;
+            border: 1px solid #eee;
+        }
+        .trip-table td {
+            padding: 12px;
+            border: 1px solid #eee;
+            vertical-align: top;
         }
 
         footer { text-align: center; padding: 60px 20px; color: #aaa; font-size: 0.85em; }
@@ -88,7 +138,6 @@
         @media (max-width: 600px) {
             .content-container { margin: 15px; padding: 25px; }
             .hero-img { max-height: 250px; }
-            h1 { font-size: 1.6em; }
         }
     </style>
 </head>
@@ -99,58 +148,178 @@
 </nav>
 
 <article class="content-container">
-    <img src="../images/雪山東峰_01.JPG" alt="雪山東峰" class="hero-img">
+    <img src="DiAriEs/images/雪山東峰_01.JPG" alt="雪山東峰" class="hero-img">
 
     <h1>雪山東峰單攻紀錄</h1>
     <div class="post-meta">
-        📅 日期：2025/11/23 | ⛰️ 難度：易⭐ | 👤 作者：DiAriEs
+        我的第 39 座 | 📅 日期：2025/11/23 | ⛰️難度：易⭐ | 👤 作者：DiAriEs
     </div>
 
     <div class="gear-box">
         <h3> Table of Contents </h3>
-        <ul>
-            <li><strong>飲水：</strong>2L（視天氣增減）</li>
-            <li><strong>糧食：</strong>行動糧、飯糰、能量果凍</li>
-            <li><strong>服裝：</strong>底層排汗衣、中層保暖、防風雨外套</li>
-            <li><strong>配件：</strong>頭燈（必備）、登山杖、兩截式雨衣、遮陽帽</li>
-            <li><strong>數位：</strong>離線地圖（如 Hikingbook 或 GPX 軌跡）</li>
+        <ul class="toc-list">
+            <li><a href="#intro">一、雪山東峰簡介</a></li>
+            <li><strong>二、行程規劃建議</strong></li> 
+            <li><a href="#actual-trip">三、實際行程紀錄</a></li>
         </ul>
     </div>
 
     <section class="trip-section">
-        <h3>一、 雪山東峰簡介</h3>
+        <h3 id="intro">一、 雪山東峰簡介</h3>
         <p>
             雪山東峰海拔 3,201 公尺，位於台中市和平區，為台灣百岳排名第 74。其地理位置優越，從大水池登山口起登路徑清晰，是許多百岳新手的首選。
         </p>
 
         <h3>二、 行程規劃建議</h3>
+        <p>雪山群峰包含雪山東峰、雪山主峰、雪山北峰等，路線走法多元，</br>如果志在東峰，可選擇單攻(只撿東峰的話，個人較推薦)或兩天一夜，體力好的山友可以考慮一起撿主峰。</p>
         
-        <h4 style="color: #2d5a27;">🟢 新手友善：志在東峰</h4>
+        <h4 style="color: #2d5a27;">🟢 雪山東峰新手友善</h4>
         <ul>
-            <li><strong>雪山東峰單攻（最推薦）：</strong>
-                <ul>
-                    <li>里程：單程約 5k（來回約 10k ）。</li>
-                    <li>時程：輕裝新手建議抓 6-7小時（含休息）較為從容。</li>
-                </ul>
-            </li>
-            <li><strong>兩天一夜（悠閒版）：</strong>
-                <p>D1 抵達七卡山莊過夜，D2 輕裝散步上東峰。適合想在山上悠閒喝咖啡的人。</p>
-            </li>
+            <li><strong>單攻：</strong>來回約 10k，新手建議抓 6-7小時（含休息）較為從容。優點：可輕裝出發。</li>
+            <li><strong>兩天一夜：</strong>D1 在七卡過夜，D2 散步上東峰。優點：D1 可先適應高海拔，適合想優閒享受風景的山友，不過七卡假日不好搶，建議手速要快或是挑平日卡位。</li>
         </ul>
 
-        <h4 style="color: #a0522d;">🟡 進階挑戰：雪主東連走</h4>
+        <h4 style="color: #2d5a27;">🟡 雪主東進階挑戰</h4>
         <ul>
-            <li><strong>單攻雪主東（硬漢行程）：</strong>
-                <p>來回約 22 公里，建議凌晨 02:00 起登。這是一場體力與意志力的磨練！</p>
-            </li>
+            <li><strong>單攻：</strong>來回約 22k，建議抓 15小時（含休息）較保險。凌晨 02:00 起登，12:00 前如果尚未過圈谷，建議撤退，以免摸黑。優點：一次撿完兩座，CP值高。</li>
         </ul>
+        
+        <h3 id="actual-trip">三、 實際行程紀錄</h3>
+        <h4>01. 出團動機</h4>
+        <p>此次出團成員：阿純(Me)、Mark、阿巧、綿羊，共四人，四人平常都有運動習慣，基本上不太擔心大家的體能，比較擔心高山症跟過度疲勞(畢竟有人兜鈴成2.3點才睡，還有人前一天跑去喝酒^^)。</br>
+        這次原本是想跟男友一起爬山，結果行前吵架男友也沒去(現在已經是前男友ㄌ)，然後在上數據課跟同組成員們突然聊到好久沒上山，聽著大家分享近一次的爬山經驗，腳突然就癢起來，就約定等課程結束後要一起爬山！想說湊一車，便找了之前一起爬塔曼山的朋朋，就這樣成團！
+        </p>
 
-        <h3>三、 實地走訪紀錄</h3>
-        <p>從大水池登山口出發，一開始就是不斷的陡上。著名的「哭坡」雖然聽起來嚇人，但只要調整好呼吸，其實節奏很好掌握。</p>
+        <h4>02. 行前準備</h4>
+        <p><strong>(1) 裝備清單</strong></p>
+        <table class="trip-table">
+            <thead>
+                <tr>
+                    <th>衣物類</th>
+                    <th>裝備類</th>
+                    <th>必備證件與藥品</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>毛帽、排汗衣、羊毛長袖、輕羽絨、GORE-TEX 外套、登山褲、羊毛襪</td>
+                    <td>登山鞋、登山杖、雨衣褲、頭燈</td>
+                    <td>身分證、入園證、丹木斯/紅景天、離線地圖 GPX</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>(2) 申請項目</strong></p>
+        <table class="trip-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>是否需要 / 備註</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>入園證</strong></td>
+                    <td>需申請（雪霸國家公園）</td>
+                </tr>
+                <tr>
+                    <td><strong>入山證</strong></td>
+                    <td>不需要</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>03. 實際過程</h4>
+        <p><strong>距離：</strong>9.35k | <strong>時間：</strong>7:44:56 | <strong>總爬升：</strong>1,027m</p>
         
-        <img src="../images/view1.jpg" alt="雪山東峰山頂美景">
+        <table class="trip-table">
+            <thead>
+                <tr>
+                    <th style="width: 100px;">時間</th>
+                    <th>行程內容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>13:30</td><td>北車集合出發</td></tr>
+                <tr><td>18:30</td><td>抵達還清宮休息</td></tr>
+                <tr><td>02:30</td><td>起床準備</td></tr>
+                <tr><td>03:30</td><td>雪山登山口起登</td></tr>
+            </tbody>
+        </table>
+
+        <p>13:30 北車集合上車，從宜蘭往武陵方向開，車程預計4小。
+            中間在院長牛肉麵吃了午晚餐，牛肉麵中規中矩，老闆很好客，看到我們多點一份燙青菜，叫我們不用多點，可以幫我們在牛肉麵裡加菜，但還是收了燙青菜的錢XD
+            吃飽喝足在附近7-11補給後就直接往還清宮開，沿途趁機打了2朵菇(爬山皮友們ㄉ快樂就是荒郊野外的菇不用搶)，不得稱讚一下福特focus，真的超安靜，整趟車程很舒服~
+        </p>
+
+        <p>18:30到還清宮，宮內車子已停滿，在附近繞了一下最後停在斜坡下來左前方的小空間，比預計時間晚了半小時。
+            知道明天要早起，趕緊洗漱整理好裝備，20:00準備睡覺(我是4個人裡面最早躺床的XD)
+        </p>
+
+        <p>還清宮雖然仍有此起彼落的打呼聲，甚至聽得到隔壁間的對話(???)，整體睡眠品質還是不錯，床位乾淨，床跟床之間有獨立簾子可拉上，棉被也有南部陽光的香味，
+            如果追求睡眠品質，比起睡七卡山莊，也很推薦還清宮，要爬雪霸系列山頭(志佳陽、桃山喀拉業等)的山友，也可以考慮，
+            建議先電話預訂，一人一晚500元現場付現，缺點就是到登山口大概還需要20分鐘車程，規劃行程時記得預留一點時間~
+        </p>
+        <img src="DiAriEs/images/雪山東峰_02.jpg" alt="雪山東峰山頂">
+        <img src="DiAriEs/images/雪山東峰_03.jpg" alt="雪山東峰山頂">
+        <img src="DiAriEs/images/雪山東峰_04.jpg" alt="雪山東峰山頂">
+
+        <p>02:30 起床，03:00完妝(裝)後便從還清宮出發前往雪山登山口。
+            03:30抵達雪山停車場，沿途有看到兩個停車場(但爬文說有三個)，我們停在第一停車場，很幸運的還有空位，這是離雪山登山服務站最近的地方，
+            走一小段木棧階梯便來到服務站，大家可能還沒睡醒，三個女孩都沒發現上到男廁，甚至是下山後才發現XD儀錶板顯示雪山東峰目前3.9度，
+            投遞入園證意外瞥見旁邊販售冰淇淋的標誌，留著下山後來吃！
+        </p>
+        <img src="DiAriEs/images/雪山東峰_05.jpg" alt="雪山東峰山頂">
+        <img src="DiAriEs/images/雪山東峰_06.jpg" alt="雪山東峰山頂">
         
-        <p>攻頂後看到聖稜線的那一刻，所有的疲累瞬間都消失了。這就是登山的魔力吧！希望每個來到這裡的人，都能愛上這片山林。</p>
+        <p>雪山東峰沿途標示清楚，路況也算好走，4:30 七卡看星空
+            山屋的鼾聲讓我們小心翼翼，深怕吵到沉睡的山友，小休一下拍個星空，便繼續前行
+        </p>
+         <img src="DiAriEs/images/雪山東峰_07.jpg" alt="雪山東峰山頂">
+
+        <p>5:47 到一個展望極佳的路段欣賞東峰的雲海
+        </p>
+         <img src="DiAriEs/images/雪山東峰_08.jpg" alt="雪山東峰山頂">
+         <img src="DiAriEs/images/雪山東峰_09.jpg" alt="雪山東峰山頂">
+
+        <p>6:00 哭坡前大平台
+            為了等日出，身體漸漸冷掉(這次竟然忘記帶羽絨)，冷到瑟瑟發抖，只能尋覓微弱的陽光，讓身子暖和一點
+            拍照玩樂的同時，太陽出來了，喜獲一張與日出的合照
+            這一刻大家似乎默默有了一個共識：爬到東峰就好，此趟已心滿意足
+            在平台遇一位爬了N遍的大哥，大哥這趟準備撿主+東，聽到我們只撿東峰，大哥開始勸說以我們的腳程可以撿完主峰再下山，
+            叫我們跟著他爬，我們只是很感謝大哥的邀約，只是這一趟我們只想好好享受美景，沒有想讓自己太累XD
+        </p>
+         <img src="DiAriEs/images/雪山東峰_10.jpg" alt="雪山東峰山頂">
+         <img src="DiAriEs/images/雪山東峰_11.jpg" alt="雪山東峰山頂">
+
+        <p>6:30離開大平台，沿途的展望讓人心情愉悅
+            7:00經過哭坡的牌子，很意外的是長在地上哈哈
+        </p>
+         <img src="DiAriEs/images/雪山東峰_12.jpg" alt="雪山東峰山頂">
+         <img src="DiAriEs/images/雪山東峰_13.jpg" alt="雪山東峰山頂">
+        
+        <p>7:35抵達雪山東峰
+            在山腳點遇到一位獨攀勇者，無袖+短褲也是要撿主+東的山友，很專業的指導我們哪些角度拍起來很讚，就這樣我們又玩了半個小時，身體又冷到瑟瑟發抖哈哈
+        </p>
+         <img src="DiAriEs/images/雪山東峰_14.jpg" alt="雪山東峰山頂">
+         <img src="DiAriEs/images/雪山東峰_15.jpg" alt="雪山東峰山頂">
+
+        <p>雪山東峰的展望極佳，面對三角點的牌子，由右到左環繞一圈，雪主、雪北、武陵四秀、南胡群峰盡收眼底
+        </p>
+         <img src="DiAriEs/images/雪山東峰_16.jpg" alt="雪山東峰山頂">
+         <img src="DiAriEs/images/雪山東峰_17.jpg" alt="雪山東峰山頂">
+         <img src="DiAriEs/images/雪山東峰_18.jpg" alt="雪山東峰山頂">
+
+        <p>10:00回到七卡山莊，進去裡面晃了一圈，只剩下幾個床位還有山友的裝備，在山莊小休補給曬個日光浴，遍繼續往登山口前進
+        </p>
+         <img src="DiAriEs/images/雪山東峰_19.jpg" alt="雪山東峰山頂">
+
+        <p>11:00 抵達服務站了，有別凌晨起登的冷清，大家都把握好天氣出門踏青，黑水池、服務站商店已充滿人潮，我們也不忘初衷，跑去買了冰淇淋XD
+            買了三個口味，個人最愛烏龍茶，茶味很濃~下山後來一口，身心舒暢~
+        </p>
+         <img src="DiAriEs/images/雪山東峰_20.jpg" alt="雪山東峰山頂">
+         <img src="DiAriEs/images/雪山東峰_21.jpg" alt="雪山東峰山頂">
+
     </section>
 </article>
 
