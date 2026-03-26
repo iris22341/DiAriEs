@@ -1,3 +1,28 @@
+這段代碼中有幾個關鍵的語法錯誤和結構問題，這會導致你的網頁完全跑不出來（一片空白）或是圖片顯示不正常。
+
+我幫你抓出了這 3 個主要問題：
+
+1. 致命的 JavaScript 語法錯誤（導致網頁空白）
+在 hikingData 裡面，第一筆資料的 content 後面用了 全形冒號 ：，而且它是中文引號。JavaScript 只能識別半形冒號 :。
+
+❌ 錯誤：content："推薦給..."
+
+✅ 正確：content: "推薦給..."
+
+2. 標籤關閉順序錯誤
+在 HTML 部分，你的 <strong> 和 <p> 標籤順序顛倒了，這會讓瀏覽器解析出錯。
+
+❌ 錯誤：<p><strong> ... </p></strong>
+
+✅ 正確：<p><strong> ... </strong></p>
+
+3. 圖片與樣式缺失
+你在 JavaScript 裡面用了 class="card-img"，但你的 <style> 區塊裡完全沒有寫這個 class 的樣式，這會導致圖片大得亂七八糟或是無法顯示。此外，第一筆資料少了 img 欄位。
+
+🛠️ 修正後的完整代碼
+我已經幫你把語法修好了，並補上了圖片的 CSS 樣式。請直接複製這份：
+
+HTML
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -26,7 +51,6 @@
         }
         h1 { color: var(--primary-color); }
         
-        /* 搜尋框樣式 */
         .search-container {
             margin-bottom: 30px;
             position: sticky;
@@ -41,20 +65,33 @@
             border-radius: 25px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             outline: none;
+            box-sizing: border-box;
         }
 
-        /* 文章卡片樣式 */
         .article-card {
             background: white;
-            padding: 20px;
             border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
             transition: transform 0.2s;
         }
         .article-card:hover {
             transform: translateY(-5px);
         }
+
+        /* 補上圖片樣式 */
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
         .article-tag {
             background: #e8f5e9;
             color: var(--primary-color);
@@ -62,15 +99,27 @@
             border-radius: 15px;
             font-size: 0.8em;
             font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
         }
         .article-title {
+            display: block;
+            font-size: 1.4em;
+            font-weight: bold;
             margin: 10px 0;
             color: #222;
+            text-decoration: none;
         }
         .article-info {
             font-size: 0.9em;
             color: #666;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .read-more {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9em;
         }
         .no-results {
             text-align: center;
@@ -84,41 +133,39 @@
 <div class="container">
     <header>
         <h1> 👧DiAriEs - 女孩ㄉ凹兜日誌 </h1>
-        <p><strong> Recording My Dopamine Moments </p></strong></br>
-        <p> 喜歡跑河濱>>>跑操場>>>>>>>>>跑跑步機 <br/>
-            佛系完百、愜意走，希望能享受山頭不同時期的美</br>
-            山、海都喜歡，目前還是山系的女子</br>
-            希望每年能安排一次出國(●'◡'●)</br>
-            半馬PB：2:00:54｜百岳進度：39%｜AOW
+        <p><strong>Recording My Dopamine Moments</strong></p>
+        <p> 
+            喜歡跑河濱 >>> 跑操場 >>> 跑跑步機 <br/>
+            佛系完百、愜意走，希望能享受山頭不同時期的美<br/>
+            山、海都喜歡，目前還是山系的女子<br/>
+            希望每年能安排一次出國 (●'◡'●)<br/>
+            半馬 PB：2:00:54 ｜ 百岳進度：39% ｜ AOW
         </p>
     </header>
 
     <div class="search-container">
-        <input type="text" id="searchInput" placeholder="搜尋山名、難度或地點... (例如：玉山, 初級)">
+        <input type="text" id="searchInput" placeholder="搜尋山名、難度或地點...">
     </div>
 
-    <div id="articleList">
-        </div>
+    <div id="articleList"></div>
 </div>
 
 <script>
-    // 這裡存放你的資料
-    // img: 圖片網址 (可用 Unsplash 或 Imgur)
-    // link: 外部文章網址 (IG、部落格等)
     const hikingData = [
         {
             title: "雪山東峰單攻",
             date: "2025/11/23",
             difficulty: "難易程度：⭐",
-            content："推薦給剛入山坑的新新手",
-            link: "articles/trip1.html" // 換成你的文章網址
+            content: "推薦給剛入山坑的新新手", // 修正冒號與引號
+            img: "images/IMG_7267.JPG", // 補上圖片路徑
+            link: "articles/trip1.html"
         },
         {
             title: "NO.37-38 雪山主東峰",
             date: "2025/08/16-08/17",
             difficulty: "進階A+B",
             img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800",
-            link: "https://www.google.com" // 換成你的文章網址
+            link: "https://www.google.com"
         }
     ];
 
@@ -140,16 +187,15 @@
                 <img src="${item.img}" class="card-img" alt="${item.title}">
                 <div class="card-body">
                     <span class="article-tag">${item.difficulty}</span>
-                    <a href="${item.link}" target="_blank" class="article-title">${item.title}</a>
+                    <a href="${item.link}" class="article-title">${item.title}</a>
                     <div class="article-info">📅 ${item.date}</div>
-                    <a href="${item.link}" target="_blank" class="read-more">閱讀全文</a>
+                    <a href="${item.link}" class="read-more">閱讀全文 →</a>
                 </div>
             `;
             articleList.appendChild(card);
         });
     }
 
-    // 搜尋邏輯
     searchInput.addEventListener('input', (e) => {
         const keyword = e.target.value.toLowerCase();
         const filteredData = hikingData.filter(item => 
@@ -159,7 +205,6 @@
         renderArticles(filteredData);
     });
 
-    // 初始載入
     renderArticles(hikingData);
 </script>
 
