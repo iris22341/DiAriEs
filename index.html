@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 👧DiAriEs - 愛運動女孩ㄉ凹兜日誌 </title>
+    <title> 👧 DiAriEs - 愛運動女孩ㄉ凹兜日誌 </title>
     <style>
         :root {
             --primary-color: #2d5a27;
@@ -50,7 +50,7 @@
             background: white;
         }
 
-        /* 卡片設計升級 */
+        /* 卡片設計 */
         .article-card {
             background: white;
             border-radius: 16px;
@@ -63,15 +63,14 @@
             transform: translateY(-8px);
         }
 
-        /* 圖片自適應調整：完整顯示但限制最大高度 */
         .card-img-container {
             background: #eee;
             text-align: center;
         }
         .card-img {
             width: 100%;
-            max-height: 450px; /* 限制高度，避免照片太長佔滿螢幕 */
-            object-fit: contain; /* 確保完整顯示，不裁切 */
+            max-height: 450px; 
+            object-fit: contain; 
             display: block;
         }
 
@@ -110,7 +109,6 @@
             margin-bottom: 20px;
         }
         
-        /* 閱讀全文按鈕化 */
         .read-more {
             display: inline-block;
             padding: 8px 20px;
@@ -206,12 +204,17 @@
         });
     }
 
+    // 核心修正：全方位搜尋邏輯
     searchInput.addEventListener('input', (e) => {
         const keyword = e.target.value.toLowerCase();
-        const filteredData = hikingData.filter(item => 
-            item.title.toLowerCase().includes(keyword) || 
-            item.difficulty.toLowerCase().includes(keyword)
-        );
+        const filteredData = hikingData.filter(item => {
+            const titleMatch = item.title.toLowerCase().includes(keyword);
+            const difficultyMatch = item.difficulty.toLowerCase().includes(keyword);
+            const contentMatch = (item.content || "").toLowerCase().includes(keyword);
+            
+            // 只要其中一個符合就回傳 true
+            return titleMatch || difficultyMatch || contentMatch;
+        });
         renderArticles(filteredData);
     });
 
