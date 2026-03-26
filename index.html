@@ -1,21 +1,23 @@
-HTML
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 👧DiAriEs - 女孩ㄉ凹兜日誌 </title>
+    <title> 👧DiAriEs - 愛運動女孩ㄉ凹兜日誌 </title>
     <style>
         :root {
             --primary-color: #2d5a27;
             --bg-color: #f4f7f1;
+            --text-color: #333;
+            --secondary-text: #666;
         }
         body {
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
             background-color: var(--bg-color);
             margin: 0;
             padding: 20px;
-            color: #333;
+            color: var(--text-color);
+            line-height: 1.6;
         }
         .container {
             max-width: 800px;
@@ -24,9 +26,12 @@ HTML
         header {
             text-align: center;
             margin-bottom: 40px;
+            padding: 20px 0;
         }
-        h1 { color: var(--primary-color); }
+        h1 { color: var(--primary-color); margin-bottom: 10px; }
+        .header-bio { margin-top: 15px; font-size: 0.95em; }
         
+        /* 搜尋框美化 */
         .search-container {
             margin-bottom: 30px;
             position: sticky;
@@ -35,68 +40,93 @@ HTML
         }
         #searchInput {
             width: 100%;
-            padding: 15px;
-            font-size: 18px;
+            padding: 15px 25px;
+            font-size: 16px;
             border: 2px solid var(--primary-color);
-            border-radius: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(45, 90, 39, 0.15);
             outline: none;
             box-sizing: border-box;
+            background: white;
         }
 
+        /* 卡片設計升級 */
         .article-card {
             background: white;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             overflow: hidden;
-            transition: transform 0.2s;
+            transition: transform 0.3s ease;
         }
         .article-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
         }
 
-        /* 補上圖片樣式 */
+        /* 圖片自適應調整：完整顯示但限制最大高度 */
+        .card-img-container {
+            background: #eee;
+            text-align: center;
+        }
         .card-img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            max-height: 450px; /* 限制高度，避免照片太長佔滿螢幕 */
+            object-fit: contain; /* 確保完整顯示，不裁切 */
             display: block;
         }
 
         .card-body {
-            padding: 20px;
+            padding: 25px;
         }
 
         .article-tag {
             background: #e8f5e9;
             color: var(--primary-color);
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
             font-weight: bold;
             display: inline-block;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .article-title {
             display: block;
-            font-size: 1.4em;
+            font-size: 1.5em;
             font-weight: bold;
-            margin: 10px 0;
+            margin-bottom: 10px;
             color: #222;
             text-decoration: none;
         }
-        .article-info {
-            font-size: 0.9em;
-            color: #666;
+        .article-content {
+            font-size: 1em;
+            color: var(--text-color);
             margin-bottom: 15px;
+            border-left: 3px solid #e8f5e9;
+            padding-left: 10px;
         }
+        .article-info {
+            font-size: 0.85em;
+            color: var(--secondary-text);
+            margin-bottom: 20px;
+        }
+        
+        /* 閱讀全文按鈕化 */
         .read-more {
-            color: var(--primary-color);
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: var(--primary-color);
+            color: white;
             text-decoration: none;
+            border-radius: 8px;
             font-weight: bold;
             font-size: 0.9em;
+            transition: opacity 0.2s;
         }
+        .read-more:hover {
+            opacity: 0.85;
+            color: white;
+        }
+
         .no-results {
             text-align: center;
             color: #999;
@@ -108,15 +138,15 @@ HTML
 
 <div class="container">
     <header>
-        <h1> 👧DiAriEs - 愛運動女孩ㄉ凹兜日誌 </h1>
-        <p><strong>Recording My Dopamine Moments</strong></p>
-        <p> 
-            喜歡跑河濱 >>> 跑操場 >>> 跑跑步機 <br/>
-            佛系完百、愜意走，希望能享受山頭不同時期的美<br/>
+        <h1> 👧 DiAriEs - 愛運動女孩ㄉ凹兜日誌 </h1>
+        <p><strong>✨ Recording My Dopamine Moments ✨</strong></p>
+        <div class="header-bio"> 
+            喜歡跑河濱 > 跑操場 >>> 跑跑步機 <br/>
+            佛系完百，享受山頭不同時期的美<br/>
             山、海都喜歡，目前還是山系的女子<br/>
-            希望每年能安排一次出國 (●'◡'●)<br/>
+            每年安排一次出國 (●'◡'●)<br/>
             半馬 PB：2:00:54 ｜ 百岳進度：39% ｜ AOW
-        </p>
+        </div>
     </header>
 
     <div class="search-container">
@@ -132,14 +162,15 @@ HTML
             title: "雪山東峰單攻",
             date: "2025/11/23",
             difficulty: "難易程度：⭐",
-            content: "推薦給剛入山坑的新新手", // 修正冒號與引號
-            img: "images/IMG_7267.JPG", // 補上圖片路徑
+            content: "推薦給剛入山坑的新新手，展望極佳！",
+            img: "images/IMG_7267.JPG", 
             link: "articles/trip1.html"
         },
         {
             title: "NO.37-38 雪山主東峰",
             date: "2025/08/16-08/17",
             difficulty: "進階A+B",
+            content: "兩天一夜的經典行程，雖然累但聖稜線無敵。",
             img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800",
             link: "https://www.google.com"
         }
@@ -160,10 +191,13 @@ HTML
             const card = document.createElement('div');
             card.className = 'article-card';
             card.innerHTML = `
-                <img src="${item.img}" class="card-img" alt="${item.title}">
+                <div class="card-img-container">
+                    <img src="${item.img}" class="card-img" alt="${item.title}">
+                </div>
                 <div class="card-body">
                     <span class="article-tag">${item.difficulty}</span>
-                    <a href="${item.link}" class="article-title">${item.title}</a>
+                    <a href="${item.link}" target="_blank" class="article-title">${item.title}</a>
+                    <p class="article-content">${item.content || ""}</p> 
                     <div class="article-info">📅 ${item.date}</div>
                     <a href="${item.link}" target="_blank" class="read-more">閱讀全文 →</a>
                 </div>
