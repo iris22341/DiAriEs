@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>雪山東峰單攻紀錄</title>
+    <title>雪山東峰單攻紀錄 - 👧DiAriEs</title>
     <style>
         :root {
             --primary-color: #2d5a27;
             --bg-color: #f4f7f1;
+            --white: #ffffff;
         }
         body {
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
@@ -18,7 +19,7 @@
             padding: 0;
         }
         .nav-bar {
-            background: white;
+            background: var(--white);
             padding: 15px 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             position: sticky;
@@ -29,23 +30,26 @@
             text-decoration: none;
             color: var(--primary-color);
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         .content-container {
-            max-width: 700px;
+            max-width: 750px;
             margin: 40px auto;
-            background: white;
+            background: var(--white);
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
         .hero-img {
             width: 100%;
-            height: 350px;
+            max-height: 450px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 30px;
         }
-        h1 { color: #222; margin-bottom: 10px; }
+        h1 { color: #222; margin-top: 0; font-size: 2em; }
         .post-meta {
             color: #888;
             font-size: 0.9em;
@@ -53,60 +57,105 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 15px;
         }
+        
+        /* 裝備區塊美化 */
         .gear-box {
-            background: #e8f5e9;
-            padding: 20px;
-            border-radius: 10px;
+            background: #f1f8f1;
+            padding: 25px;
+            border-radius: 12px;
             margin: 30px 0;
+            border-left: 5px solid var(--primary-color);
         }
         .gear-box h3 { margin-top: 0; color: var(--primary-color); }
-        .trip-content img {
-            width: 100%;
-            border-radius: 8px;
-            margin: 20px 0;
+        .gear-box ul { margin-bottom: 0; }
+
+        .trip-section h3 {
+            border-bottom: 2px solid #e8f5e9;
+            padding-bottom: 8px;
+            margin-top: 40px;
+            color: #222;
         }
-        footer { text-align: center; padding: 40px; color: #aaa; font-size: 0.8em; }
+
+        .trip-section img {
+            width: 100%;
+            border-radius: 12px;
+            margin: 25px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        footer { text-align: center; padding: 60px 20px; color: #aaa; font-size: 0.85em; }
         
         @media (max-width: 600px) {
-            .content-container { margin: 10px; padding: 20px; }
-            .hero-img { height: 200px; }
+            .content-container { margin: 15px; padding: 25px; }
+            .hero-img { max-height: 250px; }
+            h1 { font-size: 1.6em; }
         }
     </style>
 </head>
 <body>
 
 <nav class="nav-bar">
-    <a href="../index.html">← 返回首頁</a>
+    <a href="../index.html"><span>←</span> 返回日誌首頁</a>
 </nav>
 
-<div class="content-container">
-    <img src="images/雪山東峰_01.JPG" alt="雪山東峰" class="hero-img">
+<article class="content-container">
+    <img src="../images/雪山東峰_01.JPG" alt="雪山東峰" class="hero-img">
 
     <h1>雪山東峰單攻紀錄</h1>
     <div class="post-meta">
-        📅 日期：2025/11/23 | ⛰️ 難度：易⭐
+        📅 日期：2025/11/23 | ⛰️ 難度：易⭐ | 👤 作者：DiAriEs
     </div>
-        
-        <div class="gear-box">
-            <h3>🎒 裝備清單</h3>
-            <ul>
-                <li>水：2L</li>
-                <li>食物：行動糧、麵包、能量飲</li>
-                <li>服裝：排汗衣、防風外套、遮陽帽</li>
-                <li>其他：頭燈、登山杖、離線地圖</li>
-            </ul>
-        </div>
 
-        <p>從大水池登山口出發，一開始就是不斷的陡上。著名的「哭坡」雖然聽起來嚇人，但慢慢走其實節奏很好調整。</p>
-        
-        <img src="../images/view1.jpg" alt="山頂美景">
-        
-        <p>攻頂後看到聖稜線的震撼感，真的讓一切辛苦都值得了！這就是我愛上登山的原因。</p>
+    <div class="gear-box">
+        <h3> Table of Contents </h3>
+        <ul>
+            <li><strong>飲水：</strong>2L（視天氣增減）</li>
+            <li><strong>糧食：</strong>行動糧、飯糰、能量果凍</li>
+            <li><strong>服裝：</strong>底層排汗衣、中層保暖、防風雨外套</li>
+            <li><strong>配件：</strong>頭燈（必備）、登山杖、兩截式雨衣、遮陽帽</li>
+            <li><strong>數位：</strong>離線地圖（如 Hikingbook 或 GPX 軌跡）</li>
+        </ul>
     </div>
-</div>
+
+    <section class="trip-section">
+        <h3>一、 雪山東峰簡介</h3>
+        <p>
+            雪山東峰海拔 3,201 公尺，位於台中市和平區，為台灣百岳排名第 74。其地理位置優越，從大水池登山口起登路徑清晰，是許多百岳新手的首選。
+        </p>
+
+        <h3>二、 行程規劃建議</h3>
+        
+        <h4 style="color: #2d5a27;">🟢 新手友善：志在東峰</h4>
+        <ul>
+            <li><strong>雪山東峰單攻（最推薦）：</strong>
+                <ul>
+                    <li>里程：單程約 5k（來回約 10k ）。</li>
+                    <li>時程：輕裝新手建議抓 6-7小時（含休息）較為從容。</li>
+                </ul>
+            </li>
+            <li><strong>兩天一夜（悠閒版）：</strong>
+                <p>D1 抵達七卡山莊過夜，D2 輕裝散步上東峰。適合想在山上悠閒喝咖啡的人。</p>
+            </li>
+        </ul>
+
+        <h4 style="color: #a0522d;">🟡 進階挑戰：雪主東連走</h4>
+        <ul>
+            <li><strong>單攻雪主東（硬漢行程）：</strong>
+                <p>來回約 22 公里，建議凌晨 02:00 起登。這是一場體力與意志力的磨練！</p>
+            </li>
+        </ul>
+
+        <h3>三、 實地走訪紀錄</h3>
+        <p>從大水池登山口出發，一開始就是不斷的陡上。著名的「哭坡」雖然聽起來嚇人，但只要調整好呼吸，其實節奏很好掌握。</p>
+        
+        <img src="../images/view1.jpg" alt="雪山東峰山頂美景">
+        
+        <p>攻頂後看到聖稜線的那一刻，所有的疲累瞬間都消失了。這就是登山的魔力吧！希望每個來到這裡的人，都能愛上這片山林。</p>
+    </section>
+</article>
 
 <footer>
-    © 2026 DiAriEs' Blog | Capturing every moment of happiness.
+    © 2026 DiAriEs' Blog | Capturing every moment of dopamine.
 </footer>
 
 </body>
