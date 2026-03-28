@@ -10,7 +10,6 @@
             --sidebar-collapsed-width: 70px;
             --primary-green: #2d5a27;
             --light-green: #f4f7f1;
-            --accent-orange: #e67e22; /* 點擊吸引色 */
         }
 
         body {
@@ -21,7 +20,7 @@
             transition: all 0.3s ease;
         }
 
-        /* 1. 左側選單 */
+        /* 1. 左側選單 (桌機版) */
         .sidebar {
             width: var(--sidebar-width);
             height: 100vh;
@@ -56,7 +55,7 @@
             border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; 
         }
 
-        .sidebar-menu { list-style: none; padding: 0; }
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
         .sidebar-menu li { margin: 25px 0; }
         .sidebar-menu a {
             color: rgba(255,255,255,0.8);
@@ -81,14 +80,14 @@
             border-left: 5px solid var(--primary-green);
             padding-left: 20px;
         }
-        header h1 { color: var(--primary-green); margin-bottom: 10px; }
-        .header-bio { color: #555; line-height: 1.8; margin-top: 15px; }
+        header h1 { color: var(--primary-green); margin-bottom: 10px; font-size: 1.8em; }
+        .header-bio { color: #555; line-height: 1.8; margin-top: 15px; font-size: 0.95em; }
 
-        /* 文章區塊顯示控制 */
+        /* 文章區塊 */
         .category-section {
-            display: block; /* 預設全部顯示 */
+            display: block;
             background: white; border-radius: 20px;
-            margin-bottom: 50px; overflow: hidden;
+            margin-bottom: 40px; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             animation: fadeIn 0.5s;
         }
@@ -96,8 +95,8 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .category-banner { width: 100%; height: 250px; object-fit: cover; }
-        .category-info { padding: 30px; }
-        .category-info h3 { color: var(--primary-green); margin-top: 0; font-size: 1.5em; border-bottom: 2px solid var(--light-green); padding-bottom: 10px;}
+        .category-info { padding: 25px; }
+        .category-info h3 { color: var(--primary-green); margin-top: 0; font-size: 1.3em; border-bottom: 2px solid var(--light-green); padding-bottom: 10px;}
 
         .article-list { list-style: none; padding: 0; margin-top: 20px; }
         .article-list li {
@@ -105,62 +104,52 @@
             display: flex; justify-content: space-between; align-items: center;
         }
 
-        /* ✨ 吸引點擊的文章連結樣式 ✨ */
         .article-list a { 
-            text-decoration: none; 
-            color: #333; 
-            font-size: 1.1em;
-            font-weight: 500;
-            position: relative;
-            display: inline-block;
-            transition: color 0.3s;
+            text-decoration: none; color: #333; font-size: 1.05em; font-weight: 500;
+            position: relative; display: inline-block; transition: 0.3s;
         }
 
-        /* 增加箭頭符號 */
-        .article-list a::before {
-            content: "➔";
-            margin-right: 8px;
-            color: var(--primary-green);
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: 0.3s;
-            display: inline-block;
+        /* 桌機版才顯示箭頭，手機版簡化 */
+        @media (min-width: 769px) {
+            .article-list a::before {
+                content: "➔"; margin-right: 8px; color: var(--primary-green);
+                opacity: 0; transform: translateX(-10px); transition: 0.3s; display: inline-block;
+            }
+            .article-list a:hover { color: var(--primary-green); padding-left: 5px; }
+            .article-list a:hover::before { opacity: 1; transform: translateX(0); }
         }
-
-        .article-list a:hover { color: var(--primary-green); }
-        
-        .article-list a:hover::before {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* 底線動畫 */
-        .article-list a::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 20px;
-            background-color: var(--primary-green);
-            transition: width 0.3s;
-        }
-        .article-list a:hover::after { width: calc(100% - 20px); }
 
         .article-date { 
-            color: #aaa; 
-            font-size: 0.9em; 
-            background: #f9f9f9;
-            padding: 4px 10px;
-            border-radius: 12px;
+            color: #aaa; font-size: 0.85em; background: #f9f9f9;
+            padding: 4px 10px; border-radius: 12px; white-space: nowrap; margin-left: 10px;
         }
 
+        /* 📱 手機版專屬樣式修正 */
         @media (max-width: 768px) {
             body { flex-direction: column; }
-            .sidebar { width: 100% !important; height: auto; position: relative; }
-            .sidebar-inner { opacity: 1 !important; pointer-events: auto !important; }
-            .main-content { margin-left: 0 !important; padding: 20px; }
-            .toggle-btn { display: none; }
+            
+            /* 讓選單變成頂部橫向滑動列 */
+            .sidebar {
+                width: 100% !important; height: auto; position: sticky; top: 0;
+                background: var(--primary-green); box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            }
+            .toggle-btn, .sidebar h2, .sidebar hr { display: none; }
+            
+            .sidebar-inner { padding: 10px 15px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            
+            .sidebar-menu { display: flex; gap: 15px; align-items: center; }
+            .sidebar-menu li { margin: 0; flex-shrink: 0; }
+            .sidebar-menu a { padding: 8px 15px; background: rgba(255,255,255,0.1); border-radius: 20px; font-size: 0.9em; }
+            .sidebar-menu a.active { background: white; color: var(--primary-green); }
+
+            .main-content { margin-left: 0 !important; padding: 20px 15px; }
+            .category-banner { height: 180px; } /* 手機版縮短圖片高度 */
+            
+            header { padding-left: 15px; margin-bottom: 25px; }
+            header h1 { font-size: 1.5em; }
+
+            .article-list li { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .article-date { margin-left: 0; }
         }
     </style>
 </head>
@@ -171,21 +160,20 @@
     <div class="sidebar-inner">
         <h2>DiAriEs 分類</h2>
         <ul class="sidebar-menu">
-            <li><a onclick="showCategory('mountain')" class="menu-item">⛰️ DiAriEs about 爬山</a></li>
-            <li><a onclick="showCategory('sea')" class="menu-item">🌊 DiAriEs about 潛水</a></li>
-            <li><a onclick="showCategory('run')" class="menu-item">🏃 DiAriEs about 跑步</a></li>
-            <li><a onclick="showCategory('travel')" class="menu-item">✈️ DiAriEs about 旅行</a></li>
-            <hr style="opacity: 0.2; margin: 20px 0;">
-            <li><a onclick="showAll()" class="menu-item">顯示全部內容...</a></li>
+            <li><a onclick="showCategory('mountain')" class="menu-item">⛰️ 爬山</a></li>
+            <li><a onclick="showCategory('sea')" class="menu-item">🌊 潛水</a></li>
+            <li><a onclick="showCategory('run')" class="menu-item">🏃 跑步</a></li>
+            <li><a onclick="showCategory('travel')" class="menu-item">✈️ 旅行</a></li>
+            <hr>
+            <li><a onclick="showAll()" class="menu-item active">🏠 全部</a></li>
         </ul>
     </div>
 </nav>
 
 <main class="main-content" id="mainSection">
     <header>
-        <h1>👧 DiAriEs - 愛運動女孩ㄉ凹兜日誌</h1>
+        <h1>👧 DiAriEs - 凹兜日誌</h1>
         <div class="header-bio"> 
-            喜歡跑河濱 > 跑操場 >>> 跑步機 <br/>
             佛系完百，享受山頭不同時期的美<br/>
             山、海都愛，目前還是山系女子<br/>
             目標每年安排一次出國 (●'◡'●)<br/>
@@ -197,8 +185,8 @@
         <div class="category-info">
             <h3>⛰️ DiAriEs about 爬山</h3>
             <ul class="article-list">
-                <li><a href="articles/trip1.html">雪山東峰單攻紀錄</a><span class="article-date">2025/11/23</span></li>
-                <li><a href="#">大霸尖山三日行</a><span class="article-date">2026/01/10</span></li>
+                <li><a href="articles/trip1.html" target="_blank" rel="noopener noreferrer">雪山東峰單攻紀錄</a><span class="article-date">2025/11/23</span></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">大霸尖山三日行</a><span class="article-date">2026/01/10</span></li>
             </ul>
         </div>
     </section>
@@ -208,7 +196,7 @@
         <div class="category-info">
             <h3>🌊 DiAriEs about 潛水</h3>
             <ul class="article-list">
-                <li><a href="#">自潛紀錄：小琉球尋龜記</a><span class="article-date">2025/08/15</span></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">自潛紀錄：小琉球尋龜記</a><span class="article-date">2025/08/15</span></li>
             </ul>
         </div>
     </section>
@@ -218,7 +206,7 @@
         <div class="category-info">
             <h3>🏃 DiAriEs about 跑步</h3>
             <ul class="article-list">
-                <li><a href="#">台北馬拉松初半馬心得</a><span class="article-date">2025/12/20</span></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">台北馬拉松初半馬心得</a><span class="article-date">2025/12/20</span></li>
             </ul>
         </div>
     </section>
@@ -228,7 +216,7 @@
         <div class="category-info">
             <h3>✈️ DiAriEs about 旅行</h3>
             <ul class="article-list">
-                <li><a href="#">京都散策：鴨川跳龜</a><span class="article-date">2025/11/01</span></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">京都散策：鴨川跳龜</a><span class="article-date">2025/11/01</span></li>
             </ul>
         </div>
     </section>
@@ -240,33 +228,26 @@
         document.getElementById("mainSection").classList.toggle("expanded");
     }
 
-    // 顯示特定分類
     function showCategory(categoryId) {
         const sections = document.querySelectorAll('.category-section');
         sections.forEach(sec => {
-            if (sec.id === categoryId) {
-                sec.style.display = 'block';
-            } else {
-                sec.style.display = 'none';
-            }
+            sec.style.display = (sec.id === categoryId) ? 'block' : 'none';
         });
 
-        // 更新選單高亮
         const menuItems = document.querySelectorAll('.menu-item');
         menuItems.forEach(item => item.classList.remove('active'));
-        event.currentTarget.classList.add('active');
+        if (event) event.currentTarget.classList.add('active');
         
-        // 自動捲動到最上方看該分類
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 顯示全部
     function showAll() {
         const sections = document.querySelectorAll('.category-section');
         sections.forEach(sec => sec.style.display = 'block');
         
         const menuItems = document.querySelectorAll('.menu-item');
         menuItems.forEach(item => item.classList.remove('active'));
+        if (event) event.currentTarget.classList.add('active');
         
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
