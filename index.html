@@ -1,225 +1,136 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 👧 DiAriEs - 愛運動女孩ㄉ凹兜日誌 </title>
-    <style>
-        :root {
-            --primary-color: #2d5a27;
-            --bg-color: #f4f7f1;
-            --text-color: #333;
-            --secondary-text: #666;
-        }
-        body {
-            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 20px;
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px 0;
-        }
-        h1 { color: var(--primary-color); margin-bottom: 10px; }
-        .header-bio { margin-top: 15px; font-size: 0.95em; }
-        
-        /* 搜尋框美化 */
-        .search-container {
-            margin-bottom: 30px;
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-        }
-        #searchInput {
-            width: 100%;
-            padding: 15px 25px;
-            font-size: 16px;
-            border: 2px solid var(--primary-color);
-            border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(45, 90, 39, 0.15);
-            outline: none;
-            box-sizing: border-box;
-            background: white;
-        }
-
-        /* 卡片設計 */
-        .article-card {
-            background: white;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-        .article-card:hover {
-            transform: translateY(-8px);
-        }
-
-        .card-img-container {
-            background: #eee;
-            text-align: center;
-        }
-        .card-img {
-            width: 100%;
-            max-height: 100%; 
-            object-fit: contain; 
-            display: block;
-        }
-
-        .card-body {
-            padding: 25px;
-        }
-
-        .article-tag {
-            background: #e8f5e9;
-            color: var(--primary-color);
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 12px;
-        }
-        .article-title {
-            display: block;
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #222;
-            text-decoration: none;
-        }
-        .article-content {
-            font-size: 1em;
-            color: var(--text-color);
-            margin-bottom: 15px;
-            border-left: 3px solid #e8f5e9;
-            padding-left: 10px;
-        }
-        .article-info {
-            font-size: 0.85em;
-            color: var(--secondary-text);
-            margin-bottom: 20px;
-        }
-        
-        .read-more {
-            display: inline-block;
-            padding: 8px 20px;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 0.9em;
-            transition: opacity 0.2s;
-        }
-        .read-more:hover {
-            opacity: 0.85;
-            color: white;
-        }
-
-        .no-results {
-            text-align: center;
-            color: #999;
-            margin-top: 50px;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <header>
-        <h1> 👧 DiAriEs - 愛運動女孩ㄉ凹兜日誌 </h1>
-        <p><strong>—— Recording My Dopamine Moments ——</strong></p>
-        <div class="header-bio"> 
-            喜歡跑河濱 > 跑操場 >>> 跑步機 <br/>
-            佛系完百，享受山頭不同時期的美<br/>
-            山、海都愛，目前還是山系女子<br/>
-            目標每年安排一次出國 (●'◡'●)<br/>
-            半馬 PB：2:00:54 ｜ 百岳進度：39% ｜ AOW
-        </div>
-    </header>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="搜尋山名、難度或地點...">
-    </div>
-
-    <div id="articleList"></div>
-</div>
-
-<script>
-    const hikingData = [
-        {
-            title: "雪山東峰單攻",
-            date: "2025/11/23",
-            difficulty: "難度：易⭐",
-            content: "適合剛入坑的新新手！",
-            img: "images/雪山東峰_01.JPG", 
-            link: "articles/trip1.html"
-        },
-        {
-            title: "NO.37-38 雪山主東峰",
-            date: "2025/08/16-08/17",
-            difficulty: "進階A+B",
-            content: "兩天一夜的經典行程，雖然累但聖稜線無敵。",
-            img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800",
-            link: "https://www.google.com"
-        }
-    ];
-
-    const searchInput = document.getElementById('searchInput');
-    const articleList = document.getElementById('articleList');
-
-    function renderArticles(data) {
-        articleList.innerHTML = '';
-        
-        if (data.length === 0) {
-            articleList.innerHTML = '<div class="no-results">找不到相關行程</div>';
-            return;
-        }
-
-        data.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'article-card';
-            card.innerHTML = `
-                <div class="card-img-container">
-                    <img src="${item.img}" class="card-img" alt="${item.title}">
-                </div>
-                <div class="card-body">
-                    <span class="article-tag">${item.difficulty}</span>
-                    <a href="${item.link}" target="_blank" class="article-title">${item.title}</a>
-                    <p class="article-content">${item.content || ""}</p> 
-                    <div class="article-info">📅 ${item.date}</div>
-                    <a href="${item.link}" target="_blank" class="read-more">閱讀全文 →</a>
-                </div>
-            `;
-            articleList.appendChild(card);
-        });
+<style>
+    body {
+        display: flex; /* 讓左邊選單與右邊內容並排 */
+        margin: 0;
+        background-color: #f4f7f1;
     }
 
-    // 核心修正：全方位搜尋邏輯
-    searchInput.addEventListener('input', (e) => {
-        const keyword = e.target.value.toLowerCase();
-        const filteredData = hikingData.filter(item => {
-            const titleMatch = item.title.toLowerCase().includes(keyword);
-            const difficultyMatch = item.difficulty.toLowerCase().includes(keyword);
-            const contentMatch = (item.content || "").toLowerCase().includes(keyword);
-            
-            // 只要其中一個符合就回傳 true
-            return titleMatch || difficultyMatch || contentMatch;
-        });
-        renderArticles(filteredData);
-    });
+    /* 1. 左側固定分類選單 */
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        background: #2d5a27;
+        color: white;
+        position: fixed;
+        padding: 30px 20px;
+        box-sizing: border-box;
+    }
 
-    renderArticles(hikingData);
-</script>
+    .sidebar h2 { font-size: 1.2em; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
 
-</body>
-</html>
+    .sidebar-menu { list-style: none; padding: 0; }
+    .sidebar-menu li { margin: 20px 0; }
+    .sidebar-menu a {
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+    .sidebar-menu a:hover { color: white; padding-left: 10px; }
+
+    /* 2. 右側主要內容區 */
+    .main-content {
+        margin-left: 250px; /* 留出空間給左側選單 */
+        flex-grow: 1;
+        padding: 40px;
+    }
+
+    /* 每個分類的區塊卡片 */
+    .category-section {
+        background: white;
+        border-radius: 20px;
+        margin-bottom: 50px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        scroll-margin-top: 40px; /* 點擊連結跳轉時不會被頂部擋住 */
+    }
+
+    .category-banner {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .category-info { padding: 30px; }
+    .category-info h3 { color: #2d5a27; margin-top: 0; font-size: 1.5em; }
+
+    /* 文章清單樣式 */
+    .article-list { list-style: none; padding: 0; margin-top: 20px; }
+    .article-list li {
+        padding: 12px 0;
+        border-bottom: 1px dashed #eee;
+        display: flex;
+        justify-content: space-between;
+    }
+    .article-list a {
+        text-decoration: none;
+        color: #333;
+        transition: 0.2s;
+    }
+    .article-list a:hover { color: #2d5a27; font-weight: bold; }
+    .article-date { color: #aaa; font-size: 0.85em; }
+
+    /* RWD 手機版調整 */
+    @media (max-width: 768px) {
+        body { flex-direction: column; }
+        .sidebar { width: 100%; height: auto; position: relative; }
+        .main-content { margin-left: 0; padding: 20px; }
+    }
+</style>
+
+<nav class="sidebar">
+    <h2>👧 DiAriEs 日誌</h2>
+    <ul class="sidebar-menu">
+        <li><a href="#mountain">⛰️ DiAriEs about 爬山</a></li>
+        <li><a href="#sea">🌊 DiAriEs about 潛水</a></li>
+        <li><a href="#run">🏃 DiAriEs about 跑步</a></li>
+        <li><a href="#travel">✈️ DiAriEs about 旅行</a></li>
+    </ul>
+</nav>
+
+<main class="main-content">
+    
+    <section id="mountain" class="category-section">
+        <img src="images/mountain_cover.JPG" class="category-banner" alt="爬山分類">
+        <div class="category-info">
+            <h3>DiAriEs about 爬山</h3>
+            <ul class="article-list">
+                <li>
+                    <a href="articles/trip1.html">雪山東峰單攻紀錄</a>
+                    <span class="article-date">2025/11/23</span>
+                </li>
+                </ul>
+        </div>
+    </section>
+
+    <section id="sea" class="category-section">
+        <img src="images/sea_cover.JPG" class="category-banner" alt="潛水分類">
+        <div class="category-info">
+            <h3>DiAriEs about 潛水</h3>
+            <ul class="article-list">
+                <li><a href="#">自潛紀錄：小琉球尋龜記</a><span class="article-date">Coming soon</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="sea" class="category-section">
+        <img src="images/sea_cover.JPG" class="category-banner" alt="跑步分類">
+        <div class="category-info">
+            <h3>DiAriEs about 跑步</h3>
+            <ul class="article-list">
+                <li><a href="#">慢跑紀錄</a><span class="article-date">Coming soon</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="sea" class="category-section">
+        <img src="images/sea_cover.JPG" class="category-banner" alt="旅行分類">
+        <div class="category-info">
+            <h3>DiAriEs about 旅行</h3>
+            <ul class="article-list">
+                <li><a href="#">旅行紀錄</a><span class="article-date">Coming soon</span></li>
+            </ul>
+        </div>
+    </section>
+
+    </main>
