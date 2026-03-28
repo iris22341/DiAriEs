@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DiAriEs 日誌 - 分類導覽</title>
+    <title>👧 DiAriEs - 愛運動女孩ㄉ凹兜日誌</title>
     <style>
         :root {
             --sidebar-width: 250px;
@@ -34,12 +34,10 @@
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
 
-        /* 縮合狀態的側邊欄 */
         .sidebar.collapsed {
             width: var(--sidebar-collapsed-width);
         }
 
-        /* 收納按鈕 */
         .toggle-btn {
             background: none;
             border: none;
@@ -59,7 +57,6 @@
             white-space: nowrap;
         }
 
-        /* 縮合時隱藏文字內容 */
         .sidebar.collapsed .sidebar-inner {
             opacity: 0;
             pointer-events: none;
@@ -91,12 +88,10 @@
             transition: all 0.3s ease;
         }
 
-        /* 當側邊欄縮小時，內容區往左推 */
         .main-content.expanded {
             margin-left: var(--sidebar-collapsed-width);
         }
 
-        /* 每個分類的區塊卡片 */
         .category-section {
             background: white;
             border-radius: 20px;
@@ -115,7 +110,6 @@
         .category-info { padding: 30px; }
         .category-info h3 { color: var(--primary-green); margin-top: 0; font-size: 1.5em; }
 
-        /* 文章清單樣式 */
         .article-list { list-style: none; padding: 0; margin-top: 20px; }
         .article-list li {
             padding: 12px 0;
@@ -132,17 +126,12 @@
         .article-list a:hover { color: var(--primary-green); font-weight: bold; }
         .article-date { color: #aaa; font-size: 0.85em; }
 
-        /* RWD 手機版調整 */
         @media (max-width: 768px) {
             body { flex-direction: column; }
-            .sidebar { 
-                width: 100% !important; 
-                height: auto; 
-                position: relative; 
-            }
+            .sidebar { width: 100% !important; height: auto; position: relative; }
             .sidebar-inner { opacity: 1 !important; pointer-events: auto !important; }
             .main-content { margin-left: 0 !important; padding: 20px; }
-            .toggle-btn { display: none; } /* 手機版不需要縮合 */
+            .toggle-btn { display: none; }
         }
     </style>
 </head>
@@ -187,3 +176,38 @@
     </section>
 
     <section id="run" class="category-section">
+        <img src="images/run_cover.JPG" class="category-banner" alt="跑步分類">
+        <div class="category-info">
+            <h3>DiAriEs about 跑步</h3>
+            <ul class="article-list">
+                <li><a href="#">慢跑紀錄：初半馬心得</a><span class="article-date">Coming soon</span></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="travel" class="category-section">
+        <img src="images/travel_cover.JPG" class="category-banner" alt="旅行分類">
+        <div class="category-info">
+            <h3>DiAriEs about 旅行</h3>
+            <ul class="article-list">
+                <li><a href="#">京都散策：鴨川跳龜</a><span class="article-date">Coming soon</span></li>
+            </ul>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    function toggleNav() {
+        const sidebar = document.getElementById("mySidebar");
+        const main = document.getElementById("mainSection");
+        
+        if (sidebar && main) {
+            sidebar.classList.toggle("collapsed");
+            main.classList.toggle("expanded");
+        }
+    }
+</script>
+
+</body>
+</html>
