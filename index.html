@@ -10,6 +10,7 @@
             --sidebar-collapsed-width: 70px;
             --primary-green: #2d5a27;
             --light-green: #f4f7f1;
+            --accent-orange: #e67e22; /* 點擊吸引色 */
         }
 
         body {
@@ -83,26 +84,12 @@
         header h1 { color: var(--primary-green); margin-bottom: 10px; }
         .header-bio { color: #555; line-height: 1.8; margin-top: 15px; }
 
-        .search-container { margin-bottom: 40px; }
-        #searchInput {
-            width: 100%; padding: 15px 25px; font-size: 16px;
-            border: 2px solid #ddd; border-radius: 30px;
-            outline: none; transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        #searchInput:focus { border-color: var(--primary-green); }
-
         /* 文章區塊顯示控制 */
         .category-section {
-            display: none; /* 重要：預設全部隱藏 */
+            display: block; /* 預設全部顯示 */
             background: white; border-radius: 20px;
             margin-bottom: 50px; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-        
-        /* 當區塊有 active 類別時才顯示 */
-        .category-section.active {
-            display: block;
             animation: fadeIn 0.5s;
         }
 
@@ -110,18 +97,63 @@
 
         .category-banner { width: 100%; height: 250px; object-fit: cover; }
         .category-info { padding: 30px; }
-        .category-info h3 { color: var(--primary-green); margin-top: 0; }
+        .category-info h3 { color: var(--primary-green); margin-top: 0; font-size: 1.5em; border-bottom: 2px solid var(--light-green); padding-bottom: 10px;}
 
         .article-list { list-style: none; padding: 0; margin-top: 20px; }
         .article-list li {
-            padding: 12px 0; border-bottom: 1px dashed #eee;
+            padding: 15px 0; border-bottom: 1px solid #f0f0f0;
             display: flex; justify-content: space-between; align-items: center;
         }
-        /* 搜尋命中時的高亮效果 */
-        .article-list li.hidden { display: none; }
-        .article-list a { text-decoration: none; color: #333; }
-        .article-list a:hover { color: var(--primary-green); font-weight: bold; }
-        .article-date { color: #aaa; font-size: 0.85em; }
+
+        /* ✨ 吸引點擊的文章連結樣式 ✨ */
+        .article-list a { 
+            text-decoration: none; 
+            color: #333; 
+            font-size: 1.1em;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        /* 增加箭頭符號 */
+        .article-list a::before {
+            content: "➔";
+            margin-right: 8px;
+            color: var(--primary-green);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .article-list a:hover { color: var(--primary-green); }
+        
+        .article-list a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* 底線動畫 */
+        .article-list a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 20px;
+            background-color: var(--primary-green);
+            transition: width 0.3s;
+        }
+        .article-list a:hover::after { width: calc(100% - 20px); }
+
+        .article-date { 
+            color: #aaa; 
+            font-size: 0.9em; 
+            background: #f9f9f9;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
 
         @media (max-width: 768px) {
             body { flex-direction: column; }
@@ -139,10 +171,12 @@
     <div class="sidebar-inner">
         <h2>DiAriEs 分類</h2>
         <ul class="sidebar-menu">
-            <li><a onclick="showCategory('mountain')" class="menu-item active">⛰️ DiAriEs about 爬山</a></li>
+            <li><a onclick="showCategory('mountain')" class="menu-item">⛰️ DiAriEs about 爬山</a></li>
             <li><a onclick="showCategory('sea')" class="menu-item">🌊 DiAriEs about 潛水</a></li>
             <li><a onclick="showCategory('run')" class="menu-item">🏃 DiAriEs about 跑步</a></li>
             <li><a onclick="showCategory('travel')" class="menu-item">✈️ DiAriEs about 旅行</a></li>
+            <hr style="opacity: 0.2; margin: 20px 0;">
+            <li><a onclick="showAll()" class="menu-item">顯示全部內容...</a></li>
         </ul>
     </div>
 </nav>
@@ -157,12 +191,8 @@
             目標每年安排一次出國 (●'◡'●)<br/>
         </div>
     </header>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" onkeyup="searchArticles()" placeholder="輸入關鍵字...">
-    </div>
     
-    <section id="mountain" class="category-section active">
+    <section id="mountain" class="category-section">
         <img src="images/mountain_cover.JPG" class="category-banner" alt="爬山分類">
         <div class="category-info">
             <h3>⛰️ DiAriEs about 爬山</h3>
@@ -205,55 +235,40 @@
 </main>
 
 <script>
-    // 1. 側邊欄縮放
     function toggleNav() {
         document.getElementById("mySidebar").classList.toggle("collapsed");
         document.getElementById("mainSection").classList.toggle("expanded");
     }
 
-    // 2. 切換分類功能
+    // 顯示特定分類
     function showCategory(categoryId) {
-        // 隱藏所有區塊
         const sections = document.querySelectorAll('.category-section');
-        sections.forEach(sec => sec.classList.remove('active'));
-
-        // 顯示目標區塊
-        document.getElementById(categoryId).classList.add('active');
+        sections.forEach(sec => {
+            if (sec.id === categoryId) {
+                sec.style.display = 'block';
+            } else {
+                sec.style.display = 'none';
+            }
+        });
 
         // 更新選單高亮
         const menuItems = document.querySelectorAll('.menu-item');
         menuItems.forEach(item => item.classList.remove('active'));
         event.currentTarget.classList.add('active');
-
-        // 切換分類時清空搜尋框
-        document.getElementById('searchInput').value = '';
-        const allArticles = document.querySelectorAll('.article-list li');
-        allArticles.forEach(li => li.classList.remove('hidden'));
+        
+        // 自動捲動到最上方看該分類
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 3. 搜尋功能
-    function searchArticles() {
-        const input = document.getElementById('searchInput').value.toLowerCase();
+    // 顯示全部
+    function showAll() {
         const sections = document.querySelectorAll('.category-section');
-        const allArticles = document.querySelectorAll('.article-list li');
-
-        // 如果搜尋框有字，顯示所有區塊以便過濾
-        if (input.length > 0) {
-            sections.forEach(sec => sec.classList.add('active'));
-            
-            allArticles.forEach(li => {
-                const title = li.querySelector('a').innerText.toLowerCase();
-                if (title.includes(input)) {
-                    li.classList.remove('hidden');
-                } else {
-                    li.classList.add('hidden');
-                }
-            });
-        } else {
-            // 如果搜尋框沒字，恢復只顯示目前選中的分類 (預設回到第一個或保持現狀)
-            // 這裡簡單處理：搜尋清空時，所有文章恢復顯示
-            allArticles.forEach(li => li.classList.remove('hidden'));
-        }
+        sections.forEach(sec => sec.style.display = 'block');
+        
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(item => item.classList.remove('active'));
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
 
