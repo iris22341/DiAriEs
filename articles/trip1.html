@@ -9,13 +9,11 @@
             --primary-color: #2d5a27;
             --bg-color: #f4f7f1;
             --white: #ffffff;
-            /* 新增表格專用顏色 */
             --table-header-dark: #b4c7e7;
             --table-header-light: #d9e1f2;
             --table-time-bg: #f2f2f2;
         }
 
-        /* 讓網頁捲動變得順滑 */
         html {
             scroll-behavior: smooth;
         }
@@ -122,9 +120,8 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* ✨ 調整後的表格樣式 ✨ */
         .trip-table-wrapper {
-            overflow-x: auto; /* 確保手機版可以滑動表格 */
+            overflow-x: auto;
             margin: 15px 0 25px 0;
         }
 
@@ -143,7 +140,6 @@
             vertical-align: middle;
         }
 
-        /* 藍色大標題 (Day 0 / Day 1) */
         .date-header th {
             background-color: var(--table-header-dark);
             text-align: center;
@@ -151,14 +147,12 @@
             font-weight: bold;
         }
 
-        /* 淺藍色欄位名稱 (時間 / 地點) */
         .column-header th {
             background-color: var(--table-header-light);
             text-align: center;
             color: #333;
         }
 
-        /* 時間欄位樣式：置中、灰底 */
         .trip-table td:nth-child(odd) {
             text-align: center;
             background-color: var(--table-time-bg);
@@ -166,7 +160,6 @@
             width: 80px;
         }
 
-        /* 行程細節中的小字備註 */
         .trip-table small {
             color: #666;
             display: block;
@@ -174,13 +167,33 @@
             line-height: 1.4;
         }
 
-        /* 截圖中的虛線效果 */
-        .dotted-border {
-            border-top: 2px dotted #666 !important;
+        /* 頁尾 IG 樣式優化 */
+        .ig-link-container {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+        .ig-link-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        .ig-link-wrapper:hover {
+            transform: scale(1.05);
+        }
+        .ig-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        .ig-link {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.1em;
         }
 
-        footer { text-align: center; padding: 60px 20px; color: #aaa; font-size: 0.85em; }
-        
         @media (max-width: 600px) {
             .content-container { margin: 15px; padding: 25px; }
             .hero-img { max-height: 250px; }
@@ -241,48 +254,48 @@
         <h4>01. 行前準備</h4>
         <p><strong>(1) 裝備清單</strong></p>
         <div class="trip-table-wrapper">
-        <table class="trip-table" style="table-layout: fixed; width: 100%;">
-            <thead class="column-header">
-                <tr>
-                    <th style="width: 33.3%; text-align: center;">衣物類</th>
-                    <th style="width: 33.3%; text-align: center;">裝備類</th>
-                    <th style="width: 33.3%; text-align: center;">必備證件與藥品</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="padding: 15px; line-height: 2;">
-                        毛帽<br/>排汗衣<br/>羊毛長袖<br/>輕羽絨<br/>GORE-TEX 外套<br/>登山褲<br/>羊毛襪
-                    </td>
-                    <td style="padding: 15px; line-height: 2;">
-                        登山鞋<br/>登山杖<br/>雨衣褲<br/>頭燈
-                    </td>
-                    <td style="padding: 15px; line-height: 2;">
-                        身分證/入園證<br/><br/>
-                        丹木斯/紅景天<br/>
-                        離線地圖 GPX
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        </div>
-
-        <p><strong>(2) 申請項目</strong></p>
-        <div class="trip-table-wrapper">
-            <table class="trip-table">
+            <table class="trip-table" style="table-layout: fixed; width: 100%;">
                 <thead class="column-header">
                     <tr>
-                        <th>項目</th>
-                        <th>是否需要 / 備註</th>
+                        <th style="width: 33.3%; text-align: center;">衣物類</th>
+                        <th style="width: 33.3%; text-align: center;">裝備類</th>
+                        <th style="width: 33.3%; text-align: center;">必備證件與藥品</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="text-align: left; background-color: white; width: auto;"><strong>入園證</strong></td>
+                        <td style="padding: 15px; line-height: 2;">
+                            毛帽<br/>排汗衣<br/>羊毛長袖<br/>輕羽絨<br/>GORE-TEX 外套<br/>登山褲<br/>羊毛襪
+                        </td>
+                        <td style="padding: 15px; line-height: 2;">
+                            登山鞋<br/>登山杖<br/>雨衣褲<br/>頭燈
+                        </td>
+                        <td style="padding: 15px; line-height: 2;">
+                            身分證/入園證<br/><br/>
+                            丹木斯/紅景天<br/>
+                            離線地圖 GPX
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p><strong>(2) 申請項目</strong></p>
+        <div class="trip-table-wrapper">
+            <table class="trip-table" style="table-layout: fixed; width: 100%;">
+                <thead class="column-header">
+                    <tr>
+                        <th style="width: 33.3%; text-align: center;">項目</th>
+                        <th style="width: 66.7%; text-align: center;">是否需要 / 備註</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left; background-color: white;"><strong>入園證</strong></td>
                         <td>O（雪霸國家公園）</td>
                     </tr>
                     <tr>
-                        <td style="text-align: left; background-color: white; width: auto;"><strong>入山證</strong></td>
+                        <td style="text-align: left; background-color: white;"><strong>入山證</strong></td>
                         <td>X</td>
                     </tr>
                 </tbody>
@@ -295,17 +308,17 @@
         <strong>總爬升：</strong>1,027m</p>
         
         <div class="trip-table-wrapper">
-            <table class="trip-table">
+            <table class="trip-table" style="table-layout: fixed; width: 100%;">
                 <thead>
                     <tr class="date-header">
-                        <th colspan="2">11/22 Day 0</th>
-                        <th colspan="2">11/23 Day 1</th>
+                        <th style="width: 50%; text-align: center;" colspan="2">11/22 Day 0</th>
+                        <th style="width: 50%; text-align: center;" colspan="2">11/23 Day 1</th>
                     </tr>
                     <tr class="column-header">
-                        <th>時間</th>
-                        <th>地點</th>
-                        <th>時間</th>
-                        <th>地點</th>
+                        <th style="width: 15%; text-align: center;">時間</th>
+                        <th style="width: 35%; text-align: center;">地點</th>
+                        <th style="width: 15%; text-align: center;">時間</th>
+                        <th style="width: 35%; text-align: center;">地點</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -339,15 +352,13 @@
                         <td>07:30</td>
                         <td>雪山東峰</td>
                     </tr>
-                    </tr>
-                        <tr>
+                    <tr>
                         <td></td>
                         <td></td>
                         <td>10:00</td>
                         <td>七卡山莊</td>
                     </tr>
-                    </tr>
-                        <tr>
+                    <tr>
                         <td></td>
                         <td></td>
                         <td>11:30</td>
@@ -374,15 +385,15 @@
         <img src="../images/雪山東峰_03.JPG" alt="還清宮環境2">
         <img src="../images/雪山東峰_04.JPG" alt="還清宮環境3">
 
-        <p>02:30 起床，03:00完妝(裝)後便出發前往雪山登山口。
+        <p>02:30 起床，03:00完妝(裝)後便出發前往雪山登山口.
             03:30抵達停車場，沿途有看到兩個停車場(但爬文說有三個)，我們停在第一停車場，很幸運還有空位，這是離雪山登山服務站最近的地方，
-            走一小段木棧階梯便來到服務站，大家可能還沒睡醒，三個女孩都沒發現上到男廁，甚至是下山後才發現XD</br>
+            走一小段木棧階梯便來到服務站，大家可能還沒睡醒，三個女孩都沒發現上到男廁，甚至是下山後才發現XD<br/>
             儀錶板顯示雪山東峰目前3.9度，投遞入園證意外瞥見一旁販售冰淇淋的標誌，但商店還沒開，心凍心動同時，只能等下山再吃！
         </p>
         <img src="../images/雪山東峰_05.JPG" alt="雪山東峰山頂">
         <img src="../images/雪山東峰_06.JPG" alt="雪山東峰山頂">
         
-        <p>雪山東峰沿途標示清楚，路況佳，跟著標示走基本上不會迷路，</br>
+        <p>雪山東峰沿途標示清楚，路況佳，跟著標示走基本上不會迷路，<br/>
            04:30 抵達七卡山莊，星空超美，不過山屋的鼾聲提醒我們得降低音量，小休一下拍個星空，便繼續前行。
         </p>
          <img src="../images/雪山東峰_07.JPG" alt="雪山東峰山頂">
@@ -433,11 +444,11 @@
 <footer>
     © 2026 DiAriEs' Blog | Capturing every moment of dopamine.
     <div class="ig-link-container">
-            <a href="https://www.instagram.com/agirlwholovesexercise?igsh=MXA2OG84ZHV3NGRhMg%3D%3D&utm_source=qr" target="_blank" class="ig-link-wrapper">
-                <img src="images/IG.png" alt="Instagram Icon" class="ig-icon">
-                <span class="ig-link">Follow me on Instagram</span>
-            </a>
-        </div>
+        <a href="https://www.instagram.com/agirlwholovesexercise?igsh=MXA2OG84ZHV3NGRhMg%3D%3D&utm_source=qr" target="_blank" class="ig-link-wrapper">
+            <img src="../images/IG.png" alt="Instagram Icon" class="ig-icon">
+            <span class="ig-link">Follow me on Instagram</span>
+        </a>
+    </div>
 </footer>
 
 </body>
