@@ -9,6 +9,10 @@
             --primary-color: #2d5a27;
             --bg-color: #f4f7f1;
             --white: #ffffff;
+            /* 新增表格專用顏色 */
+            --table-header-dark: #b4c7e7;
+            --table-header-light: #d9e1f2;
+            --table-time-bg: #f2f2f2;
         }
 
         /* 讓網頁捲動變得順滑 */
@@ -52,16 +56,14 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        /* 防止錨點跳轉後標題被導覽列擋住 */
         h3[id] {
             scroll-margin-top: 80px;
         }
 
-        /* 封面大圖樣式 */
         .hero-img {
             width: 100%;
             max-height: 450px;
-            object-fit: cover; /* 確保封面圖填滿但不變形 */
+            object-fit: cover;
             border-radius: 12px;
             margin-bottom: 30px;
             display: block;
@@ -87,15 +89,12 @@
 
         .gear-box h3 { margin-top: 0; color: var(--primary-color); }
 
-        /* 目錄連結樣式 */
         .toc-list {
             list-style: none;
             padding-left: 0;
             margin: 0;
         }
-        .toc-list li {
-            margin-bottom: 8px;
-        }
+        .toc-list li { margin-bottom: 8px; }
         .toc-list a {
             text-decoration: none;
             color: var(--primary-color);
@@ -114,42 +113,76 @@
             color: #222;
         }
 
-        /* ✨✨ 關鍵修正：解決文中所有圖片破版問題 ✨✨ */
         .trip-section img {
-            max-width: 100%;    /* 寬度最大隻能是白色框框的 100% */
-            height: auto;       /* 高度依比例自動調整，避免圖片變形 */
-            display: block;     /* 移除圖片下方的小空白間隙 */
-            margin: 25px auto;  /* 讓圖片上下留白，且左右置中 */
-            border-radius: 12px; /* 圓角 */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 輕微陰影 */
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 25px auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* 表格樣式 */
+        /* ✨ 調整後的表格樣式 ✨ */
+        .trip-table-wrapper {
+            overflow-x: auto; /* 確保手機版可以滑動表格 */
+            margin: 15px 0 25px 0;
+        }
+
         .trip-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0 25px 0;
             font-size: 0.9em;
             background: white;
+            border: 1px solid #ccc;
         }
-        .trip-table th {
-            background-color: var(--primary-color);
-            color: white;
+
+        .trip-table th, .trip-table td {
+            border: 1px solid #ccc;
+            padding: 10px;
             text-align: left;
-            padding: 12px;
-            border: 1px solid #eee;
+            vertical-align: middle;
         }
-        .trip-table td {
-            padding: 12px;
-            border: 1px solid #eee;
-            vertical-align: top;
+
+        /* 藍色大標題 (Day 0 / Day 1) */
+        .date-header th {
+            background-color: var(--table-header-dark);
+            text-align: center;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* 淺藍色欄位名稱 (時間 / 地點) */
+        .column-header th {
+            background-color: var(--table-header-light);
+            text-align: center;
+            color: #333;
+        }
+
+        /* 時間欄位樣式：置中、灰底 */
+        .trip-table td:nth-child(odd) {
+            text-align: center;
+            background-color: var(--table-time-bg);
+            font-weight: 500;
+            width: 80px;
+        }
+
+        /* 行程細節中的小字備註 */
+        .trip-table small {
+            color: #666;
+            display: block;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        /* 截圖中的虛線效果 */
+        .dotted-border {
+            border-top: 2px dotted #666 !important;
         }
 
         footer { text-align: center; padding: 60px 20px; color: #aaa; font-size: 0.85em; }
         
         @media (max-width: 600px) {
             .content-container { margin: 15px; padding: 25px; }
-            /* 行動版封面大圖高度縮小 */
             .hero-img { max-height: 250px; }
             h1 { font-size: 1.6em; }
         }
@@ -158,15 +191,15 @@
 <body>
 
 <nav class="nav-bar">
-    <a href="../index.html"><span>←</span> 返回日誌首頁</a>
+    <a href="../index.html"><span>←</span> 返回 DiAriEs</a>
 </nav>
 
 <article class="content-container">
     <img src="../images/雪山東峰_01.JPG" alt="雪山東峰" class="hero-img">
 
-    <h1>雪山東峰單攻紀錄</h1>
+    <h1>雪山東峰單攻-百岳新手入門首選</h1>
     <div class="post-meta">
-        我的第 39 座 | 📅 日期：2025/11/23 | ⛰️難度：易⭐ | 👤 作者：DiAriEs
+        我的第 39 座百岳| 📅 日期：2025/11/23 | ⛰️難度：易⭐ | 👤 作者：DiAriEs
     </div>
 
     <div class="gear-box">
@@ -186,7 +219,7 @@
    
         <h3 id="plan">二、 行程規劃建議</h3>
         <p>
-            雪山群峰包含雪山東峰、雪山主峰、雪山北峰等，路線走法多元，</br>如果志在東峰，可選擇單攻(只撿東峰的話，個人較推薦)或兩天一夜，體力好的山友可以考慮一起撿主峰。
+            雪山群峰包含雪山東峰、雪山主峰、雪山北峰等，路線走法多元，<br/>如果志在東峰，可選擇單攻(只撿東峰的話，個人較推薦)或兩天一夜，體力好的山友可以考慮一起撿主峰。
         </p>
         
         <h4 style="color: #2d5a27;">🟢 雪山東峰新手友善</h4>
@@ -202,83 +235,117 @@
         
         <h3 id="actual-trip">三、 實際行程紀錄</h3>
         <h4>01. 出團動機</h4>
-        <p>此次出團成員：阿純(Me)、Mark、阿巧、綿羊，共四人，四人平常都有運動習慣，基本上不太擔心大家的體能，比較擔心高山症跟過度疲勞(畢竟有人兜鈴成2.3點才睡，還有人前一天跑去喝酒^^)。</br>
-        這次原本是想跟男友一起爬山，結果行前吵架男友也沒去(現在已經是前男友ㄌ)，然後在上數據課跟同組成員們突然聊到好久沒上山，聽著大家分享近一次的爬山經驗，腳突然就癢起來，就約定等課程結束後要一起爬山！想說湊一車，便找了之前一起爬塔曼山的朋朋，就這樣成團！
+        <p>上課跟組員們聊到好久沒上山，聽著大家分享近一次的爬山經驗，腳突然癢了起來，便約定之後要一起爬山！也找了之前一起爬塔曼山的朋朋，就這樣成團！<br/>
+        此次出團成員：阿純(Me)、Mark、阿巧、綿羊，共四人，四人平常都有運動習慣。
         </p>
 
         <h4>02. 行前準備</h4>
         <p><strong>(1) 裝備清單</strong></p>
-        <table class="trip-table">
-            <thead>
-                <tr>
-                    <th>衣物類</th>
-                    <th>裝備類</th>
-                    <th>必備證件與藥品</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>毛帽、排汗衣、羊毛長袖、輕羽絨、GORE-TEX 外套、登山褲、羊毛襪</td>
-                    <td>登山鞋、登山杖、雨衣褲、頭燈</td>
-                    <td>身分證、入園證、丹木斯/紅景天、離線地圖 GPX</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="trip-table-wrapper">
+            <table class="trip-table">
+                <thead class="column-header">
+                    <tr>
+                        <th>衣物類</th>
+                        <th>裝備類</th>
+                        <th>必備證件與藥品</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>毛帽<br/>排汗衣<br/>羊毛長袖<br/>輕羽絨<br/>GORE-TEX 外套<br/>登山褲<br/>羊毛襪</td>
+                        <td>登山鞋<br/>登山杖<br/>雨衣褲<br/>頭燈</td>
+                        <td>身分證/入園證<br/><br/>丹木斯/紅景天<br/>離線地圖 GPX</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <p><strong>(2) 申請項目</strong></p>
-        <table class="trip-table">
-            <thead>
-                <tr>
-                    <th>項目</th>
-                    <th>是否需要 / 備註</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>入園證</strong></td>
-                    <td>需申請（雪霸國家公園）</td>
-                </tr>
-                <tr>
-                    <td><strong>入山證</strong></td>
-                    <td>不需要</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="trip-table-wrapper">
+            <table class="trip-table">
+                <thead class="column-header">
+                    <tr>
+                        <th>項目</th>
+                        <th>是否需要 / 備註</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left; background-color: white; width: auto;"><strong>入園證</strong></td>
+                        <td>O（雪霸國家公園）</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left; background-color: white; width: auto;"><strong>入山證</strong></td>
+                        <td>X</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <h4>03. 實際過程</h4>
-        <p><strong>距離：</strong>9.35k | <strong>時間：</strong>7:44:56 | <strong>總爬升：</strong>1,027m</p>
+        <p><strong>距離：</strong>9.35k<br/>
+        <strong>時間：</strong>7:44:56<br/>
+        <strong>總爬升：</strong>1,027m</p>
         
-        <table class="trip-table">
-            <thead>
-                <tr>
-                    <th style="width: 100px;">時間</th>
-                    <th>行程內容</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>13:30</td><td>北車集合出發</td></tr>
-                <tr><td>18:30</td><td>抵達還清宮休息</td></tr>
-                <tr><td>02:30</td><td>起床準備</td></tr>
-                <tr><td>03:30</td><td>雪山登山口起登</td></tr>
-            </tbody>
-        </table>
+        <div class="trip-table-wrapper">
+            <table class="trip-table">
+                <thead>
+                    <tr class="date-header">
+                        <th colspan="2">11/22 Day 0</th>
+                        <th colspan="2">11/23 Day 1</th>
+                    </tr>
+                    <tr class="column-header">
+                        <th>時間</th>
+                        <th>地點</th>
+                        <th>時間</th>
+                        <th>地點</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>13:00</td>
+                        <td>北車集合<br/><small>(阿巧、綿瑤、阿純搭馬克車去宜蘭)</small></td>
+                        <td>3:00</td>
+                        <td>登山口</td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
+                        <td>羅東轉運站集合<br/><small>(馬克車停轉運站)</small></td>
+                        <td>4:00</td>
+                        <td>七卡山莊</td>
+                    </tr>
+                    <tr>
+                        <td>14:30</td>
+                        <td>羅東轉運站出發<br/><small>(開冠廷/馬克的車)</small></td>
+                        <td>6:10</td>
+                        <td>雪山東峰(休)</td>
+                    </tr>
+                    <tr>
+                        <td>17:00</td>
+                        <td>環清宮</td>
+                        <td class="dotted-border">6:20</td>
+                        <td class="dotted-border">再出發</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-        <p>13:30 北車集合上車，從宜蘭往武陵方向開，車程預計4小。
-            中間在院長牛肉麵吃了午晚餐，牛肉麵中規中矩，老闆很好客，看到我們多點一份燙青菜，叫我們不用多點，可以幫我們在牛肉麵裡加菜，但還是收了燙青菜的錢XD
-            吃飽喝足在附近7-11補給後就直接往還清宮開，沿途趁機打了2朵菇(爬山皮友們ㄉ快樂就是荒郊野外的菇不用搶)，不得稱讚一下福特focus，真的超安靜，整趟車程很舒服~
+        <p>13:30 北車集合，從宜蘭開往武陵，車程預計4小。
+            中途在院長牛肉麵吃了午晚餐，牛肉麵中規中矩，老闆很好客，看到我們多點一份燙青菜，叫我們不用多點，可以幫我們在牛肉麵裡加菜，但還是收了燙青菜的錢XD
+            吃飽喝足在附近7-11補給後就直接開往還清宮，沿途趁機打了2朵菇(荒郊野外的菇不用搶就是快樂)，不得不稱讚一下福特focus，真的超安靜，整趟車程很舒服~
         </p>
 
-        <p>18:30到還清宮，宮內車子已停滿，在附近繞了一下最後停在斜坡下來左前方的小空間，比預計時間晚了半小時。
-            知道明天要早起，趕緊洗漱整理好裝備，20:00準備睡覺(我是4個人裡面最早躺床的XD)
+        <p>18:30到還清宮，車子已停滿，繞了一圈最後停在斜坡下來左前方民宅的小空間，比預計晚了半小時。
+            明天02:30就要起床，趕緊洗漱整理裝備，20:00準備躺床！
         </p>
 
-        <p>還清宮雖然仍有此起彼落的打呼聲，甚至聽得到隔壁間的對話(???)，整體睡眠品質還是不錯，床位乾淨，床跟床之間有獨立簾子可拉上，棉被也有南部陽光的香味，
-            如果追求睡眠品質，比起睡七卡山莊，也很推薦還清宮，要爬雪霸系列山頭(志佳陽、桃山喀拉業等)的山友，也可以考慮，
-            建議先電話預訂，一人一晚500元現場付現，缺點就是到登山口大概還需要20分鐘車程，規劃行程時記得預留一點時間~
+        <p>有鼾聲也聽得到隔壁間的對話，但整體睡眠品質還是不錯，床位乾淨，床跟床之間有獨立簾子可拉上，棉被也有南部陽光的香味，
+            如果追求睡眠品質，比起睡七卡山莊，也很推薦還清宮，要爬雪霸系列山頭的山友(像是志佳陽、桃山喀拉業等等)，也可以考慮，
+            建議先電話預訂，一晚一人500元現場付現，缺點就是到登山口大概還需要20分鐘車程，規劃行程時記得預留一點時間~
         </p>
-        <img src="../images/雪山東峰_02.JPG" alt="雪山東峰山頂">
-        <img src="../images/雪山東峰_03.JPG" alt="雪山東峰山頂">
-        <img src="../images/雪山東峰_04.JPG" alt="雪山東峰山頂">
+        <img src="../images/雪山東峰_02.JPG" alt="還清宮環境1">
+        <img src="../images/雪山東峰_03.JPG" alt="還清宮環境2">
+        <img src="../images/雪山東峰_04.JPG" alt="還清宮環境3">
 
         <p>02:30 起床，03:00完妝(裝)後便從還清宮出發前往雪山登山口。
             03:30抵達雪山停車場，沿途有看到兩個停車場(但爬文說有三個)，我們停在第一停車場，很幸運的還有空位，這是離雪山登山服務站最近的地方，
