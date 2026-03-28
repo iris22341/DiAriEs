@@ -78,7 +78,7 @@
 
         .main-content.expanded { margin-left: var(--sidebar-collapsed-width); }
 
-        /* 新自介區塊佈局 */
+        /* 自介區塊 */
         header {
             margin-bottom: 40px;
             background: white;
@@ -110,7 +110,7 @@
         }
         .header-photos img:hover { transform: scale(1.05); }
 
-        /* 文章區塊 (移除 Banner 後) */
+        /* 文章區塊 */
         .category-section {
             display: block;
             background: white; border-radius: 20px;
@@ -131,7 +131,7 @@
             display: flex; justify-content: space-between; align-items: center;
         }
         .article-list a { 
-            text-decoration: underline; /* 加入底線 */
+            text-decoration: underline;
             text-underline-offset: 4px;
             color: #333; font-size: 1.1em; font-weight: 500;
             transition: 0.3s;
@@ -148,12 +148,23 @@
             color: #888;
             font-size: 0.9em;
         }
+        .ig-link-container {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .ig-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
         .ig-link {
-            margin-top: 10px;
-            display: block;
             color: var(--primary-green);
             text-decoration: none;
             font-weight: bold;
+            font-size: 1.1em;
         }
 
         /* 📱 手機版專屬優化 */
@@ -172,7 +183,6 @@
 
             .main-content { margin-left: 0 !important; padding: 15px; }
             
-            /* 手機版自介：照片在文字下方，並放大佔比 */
             header { flex-direction: column; align-items: flex-start; padding: 20px; }
             .header-photos { width: 100%; grid-template-columns: repeat(4, 1fr); margin-top: 20px; }
             .header-photos img { height: 70px; }
@@ -209,10 +219,10 @@
             </div>
         </div>
         <div class="header-photos">
-            <img src="images/mountain_cover.JPG" alt="Mountain">
-            <img src="images/sea_cover.JPG" alt="Sea">
-            <img src="images/run_cover.JPG" alt="Run">
-            <img src="images/travel_cover.JPG" alt="Travel">
+            <img src="images/雪山東峰_01.JPG" alt="雪山東峰 1">
+            <img src="images/雪山東峰_02.JPG" alt="雪山東峰 2">
+            <img src="images/雪山東峰_03.JPG" alt="雪山東峰 3">
+            <img src="images/雪山東峰_04.JPG" alt="雪山東峰 4">
         </div>
     </header>
     
@@ -255,7 +265,10 @@
 
     <footer>
         <p>© 2026 DiAriEs' Blog | Capturing every moment of dopamine.</p>
-        <a href="https://www.instagram.com/agirlwholovesexercise?igsh=MXA2OG84ZHV3NGRhMg%3D%3D&utm_source=qr" class="ig-link" target="_blank">📸 Follow me on Instagram</a>
+        <div class="ig-link-container">
+            <img src="images/IG.png" alt="Instagram Icon" class="ig-icon">
+            <a href="https://www.instagram.com/agirlwholovesexercise?igsh=MXA2OG84ZHV3NGRhMg%3D%3D&utm_source=qr" class="ig-link" target="_blank">Follow me on Instagram</a>
+        </div>
     </footer>
 </main>
 
