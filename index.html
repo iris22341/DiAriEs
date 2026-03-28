@@ -20,15 +20,14 @@
             transition: all 0.3s ease;
         }
 
-        /* 1. 左側固定分類選單 */
+        /* 1. 左側選單 */
         .sidebar {
             width: var(--sidebar-width);
             height: 100vh;
             background: var(--primary-green);
             color: white;
             position: fixed;
-            left: 0;
-            top: 0;
+            left: 0; top: 0;
             transition: all 0.3s ease;
             overflow-x: hidden;
             z-index: 1000;
@@ -38,16 +37,9 @@
         .sidebar.collapsed { width: var(--sidebar-collapsed-width); }
 
         .toggle-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 20px;
-            width: 100%;
-            text-align: left;
-            display: block;
-            outline: none;
+            background: none; border: none; color: white;
+            font-size: 24px; cursor: pointer; padding: 20px;
+            width: 100%; text-align: left; display: block; outline: none;
         }
 
         .sidebar-inner {
@@ -59,35 +51,30 @@
         .sidebar.collapsed .sidebar-inner { opacity: 0; pointer-events: none; }
 
         .sidebar h2 { 
-            font-size: 1.2em; 
-            margin-bottom: 30px; 
-            border-bottom: 1px solid rgba(255,255,255,0.2); 
-            padding-bottom: 10px; 
+            font-size: 1.2em; margin-bottom: 30px; 
+            border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; 
         }
 
         .sidebar-menu { list-style: none; padding: 0; }
         .sidebar-menu li { margin: 25px 0; }
         .sidebar-menu a {
             color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-            display: block;
+            text-decoration: none; font-weight: 500;
+            transition: 0.3s; display: block; cursor: pointer;
         }
-        .sidebar-menu a:hover { color: white; padding-left: 10px; }
+        .sidebar-menu a:hover, .sidebar-menu a.active { color: white; padding-left: 10px; font-weight: bold; }
 
         /* 2. 右側主要內容區 */
         .main-content {
             margin-left: var(--sidebar-width);
             flex-grow: 1;
-            padding: 60px 40px; /* 增加頂部間距 */
+            padding: 60px 40px;
             transition: all 0.3s ease;
-            max-width: 1000px; /* 限制寬度讓閱讀更舒服 */
+            max-width: 1000px;
         }
 
         .main-content.expanded { margin-left: var(--sidebar-collapsed-width); }
 
-        /* 自我介紹區樣式 */
         header {
             margin-bottom: 40px;
             border-left: 5px solid var(--primary-green);
@@ -96,48 +83,43 @@
         header h1 { color: var(--primary-green); margin-bottom: 10px; }
         .header-bio { color: #555; line-height: 1.8; margin-top: 15px; }
 
-        /* 搜尋框樣式 */
-        .search-container {
-            margin-bottom: 40px;
-        }
+        .search-container { margin-bottom: 40px; }
         #searchInput {
-            width: 100%;
-            padding: 15px 25px;
-            font-size: 16px;
-            border: 2px solid #ddd;
-            border-radius: 30px;
-            outline: none;
-            transition: 0.3s;
+            width: 100%; padding: 15px 25px; font-size: 16px;
+            border: 2px solid #ddd; border-radius: 30px;
+            outline: none; transition: 0.3s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        #searchInput:focus {
-            border-color: var(--primary-green);
-            box-shadow: 0 4px 12px rgba(45, 90, 39, 0.2);
+        #searchInput:focus { border-color: var(--primary-green); }
+
+        /* 文章區塊顯示控制 */
+        .category-section {
+            display: none; /* 重要：預設全部隱藏 */
+            background: white; border-radius: 20px;
+            margin-bottom: 50px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        /* 當區塊有 active 類別時才顯示 */
+        .category-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
         }
 
-        /* 文章分類區塊樣式 */
-        .category-section {
-            background: white;
-            border-radius: 20px;
-            margin-bottom: 50px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            scroll-margin-top: 40px;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .category-banner { width: 100%; height: 250px; object-fit: cover; }
         .category-info { padding: 30px; }
-        .category-info h3 { color: var(--primary-green); margin-top: 0; font-size: 1.5em; }
+        .category-info h3 { color: var(--primary-green); margin-top: 0; }
 
         .article-list { list-style: none; padding: 0; margin-top: 20px; }
         .article-list li {
-            padding: 12px 0;
-            border-bottom: 1px dashed #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 12px 0; border-bottom: 1px dashed #eee;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .article-list a { text-decoration: none; color: #333; transition: 0.2s; }
+        /* 搜尋命中時的高亮效果 */
+        .article-list li.hidden { display: none; }
+        .article-list a { text-decoration: none; color: #333; }
         .article-list a:hover { color: var(--primary-green); font-weight: bold; }
         .article-date { color: #aaa; font-size: 0.85em; }
 
@@ -155,21 +137,19 @@
 <nav class="sidebar" id="mySidebar">
     <button class="toggle-btn" onclick="toggleNav()">☰</button>
     <div class="sidebar-inner">
-        <h2>👧 DiAriEs 日誌</h2>
+        <h2>DiAriEs 分類</h2>
         <ul class="sidebar-menu">
-            <li><a href="#mountain">⛰️ DiAriEs about 爬山</a></li>
-            <li><a href="#sea">🌊 DiAriEs about 潛水</a></li>
-            <li><a href="#run">🏃 DiAriEs about 跑步</a></li>
-            <li><a href="#travel">✈️ DiAriEs about 旅行</a></li>
+            <li><a onclick="showCategory('mountain')" class="menu-item active">⛰️ DiAriEs about 爬山</a></li>
+            <li><a onclick="showCategory('sea')" class="menu-item">🌊 DiAriEs about 潛水</a></li>
+            <li><a onclick="showCategory('run')" class="menu-item">🏃 DiAriEs about 跑步</a></li>
+            <li><a onclick="showCategory('travel')" class="menu-item">✈️ DiAriEs about 旅行</a></li>
         </ul>
     </div>
 </nav>
 
 <main class="main-content" id="mainSection">
-    
     <header>
         <h1>👧 DiAriEs - 愛運動女孩ㄉ凹兜日誌</h1>
-        <p><strong>—— Recording My Dopamine Moments ——</strong></p>
         <div class="header-bio"> 
             喜歡跑河濱 > 跑操場 >>> 跑步機 <br/>
             佛系完百，享受山頭不同時期的美<br/>
@@ -179,18 +159,16 @@
     </header>
 
     <div class="search-container">
-        <input type="text" id="searchInput" placeholder="搜尋山名、難度或地點...">
+        <input type="text" id="searchInput" onkeyup="searchArticles()" placeholder="輸入關鍵字...">
     </div>
     
-    <section id="mountain" class="category-section">
+    <section id="mountain" class="category-section active">
         <img src="images/mountain_cover.JPG" class="category-banner" alt="爬山分類">
         <div class="category-info">
-            <h3>DiAriEs about 爬山</h3>
+            <h3>⛰️ DiAriEs about 爬山</h3>
             <ul class="article-list">
-                <li>
-                    <a href="articles/trip1.html">雪山東峰單攻紀錄</a>
-                    <span class="article-date">2025/11/23</span>
-                </li>
+                <li><a href="articles/trip1.html">雪山東峰單攻紀錄</a><span class="article-date">2025/11/23</span></li>
+                <li><a href="#">大霸尖山三日行</a><span class="article-date">2026/01/10</span></li>
             </ul>
         </div>
     </section>
@@ -198,9 +176,9 @@
     <section id="sea" class="category-section">
         <img src="images/sea_cover.JPG" class="category-banner" alt="潛水分類">
         <div class="category-info">
-            <h3>DiAriEs about 潛水</h3>
+            <h3>🌊 DiAriEs about 潛水</h3>
             <ul class="article-list">
-                <li><a href="#">自潛紀錄：小琉球尋龜記</a><span class="article-date">Coming soon</span></li>
+                <li><a href="#">自潛紀錄：小琉球尋龜記</a><span class="article-date">2025/08/15</span></li>
             </ul>
         </div>
     </section>
@@ -208,9 +186,9 @@
     <section id="run" class="category-section">
         <img src="images/run_cover.JPG" class="category-banner" alt="跑步分類">
         <div class="category-info">
-            <h3>DiAriEs about 跑步</h3>
+            <h3>🏃 DiAriEs about 跑步</h3>
             <ul class="article-list">
-                <li><a href="#">慢跑紀錄：初半馬心得</a><span class="article-date">Coming soon</span></li>
+                <li><a href="#">台北馬拉松初半馬心得</a><span class="article-date">2025/12/20</span></li>
             </ul>
         </div>
     </section>
@@ -218,23 +196,63 @@
     <section id="travel" class="category-section">
         <img src="images/travel_cover.JPG" class="category-banner" alt="旅行分類">
         <div class="category-info">
-            <h3>DiAriEs about 旅行</h3>
+            <h3>✈️ DiAriEs about 旅行</h3>
             <ul class="article-list">
-                <li><a href="#">京都散策：鴨川跳龜</a><span class="article-date">Coming soon</span></li>
+                <li><a href="#">京都散策：鴨川跳龜</a><span class="article-date">2025/11/01</span></li>
             </ul>
         </div>
     </section>
-
 </main>
 
 <script>
+    // 1. 側邊欄縮放
     function toggleNav() {
-        const sidebar = document.getElementById("mySidebar");
-        const main = document.getElementById("mainSection");
-        
-        if (sidebar && main) {
-            sidebar.classList.toggle("collapsed");
-            main.classList.toggle("expanded");
+        document.getElementById("mySidebar").classList.toggle("collapsed");
+        document.getElementById("mainSection").classList.toggle("expanded");
+    }
+
+    // 2. 切換分類功能
+    function showCategory(categoryId) {
+        // 隱藏所有區塊
+        const sections = document.querySelectorAll('.category-section');
+        sections.forEach(sec => sec.classList.remove('active'));
+
+        // 顯示目標區塊
+        document.getElementById(categoryId).classList.add('active');
+
+        // 更新選單高亮
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(item => item.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+
+        // 切換分類時清空搜尋框
+        document.getElementById('searchInput').value = '';
+        const allArticles = document.querySelectorAll('.article-list li');
+        allArticles.forEach(li => li.classList.remove('hidden'));
+    }
+
+    // 3. 搜尋功能
+    function searchArticles() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const sections = document.querySelectorAll('.category-section');
+        const allArticles = document.querySelectorAll('.article-list li');
+
+        // 如果搜尋框有字，顯示所有區塊以便過濾
+        if (input.length > 0) {
+            sections.forEach(sec => sec.classList.add('active'));
+            
+            allArticles.forEach(li => {
+                const title = li.querySelector('a').innerText.toLowerCase();
+                if (title.includes(input)) {
+                    li.classList.remove('hidden');
+                } else {
+                    li.classList.add('hidden');
+                }
+            });
+        } else {
+            // 如果搜尋框沒字，恢復只顯示目前選中的分類 (預設回到第一個或保持現狀)
+            // 這裡簡單處理：搜尋清空時，所有文章恢復顯示
+            allArticles.forEach(li => li.classList.remove('hidden'));
         }
     }
 </script>
