@@ -1,94 +1,167 @@
-<style>
-    body {
-        display: flex; /* 讓左邊選單與右邊內容並排 */
-        margin: 0;
-        background-color: #f4f7f1;
-    }
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiAriEs 日誌 - 分類導覽</title>
+    <style>
+        :root {
+            --sidebar-width: 250px;
+            --sidebar-collapsed-width: 70px;
+            --primary-green: #2d5a27;
+        }
 
-    /* 1. 左側固定分類選單 */
-    .sidebar {
-        width: 250px;
-        height: 100vh;
-        background: #2d5a27;
-        color: white;
-        position: fixed;
-        padding: 30px 20px;
-        box-sizing: border-box;
-    }
+        body {
+            display: flex;
+            margin: 0;
+            background-color: #f4f7f1;
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            transition: all 0.3s ease;
+        }
 
-    .sidebar h2 { font-size: 1.2em; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
+        /* 1. 左側固定分類選單 */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--primary-green);
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
 
-    .sidebar-menu { list-style: none; padding: 0; }
-    .sidebar-menu li { margin: 20px 0; }
-    .sidebar-menu a {
-        color: rgba(255,255,255,0.8);
-        text-decoration: none;
-        font-weight: 500;
-        transition: 0.3s;
-    }
-    .sidebar-menu a:hover { color: white; padding-left: 10px; }
+        /* 縮合狀態的側邊欄 */
+        .sidebar.collapsed {
+            width: var(--sidebar-collapsed-width);
+        }
 
-    /* 2. 右側主要內容區 */
-    .main-content {
-        margin-left: 250px; /* 留出空間給左側選單 */
-        flex-grow: 1;
-        padding: 40px;
-    }
+        /* 收納按鈕 */
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 20px;
+            width: 100%;
+            text-align: left;
+            display: block;
+            outline: none;
+        }
 
-    /* 每個分類的區塊卡片 */
-    .category-section {
-        background: white;
-        border-radius: 20px;
-        margin-bottom: 50px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        scroll-margin-top: 40px; /* 點擊連結跳轉時不會被頂部擋住 */
-    }
+        .sidebar-inner {
+            padding: 0 20px 30px 20px;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
 
-    .category-banner {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-    }
+        /* 縮合時隱藏文字內容 */
+        .sidebar.collapsed .sidebar-inner {
+            opacity: 0;
+            pointer-events: none;
+        }
 
-    .category-info { padding: 30px; }
-    .category-info h3 { color: #2d5a27; margin-top: 0; font-size: 1.5em; }
+        .sidebar h2 { 
+            font-size: 1.2em; 
+            margin-bottom: 30px; 
+            border-bottom: 1px solid rgba(255,255,255,0.2); 
+            padding-bottom: 10px; 
+        }
 
-    /* 文章清單樣式 */
-    .article-list { list-style: none; padding: 0; margin-top: 20px; }
-    .article-list li {
-        padding: 12px 0;
-        border-bottom: 1px dashed #eee;
-        display: flex;
-        justify-content: space-between;
-    }
-    .article-list a {
-        text-decoration: none;
-        color: #333;
-        transition: 0.2s;
-    }
-    .article-list a:hover { color: #2d5a27; font-weight: bold; }
-    .article-date { color: #aaa; font-size: 0.85em; }
+        .sidebar-menu { list-style: none; padding: 0; }
+        .sidebar-menu li { margin: 25px 0; }
+        .sidebar-menu a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            display: block;
+        }
+        .sidebar-menu a:hover { color: white; padding-left: 10px; }
 
-    /* RWD 手機版調整 */
-    @media (max-width: 768px) {
-        body { flex-direction: column; }
-        .sidebar { width: 100%; height: auto; position: relative; }
-        .main-content { margin-left: 0; padding: 20px; }
-    }
-</style>
+        /* 2. 右側主要內容區 */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
 
-<nav class="sidebar">
-    <h2>👧 DiAriEs 日誌</h2>
-    <ul class="sidebar-menu">
-        <li><a href="#mountain">⛰️ DiAriEs about 爬山</a></li>
-        <li><a href="#sea">🌊 DiAriEs about 潛水</a></li>
-        <li><a href="#run">🏃 DiAriEs about 跑步</a></li>
-        <li><a href="#travel">✈️ DiAriEs about 旅行</a></li>
-    </ul>
+        /* 當側邊欄縮小時，內容區往左推 */
+        .main-content.expanded {
+            margin-left: var(--sidebar-collapsed-width);
+        }
+
+        /* 每個分類的區塊卡片 */
+        .category-section {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            scroll-margin-top: 40px;
+        }
+
+        .category-banner {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .category-info { padding: 30px; }
+        .category-info h3 { color: var(--primary-green); margin-top: 0; font-size: 1.5em; }
+
+        /* 文章清單樣式 */
+        .article-list { list-style: none; padding: 0; margin-top: 20px; }
+        .article-list li {
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .article-list a {
+            text-decoration: none;
+            color: #333;
+            transition: 0.2s;
+        }
+        .article-list a:hover { color: var(--primary-green); font-weight: bold; }
+        .article-date { color: #aaa; font-size: 0.85em; }
+
+        /* RWD 手機版調整 */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { 
+                width: 100% !important; 
+                height: auto; 
+                position: relative; 
+            }
+            .sidebar-inner { opacity: 1 !important; pointer-events: auto !important; }
+            .main-content { margin-left: 0 !important; padding: 20px; }
+            .toggle-btn { display: none; } /* 手機版不需要縮合 */
+        }
+    </style>
+</head>
+<body>
+
+<nav class="sidebar" id="mySidebar">
+    <button class="toggle-btn" onclick="toggleNav()">☰</button>
+    <div class="sidebar-inner">
+        <h2>👧 DiAriEs 日誌</h2>
+        <ul class="sidebar-menu">
+            <li><a href="#mountain">⛰️ DiAriEs about 爬山</a></li>
+            <li><a href="#sea">🌊 DiAriEs about 潛水</a></li>
+            <li><a href="#run">🏃 DiAriEs about 跑步</a></li>
+            <li><a href="#travel">✈️ DiAriEs about 旅行</a></li>
+        </ul>
+    </div>
 </nav>
 
-<main class="main-content">
+<main class="main-content" id="mainSection">
     
     <section id="mountain" class="category-section">
         <img src="images/mountain_cover.JPG" class="category-banner" alt="爬山分類">
@@ -99,7 +172,7 @@
                     <a href="articles/trip1.html">雪山東峰單攻紀錄</a>
                     <span class="article-date">2025/11/23</span>
                 </li>
-                </ul>
+            </ul>
         </div>
     </section>
 
@@ -113,24 +186,4 @@
         </div>
     </section>
 
-    <section id="sea" class="category-section">
-        <img src="images/sea_cover.JPG" class="category-banner" alt="跑步分類">
-        <div class="category-info">
-            <h3>DiAriEs about 跑步</h3>
-            <ul class="article-list">
-                <li><a href="#">慢跑紀錄</a><span class="article-date">Coming soon</span></li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="sea" class="category-section">
-        <img src="images/sea_cover.JPG" class="category-banner" alt="旅行分類">
-        <div class="category-info">
-            <h3>DiAriEs about 旅行</h3>
-            <ul class="article-list">
-                <li><a href="#">旅行紀錄</a><span class="article-date">Coming soon</span></li>
-            </ul>
-        </div>
-    </section>
-
-    </main>
+    <section id="run" class="category-section">
