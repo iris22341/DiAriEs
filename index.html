@@ -110,7 +110,7 @@
         }
         .header-photos img:hover { transform: scale(1.05); }
 
-        /* 文章區塊 */
+        /* 文章區塊 (移除 Banner 後) */
         .category-section {
             display: block;
             background: white; border-radius: 20px;
@@ -140,7 +140,7 @@
 
         .article-date { color: #aaa; font-size: 0.9em; }
 
-        /* 頁尾 */
+        /* 頁尾 IG 樣式優化 */
         footer {
             margin-top: auto;
             padding: 40px 0 20px 0;
@@ -151,18 +151,25 @@
         .ig-link-container {
             margin-top: 15px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
+        }
+        .ig-link-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        .ig-link-wrapper:hover {
+            transform: scale(1.05);
         }
         .ig-icon {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             object-fit: contain;
         }
         .ig-link {
             color: var(--primary-green);
-            text-decoration: none;
             font-weight: bold;
             font-size: 1.1em;
         }
@@ -266,8 +273,10 @@
     <footer>
         <p>© 2026 DiAriEs' Blog | Capturing every moment of dopamine.</p>
         <div class="ig-link-container">
-            <img src="images/IG.png" alt="Instagram Icon" class="ig-icon">
-            <a href="https://www.instagram.com/agirlwholovesexercise?igsh=MXA2OG84ZHV3NGRhMg%3D%3D&utm_source=qr" class="ig-link" target="_blank">Follow me on Instagram</a>
+            <a href="https://www.instagram.com/agirlwholovesexercise?igsh=MXA2OG84ZHV3NGRhMg%3D%3D&utm_source=qr" target="_blank" class="ig-link-wrapper">
+                <img src="images/IG.png" alt="Instagram Icon" class="ig-icon">
+                <span class="ig-link">Follow me on Instagram</span>
+            </a>
         </div>
     </footer>
 </main>
