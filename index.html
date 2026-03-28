@@ -9,12 +9,13 @@
             --sidebar-width: 250px;
             --sidebar-collapsed-width: 70px;
             --primary-green: #2d5a27;
+            --light-green: #f4f7f1;
         }
 
         body {
             display: flex;
             margin: 0;
-            background-color: #f4f7f1;
+            background-color: var(--light-green);
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
             transition: all 0.3s ease;
         }
@@ -34,9 +35,7 @@
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
 
-        .sidebar.collapsed {
-            width: var(--sidebar-collapsed-width);
-        }
+        .sidebar.collapsed { width: var(--sidebar-collapsed-width); }
 
         .toggle-btn {
             background: none;
@@ -57,10 +56,7 @@
             white-space: nowrap;
         }
 
-        .sidebar.collapsed .sidebar-inner {
-            opacity: 0;
-            pointer-events: none;
-        }
+        .sidebar.collapsed .sidebar-inner { opacity: 0; pointer-events: none; }
 
         .sidebar h2 { 
             font-size: 1.2em; 
@@ -84,14 +80,42 @@
         .main-content {
             margin-left: var(--sidebar-width);
             flex-grow: 1;
-            padding: 40px;
+            padding: 60px 40px; /* 增加頂部間距 */
             transition: all 0.3s ease;
+            max-width: 1000px; /* 限制寬度讓閱讀更舒服 */
         }
 
-        .main-content.expanded {
-            margin-left: var(--sidebar-collapsed-width);
+        .main-content.expanded { margin-left: var(--sidebar-collapsed-width); }
+
+        /* 自我介紹區樣式 */
+        header {
+            margin-bottom: 40px;
+            border-left: 5px solid var(--primary-green);
+            padding-left: 20px;
+        }
+        header h1 { color: var(--primary-green); margin-bottom: 10px; }
+        .header-bio { color: #555; line-height: 1.8; margin-top: 15px; }
+
+        /* 搜尋框樣式 */
+        .search-container {
+            margin-bottom: 40px;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 15px 25px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+            transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        #searchInput:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 4px 12px rgba(45, 90, 39, 0.2);
         }
 
+        /* 文章分類區塊樣式 */
         .category-section {
             background: white;
             border-radius: 20px;
@@ -101,12 +125,7 @@
             scroll-margin-top: 40px;
         }
 
-        .category-banner {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
+        .category-banner { width: 100%; height: 250px; object-fit: cover; }
         .category-info { padding: 30px; }
         .category-info h3 { color: var(--primary-green); margin-top: 0; font-size: 1.5em; }
 
@@ -118,11 +137,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        .article-list a {
-            text-decoration: none;
-            color: #333;
-            transition: 0.2s;
-        }
+        .article-list a { text-decoration: none; color: #333; transition: 0.2s; }
         .article-list a:hover { color: var(--primary-green); font-weight: bold; }
         .article-date { color: #aaa; font-size: 0.85em; }
 
@@ -151,6 +166,21 @@
 </nav>
 
 <main class="main-content" id="mainSection">
+    
+    <header>
+        <h1>👧 DiAriEs - 愛運動女孩ㄉ凹兜日誌</h1>
+        <p><strong>—— Recording My Dopamine Moments ——</strong></p>
+        <div class="header-bio"> 
+            喜歡跑河濱 > 跑操場 >>> 跑步機 <br/>
+            佛系完百，享受山頭不同時期的美<br/>
+            山、海都愛，目前還是山系女子<br/>
+            目標每年安排一次出國 (●'◡'●)<br/>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="搜尋山名、難度或地點...">
+    </div>
     
     <section id="mountain" class="category-section">
         <img src="images/mountain_cover.JPG" class="category-banner" alt="爬山分類">
