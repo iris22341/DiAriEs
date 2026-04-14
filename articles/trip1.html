@@ -1,318 +1,427 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>雪山東峰單攻紀錄 - 👧DiAriEs</title>
-    <style>
-        :root {
-            --primary-color: #2d5a27;
-            --bg-color: #f4f7f1;
-            --white: #ffffff;
-            --table-header-dark: #b4c7e7;
-            --table-header-light: #d9e1f2;
-            --table-time-bg: #f2f2f2;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雪山東峰單攻紀錄 - 👧DiAriEs</title>
+  <style>
+    :root {
+      --primary-color: #2d5a27;
+      --bg-color: #f4f7f1;
+      --white: #ffffff;
+      --table-header-dark: #b4c7e7;
+      --table-header-light: #d9e1f2;
+      --table-time-bg: #f2f2f2;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        body {
-            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-            line-height: 1.8;
-            color: #333;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 0;
-        }
+    body {
+      font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.8;
+      color: #333;
+      background-color: var(--bg-color);
+      margin: 0;
+      padding: 0;
+    }
 
-        .nav-bar {
-            background: var(--white);
-            padding: 15px 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+    .nav-bar {
+      background: var(--white);
+      padding: 15px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-        .nav-bar a {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+    .nav-bar a {
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
-        .content-container {
-            max-width: 750px;
-            margin: 40px auto;
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
+    .content-container {
+      max-width: 750px;
+      margin: 40px auto;
+      background: var(--white);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
 
-        h3[id] {
-            scroll-margin-top: 80px;
-        }
+    h3[id] {
+      scroll-margin-top: 80px;
+    }
 
-        /* 2. 優化圖片顯示：改為 contain 並移除高度限制，確保圖片不被裁切 */
-        .hero-img {
-            width: 100%;
-            height: auto; /* 讓高度隨比例縮放 */
-            max-height: 600px; /* 稍微調高上限，讓直幅圖也能好看 */
-            object-fit: contain; /* 確保完整顯示 */
-            border-radius: 12px;
-            margin-bottom: 30px;
-            display: block;
-        }
+    .hero-img {
+      width: 100%;
+      height: auto;
+      max-height: 600px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      display: block;
+    }
 
-        h1 { color: #222; margin-top: 0; font-size: 2em; }
+    h1 { color: #222; margin-top: 0; font-size: 2em; }
 
-        .post-meta {
-            color: #888;
-            font-size: 0.9em;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-        }
-        
-        .gear-box {
-            background: #f1f8f1;
-            padding: 25px;
-            border-radius: 12px;
-            margin: 30px 0;
-            border-left: 5px solid var(--primary-color);
-        }
+    .post-meta {
+      color: #888;
+      font-size: 0.9em;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+    }
+    
+    .gear-box {
+      background: #f1f8f1;
+      padding: 25px;
+      border-radius: 12px;
+      margin: 30px 0;
+      border-left: 5px solid var(--primary-color);
+    }
 
-        .gear-box h3 { margin-top: 0; color: var(--primary-color); }
+    .gear-box h3 { margin-top: 0; color: var(--primary-color); }
 
-        .toc-list {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
-        }
-        .toc-list li { margin-bottom: 8px; }
-        .toc-list a {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 500;
-            transition: opacity 0.2s;
-        }
-        .toc-list a:hover {
-            opacity: 0.7;
-            text-decoration: underline;
-        }
+    .toc-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .toc-list li { margin-bottom: 8px; }
+    .toc-list a {
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .toc-list a:hover {
+      opacity: 0.7;
+      text-decoration: underline;
+    }
 
-        .trip-section h3 {
-            border-bottom: 2px solid #e8f5e9;
-            padding-bottom: 8px;
-            margin-top: 40px;
-            color: #222;
-        }
+    .trip-section h3 {
+      border-bottom: 2px solid #e8f5e9;
+      padding-bottom: 8px;
+      margin-top: 40px;
+      color: #222;
+    }
 
-        .trip-section img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 25px auto;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+    .trip-section img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 25px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
 
-        .trip-table-wrapper {
-            overflow-x: auto;
-            margin: 15px 0 25px 0;
-        }
+    .trip-table-wrapper {
+      overflow-x: auto;
+      margin: 15px 0 25px 0;
+    }
 
-        .trip-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9em;
-            background: white;
-            border: 1px solid #ccc;
-        }
+    .trip-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9em;
+      background: white;
+      border: 1px solid #ccc;
+    }
 
-        .trip-table th, .trip-table td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            /* 1. 優化內容置中：將預設 text-align 改為 center */
-            text-align: center; 
-            vertical-align: middle;
-        }
+    .trip-table th, .trip-table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center; 
+      vertical-align: middle;
+    }
 
-        .date-header th {
-            background-color: var(--table-header-dark);
-            text-align: center;
-            color: #333;
-            font-weight: bold;
-        }
+    .date-header th {
+      background-color: var(--table-header-dark);
+      text-align: center;
+      color: #333;
+      font-weight: bold;
+    }
 
-        .column-header th {
-            background-color: var(--table-header-light);
-            text-align: center;
-            color: #333;
-        }
+    .column-header th {
+      background-color: var(--table-header-light);
+      text-align: center;
+      color: #333;
+    }
 
-        .trip-table td:nth-child(odd) {
-            text-align: center;
-            background-color: var(--table-time-bg);
-            font-weight: 500;
-            width: 80px;
-        }
+    .trip-table td:nth-child(odd) {
+      text-align: center;
+      background-color: var(--table-time-bg);
+      font-weight: 500;
+      width: 80px;
+    }
 
-        /* 如果表格內有特別長描述想靠左，可保留這行，或移除它讓全部置中 */
-        .text-left { text-align: left !important; }
+    .text-left { text-align: left !important; }
 
-        .trip-table small {
-            color: #666;
-            display: block;
-            margin-top: 4px;
-            line-height: 1.4;
-        }
+    .trip-table small {
+      color: #666;
+      display: block;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
 
-        footer {
-            margin-top: auto;
-            padding: 40px 0 20px 0;
-            text-align: center;
-            color: #888;
-            font-size: 0.9em;
-        }
-        .ig-link-container {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-        }
-        .ig-link-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            transition: transform 0.2s ease;
-        }
-        .ig-link-wrapper:hover {
-            transform: scale(1.05);
-        }
-        .ig-icon {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-        }
-        .ig-link {
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.1em;
-        }
+    footer {
+      margin-top: auto;
+      padding: 40px 0 20px 0;
+      text-align: center;
+      color: #888;
+      font-size: 0.9em;
+    }
+    .ig-link-container {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+    }
+    .ig-link-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+    .ig-link-wrapper:hover {
+      transform: scale(1.05);
+    }
+    .ig-icon {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+    .ig-link {
+      color: var(--primary-color);
+      font-weight: bold;
+      font-size: 1.1em;
+    }
 
-        @media (max-width: 600px) {
-            .content-container { margin: 15px; padding: 25px; }
-            .hero-img { max-height: 350px; }
-            h1 { font-size: 1.6em; }
-        }
-    </style>
+    @media (max-width: 600px) {
+      .content-container { margin: 15px; padding: 25px; }
+      .hero-img { max-height: 350px; }
+      h1 { font-size: 1.6em; }
+    }
+  </style>
 </head>
 <body>
 
-<nav class="nav-bar">
+  <nav class="nav-bar">
     <a href="../index.html"><span>←</span> 返回 DiAriEs</a>
-</nav>
+  </nav>
 
-<article class="content-container">
+  <article class="content-container">
     <img src="../images/雪山東峰_01.JPG" alt="雪山東峰" class="hero-img">
 
     <h1>雪山東峰單攻｜百岳新手入門首選 展望+百岳一次收</h1>
     <div class="post-meta">
-        我的第 39 座百岳 | 📅 日期：2025/11/23 | ⛰️ 難度：易⭐ | 👤 作者：ㄚ純
+      我的第 39 座百岳 | 📅 日期：2025/11/23 | ⛰️ 難度：易⭐ | 👤 作者：ㄚ純
     </div>
 
     <div class="gear-box">
-        <h3> Table of Contents </h3>
-        <ul class="toc-list">
-            <li><a href="#intro">一、雪山東峰簡介</a></li>
-            <li><a href="#plan">二、行程規劃建議</a></li> 
-            <li><a href="#actual-trip">三、實際行程紀錄</a></li>
-        </ul>
+      <h3> Table of Contents </h3>
+      <ul class="toc-list">
+        <li><a href="#intro">一、雪山東峰簡介</a></li>
+        <li><a href="#plan">二、行程規劃建議</a></li> 
+        <li><a href="#actual-trip">三、實際行程紀錄</a></li>
+      </ul>
     </div>
 
     <section class="trip-section">
-        <h3 id="intro">一、 雪山東峰簡介</h3>
-        <p>雪山東峰海拔 3,201 公尺，位於台中市和平區，為台灣百岳排名第 74。從大水池登山口起登路徑清晰，是許多百岳新手的首選。</p>
+      <h3 id="intro">一、 雪山東峰簡介</h3>
+      <p>雪山東峰海拔 3,201 公尺，位於台中市和平區，為台灣百岳排名第 74。從大水池登山口起登路徑清晰，是許多百岳新手的首選。</p>
 
-        <h3 id="plan">二、 行程規劃建議</h3>
-        <p>路線走法多元，志在東峰可選擇單攻，體力好的山友可以考慮一起撿主峰。</p>
+      <h3 id="plan">二、 行程規劃建議</h3>
+      <p>路線走法多元，志在東峰可選擇單攻，體力好的山友可以考慮一起撿主峰。</p>
+      
+      <h4 style="color: #2d5a27;">🟢 雪山東峰新手友善</h4>
+      <ul>
+        <li><strong>單攻：</strong>來回約 10k，建議抓 6-7 小時（含休息）。優點：可輕裝出發。</li>
+      </ul>
+
+      <h3 id="actual-trip">三、 實際行程紀錄</h3>
+      <p>這次出團動機是上課剛好跟組員們聊到好久沒上山，聽著大家分享近一次的爬山經驗，腳突然癢了起來，便約定等課程結束要一起爬山！也找了之前一起爬塔曼山的朋朋，就這樣成團！<br/>
+      此次出團成員：ㄚ純、Mark、阿巧、綿羊，共四人，四人平常都有運動習慣。</p>
+
+      <h4>01. 行前準備</h4>
+      <p><strong>(1) 裝備清單</strong></p>
+      <div class="trip-table-wrapper">
+        <table class="trip-table" style="table-layout: fixed; width: 100%;">
+          <thead class="column-header">
+            <tr>
+              <th style="width: 33.3%;">必備物品</th>
+              <th style="width: 33.3%;">衣物類</th>
+              <th style="width: 33.3%;">裝備類</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 15px; line-height: 2;">
+                身分證/健保卡<br>入山證/入園證<br>丹木斯/紅景天<br>離線地圖 GPX
+              </td>
+              <td style="padding: 15px; line-height: 2;">
+                短袖排汗T<br>GORE-TEX 外套<br>羽絨外套<br>Leggings<br>毛帽<br>圓盤帽<br>羊毛襪<br>圍脖
+              </td>
+              <td style="padding: 15px; line-height: 2;">
+                隨身小包<br>19L MR攻頂包<br>GORE-TEX 登山鞋<br>登山杖<br>雨衣褲<br>頭燈(備用電池)<br>行充<br>衛生紙<br>濕紙巾<br>小塑膠袋<br>護唇膏<br>醫藥包<br>主餐<br>1000ml水+500ml熱水<br>行動糧
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>一些小建議：<br>
+        1. 1. 如果沒有百岳經驗，行前可先吃顆預防高山症的藥，行前8小時吃一顆，當天開爬前半小時再吃半顆(不過劑量、多久前要吃還是以藥師告知為主唷)，丹木斯藥局大多可買到，南部5元/顆，北部10元/顆XD有些藥師也會改開預防肺水腫/腦水腫功效的藥。<br>
+        2. 爬了那麼多座山，圍脖對我來說算是一個蠻好用的小物，除了圍在脖子保暖，高海拔冷空氣吸了會不太舒服，像我就會狂流鼻涕狂吸鼻子，這時圍脖就可以拿來當面罩，還可以當環保衛生紙(開玩笑的)。<br>
+        3. 單攻的主餐我通常會直接買便利商店的御飯糰或麵包，速吃+補充碳水，追求營養均可以再帶幾顆水煮蛋、切片水果或肉乾。<br>
+        4. 行動糧以能放進去隨身小包的能量果膠、巧克力、鹽錠(鹽糖或梅片也行)為主，行走可以快速補充熱量。</p>
+
+      <p><strong>(2) 申請項目</strong></p>
+      <div class="trip-table-wrapper">
+        <table class="trip-table" style="table-layout: fixed; width: 100%;">
+          <thead class="column-header">
+            <tr>
+              <th style="width: 33.3%;">項目</th>
+              <th style="width: 66.7%;">是否需要 / 備註</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: left; background-color: white;"><strong>入園證</strong></td>
+              <td>O（雪霸國家公園）</td>
+            </tr>
+            <tr>
+              <td style="text-align: left; background-color: white;"><strong>入山證</strong></td>
+              <td>X</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>02. 實際過程</h4>
+      <p>
+        <strong>距離：</strong>9.35k<br>
+        <strong>時間：</strong>7:44:56<br>
+        <strong>總爬升：</strong>1,027m
+      </p>
+
+      <div class="trip-table-wrapper">
+        <table class="trip-table" style="table-layout: fixed; width: 100%;">
+          <thead>
+            <tr class="date-header">
+              <th style="width: 50%;" colspan="2">11/22 Day 0</th>
+              <th style="width: 50%;" colspan="2">11/23 Day 1</th>
+            </tr>
+            <tr class="column-header">
+              <th style="width: 15%;">時間</th>
+              <th style="width: 35%;">地點</th>
+              <th style="width: 15%;">時間</th>
+              <th style="width: 35%;">地點</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>13:30</td>
+              <td>北車集合</td>
+              <td>03:30</td>
+              <td>雪山登山口</td>
+            </tr>
+            <tr>
+              <td>16:00</td>
+              <td>院長牛肉麵+7-11採買</td>
+              <td>04:30</td>
+              <td>七卡山莊</td>
+            </tr>
+            <tr>
+              <td>18:30</td>
+              <td>環清宮</td>
+              <td>06:00</td>
+              <td>哭坡前大平台</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>07:30</td>
+              <td>雪山東峰</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>11:30</td>
+              <td>雪山登山口</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>13:30 北車集合，從宜蘭開往武陵，車程預計4小。中途在院長牛肉麵吃了午晚餐，牛肉麵中規中矩，老闆很好客，看到我們多點一份燙青菜，叫我們不用多點，可以幫我們在牛肉麵裡加菜，但還是收了燙青菜的錢XD
+          吃飽喝足在附近7-11補給後就直接開往還清宮，沿途趁機打了2朵菇(身為皮友，荒郊野外的菇不用搶真快樂)~</p>
+      <p>18:30到還清宮，車子已停滿，明天02:30要起床，趕緊洗漱整理裝備，20:00準備睡覺。</p>
+      <p>整體睡眠品質還不錯，雖然有鼾聲也聽得到隔壁間的對話，不過床位乾淨，床跟床之間有獨立簾子可拉上，棉被也有南部陽光的香味，
+          比起睡七卡山莊，還清宮也是不錯的選擇，要爬雪霸系列山頭的山友(像是志佳陽、桃山喀拉業等等)，也可以考慮，
+          建議先電話預訂，一晚一人500元現場付現，缺點就是到登山口大概還需要20分鐘車程，規劃行程時記得預留一點時間~</p>
+      
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOiRWbVubabnkRQP6R2oLHNdEWhzxbqfGp1CT19R5q_NOOuyDE26ithsdZfKr7gXeTVQkxZZxx-LMPCQ3QYJTf2oL9Y3_P8M3h9PZfj8KYgmP7E7m8=w600-h315-p-k" alt="環清宮環境1">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMq_wIeKScBiFs2a9vcY9RRbbDI_5MswYf0pRmYiCqhJL0xf6pm34vzdJf5aZJFNvNI57jt7QQYEjAmEQZmhFRoyxwnZOPSQcMZaIo__Z0IzApcO1o=w600-h315-p-k" alt="環清宮環境2">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOXgrQPKtv6JzbgnaP-_C_JPFO6KxMx099oY-3OOUPqsRQ2w35nlyFeN9CLGb1cAJ_DXh5U2N-iJQ0gSYXiWx_mZ7C62_EzUPyPMO3WecpfLyMUVpA=w600-h315-p-k" alt="環清宮環境3">
+
+      <p>02:30 起床，03:00完妝(裝)後便出發前往雪山登山口，
+          03:30抵達停車場，沿途有看到兩個停車場(但爬文說有三個)，我們停在第一停車場，很幸運還有空位，這是離雪山登山服務站最近的地方，
+          走一小段木棧階梯便來到服務站，大家可能還沒睡醒，三個女孩都沒發現上到男廁，甚至是下山後才發現XD<br/>
+          儀錶板顯示雪山東峰目前3.9度，投遞入園證意外瞥見一旁販售冰淇淋的標誌，但商店還沒開，心凍心動同時，只能等下山再吃！</p>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNZiWUgUTjlNr1az3b0qnLGuwqx-59Oe_Z1Nj1eO3rGHJDGF6PB3j4MGwHCOBq1ftp7KBveBDB2qCn5vrS9VwdL0Y2r1a00mCFvsSFvME_hKuD5mSU=w600-h315-p-k" alt="雪山服務站1">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPtSK7aaJWrhDgTcWFw5yDP4I0e5bzpws9NcnAa2AgNqOBvYEcohLmVTvC5ZhCh6D595GUVDYMzGtqtVTbmopL9-NIhuKB8hjQuDIaWhhHBxA1dbbE=w600-h315-p-k" alt="雪山服務站2">
+
+      <p>雪山東峰沿途標示清楚，路況佳，跟著標示走基本上不會迷路，<br/>
+          04:30 抵達七卡山莊，星空超美，不過山屋的鼾聲提醒我們得降低音量，小休一下拍個星空，便繼續前行。</p>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMGa0wHn8hNtVrpiMXJRb6Gd4TtYqV5rfhs1Ba1zboh7aAztXqRSiFpxBmvhf-IECbyDiUDHU5KxpOhsTk7A-8nooFu9vfToV0ceTshuS4updtyX2s=w600-h315-p-k" alt="七卡山莊星空">
+
+      <p>05:47 到了一個展望極佳的路段欣賞雲海及天色漸亮的天空。</p>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPazsV4ADkEHCXG-jpf97DG7gQqa-M4Va5XQIo8ckgX_YcbfdkyHJWV1Ms7_xR960kf6IR1boxl4vORbp3KTNFYeCFnEZ_MmEoPmYKp_FA9BSlBB6o=w600-h315-p-k" alt="雪山景1">
         
-        <h4 style="color: #2d5a27;">🟢 雪山東峰新手友善</h4>
-        <ul>
-            <li><strong>單攻：</strong>來回約 10k，建議抓 6-7 小時（含休息）。優點：可輕裝出發。</li>
-        </ul>
+      <p>06:00 抵達哭坡前大平台，為了等日出，冷到瑟瑟發抖，只能尋覓微弱的陽光，讓身子暖和一點。
+          拍照玩樂的同時，等到紅澄澄的蛋黃冒出來了！這一刻大家似乎默默有了一個共識：爬到東峰就好，此趟已心滿意足。
+          在平台遇到一位爬了N遍的大哥，大哥這趟準備撿主東，聽到我們只撿東峰，便開始勸說，以我們的腳程撿完主峰再下山綽綽有餘，
+          叫我們跟著他爬，我們很感謝大哥的邀約，只是這一趟我們只想好好享受美景，沒有想讓自己太累XD</p>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczOV6-H0Y4npyqvKJwzIh2fihuIuj2Fu8ZU5V8jCoNruoAEi8KRp6HixIPo_j4Gheveb_48RLKr24-C57n1JIqdTrmkO5FTq4RKJAlmmf6sP0Nyja7s=w600-h315-p-k" alt="雪山景2">
 
-        <h3 id="actual-trip">三、 實際行程紀錄</h3>
-        <h4>01. 行前準備</h4>
-        <p><strong>(1) 裝備清單</strong></p>
-        <div class="trip-table-wrapper">
-            <table class="trip-table" style="table-layout: fixed; width: 100%;">
-                <thead class="column-header">
-                    <tr>
-                        <th style="width: 33.3%;">必備物品</th>
-                        <th style="width: 33.3%;">衣物類</th>
-                        <th style="width: 33.3%;">裝備類</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="padding: 15px; line-height: 2;">
-                            身分證/健保卡<br/>入山證/入園證<br/>丹木斯/紅景天<br/>離線地圖 GPX
-                        </td>
-                        <td style="padding: 15px; line-height: 2;">
-                            短袖排汗T<br/>GORE-TEX 外套<br/>羽絨外套<br/>Leggings<br/>毛帽<br/>圓盤帽<br/>羊毛襪<br/>圍脖
-                        </td>
-                        <td style="padding: 15px; line-height: 2;">
-                            隨身小包<br/>19L MR攻頂包<br/>GORE-TEX 登山鞋<br/>登山杖<br/>雨衣褲<br/>頭燈<br/>行動糧
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <p>06:30離開大平台，沿途的展望讓人心情愉悅，07:00經過哭坡的牌子，很意外的是長在地上。</p>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNGhcVDMOyPKoaHP4wrIQXYEWn8jivUn45uDYqcnhFNq3ii6zdo8fMUphLF3boJCb8AdeUjwiU7UG48iOIPOXR1DsQDdcJEx1w9A5E6GjSOAHT9xMI=w600-h315-p-k" alt="雪山景3">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczNX_5mTjo40crPA2edGupCxT2hBGB4BHYRFkLRzMuyNbj4fBxrOd9JmHws5STsDoTbeeysFmR8zDkvZApnBBe5wmLAdVv97bnahVE7X4j9GXCZDHh8=w600-h315-p-k" alt="雪山景4">
+        
+      <p>07:35抵達雪山東峰！
+          在山腳點遇到一位獨攀勇者，無袖+短褲也是要撿主東的山友，很專業的指導我們哪些角度拍起來很讚，就這樣我們又玩了半個小時，身體又冷到瑟瑟發抖。</p>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPfbR-Z1wuIWFNoCNwtltGrpxK7jM4Gqz8RVlP48kgpwCKkLKQqS0QI-1Y5smiGwBnbn6koB1hhWlZdVLR5HG4ennjwa1bxKareDH-xCcW-AUJrgyE=w600-h315-p-k" alt="雪山東峰山頂">
 
-        <h4>02. 實際過程</h4>
-        <div class="trip-table-wrapper">
-            <table class="trip-table" style="table-layout: fixed; width: 100%;">
-                <thead>
-                    <tr class="date-header">
-                        <th style="width: 50%;" colspan="2">11/22 Day 0</th>
-                        <th style="width: 50%;" colspan="2">11/23 Day 1</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>13:00</td>
-                        <td>北車集合</td>
-                        <td>03:30</td>
-                        <td>雪山登山口</td>
-                    </tr>
-                    <tr>
-                        <td>17:00</td>
-                        <td>環清宮</td>
-                        <td>06:10</td>
-                        <td>雪山東峰</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <p>雪山東峰的展望極佳，面對三角點的牌子，由右到左環繞一圈，雪主、雪北、武陵四秀、南胡群峰盡收眼底。
+          回程經過主峰叉路口路牌，雪山主峰、北稜線一覽無遺。</p>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczMmeHg49Wt2aRwPTukeIuvWgKpHhwmHMspDWSDHiFX-2ml0AnfUS0HHZeAxOkR5trsNY7EMxwetortLBuI7QbwG2htXVYJm350jMrLez3OXHw9Dyiw=w600-h315-p-k" alt="雪山景5">
+
+      <p>10:00 回到七卡山莊，進去裡面晃了一圈，只剩下幾個床位還有山友的裝備，在山莊小休補給曬個日光浴，遍繼續往登山口前進。</p>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPUzYilRgDnPnZkPCIedk79B6dGeXVtW8tKmLp_aHfECZLjE_vdIUgI55Ud2H3oIj8sFtNVnpHcTjE9Ceg58D4cRbVULFLNP5K4Z54qbRUS_WMmK9w=w600-h315-p-k" alt="七卡山莊">
+        
+      <p>11:00 抵達服務站，有別凌晨起登的冷清，大家都把握好天氣出門踏青，黑水池、服務站商店已充滿人潮，我們也不忘初衷，跑去買了冰淇淋XD
+          一個60元，買了三個口味有草莓、紅心芭樂、桂花烏龍，個人最愛桂花烏龍，茶味很濃(不輸台北的阿洋XD)下山後來一個，身心舒暢~</p>
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczPoDVTYASU5zTfpcfOa4Sf--62hzJJVQMrKp9oEN2cNS-grcCZsGgujePFzv9xim--pq1eD2Z6wg_MUWmk0EitcTlFRbKnm20xt0XYP2d1zNfX8uQk=w600-h315-p-k" alt="冰淇淋">
+    
     </section>
-</article>
+  </article>
 
-<footer>
+  <footer>
     <p>© DiAriEs' Blog | Capturing every moment of dopamine.</p>
     <div class="ig-link-container">
-        <a href="https://www.instagram.com/agirlwholovesexercise" target="_blank" class="ig-link-wrapper">
-            <img src="../images/IG.png" alt="Instagram Icon" class="ig-icon">
-            <span class="ig-link">Follow me on Instagram</span>
-        </a>
+      <a href="https://www.instagram.com/agirlwholovesexercise" target="_blank" class="ig-link-wrapper">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczNZTlD2Xz8PKgxPlr53c6jk_POhNA7RWaVCCw1enQYPgXyQ35ssKBMGAXkBB_RnX7WZLEFVgKUYV1ZS4wuxbWE38I2YGxja7jz8nmq5QaFbvLF3WEI=w360-h315-p-k" alt="Instagram Icon" class="ig-icon">
+        <span class="ig-link">Follow me on Instagram</span>
+      </a>
     </div>
-</footer>
+  </footer>
 
 </body>
 </html>
