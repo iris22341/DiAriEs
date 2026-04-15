@@ -75,48 +75,49 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
         .main-content.expanded { margin-left: var(--sidebar-collapsed-width); }
-
+        
+        /* 修改 header 容器：增加下方間距來與內容做區隔 */
         header {
-            display: flex;       /* 啟用彈性佈局 */
+            display: flex;
             gap: 30px;
             align-items: center;
             padding: 30px;
             background: white;
             border-radius: 20px;
+            margin-bottom: 50px; /* 增加與下方區塊的距離 */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* 稍微加深陰影，增加層次感 */
         }
         
+        /* 文字佔 2 份空間 */
         .header-text {
-            flex: 1;             /* 佔用 50% 空間 */
+            flex: 2; 
             border-left: 5px solid var(--primary-green);
             padding-left: 20px;
         }
         
+        /* 圖片佔 1 份空間 */
         .header-photos {
-            flex: 1;             /* 讓照片區也佔用 50% 空間，達成對等占比 */
+            flex: 1; 
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 這裡控制欄位數量 */
-            gap: 10px;
+            grid-template-columns: repeat(2, 1fr); /* 2:1 比例下空間較窄，改為兩欄排列較美觀 */
+            gap: 8px;
         }
         
+        /* 圖片形狀調整 */
         .header-photos img {
             width: 100%;
-            /* 如果不希望照片被裁切，請將 cover 改為 contain */
-            /* 但 contain 會導致照片大小不一，建議維持 cover 並搭配 aspect-ratio */
-            aspect-ratio: 1 / 1; 
+            height: auto;        /* 讓圖片依據原始比例縮放，不再強制正方形 */
+            aspect-ratio: auto;  /* 移除 1/1 限制 */
             object-fit: cover;   
-            border-radius: 10px;
+            border-radius: 8px;
             transition: transform 0.3s;
         }
         
-        /* 文章區塊 (移除 Banner 後) */
+        /* 下方文章區塊：微調邊距增加區隔 */
         .category-section {
-            display: block;
-            background: white; border-radius: 20px;
-            margin-bottom: 30px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            animation: fadeIn 0.5s;
+            margin-top: 10px;    /* 配合 header 的 margin-bottom */
+            border: 1px solid rgba(0,0,0,0.03); /* 增加極細邊框，與 header 的純白背景做視覺區隔 */
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
