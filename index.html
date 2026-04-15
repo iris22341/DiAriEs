@@ -102,11 +102,15 @@
             width: 300px;
         }
         .header-photos img {
+            display: grid;
+            /* 改為 2 欄或 3 欄，並使用 1fr 讓它自適應 */
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px;
+            flex: 1;      /* 讓照片區塊也佔用 50% 空間 */
             width: 100%;
-            height: 100px;
+            aspect-ratio: 1 / 1; /* 讓照片保持正方形，比例更美 */
             object-fit: cover;
             border-radius: 10px;
-            transition: transform 0.3s;
         }
         .header-photos img:hover { transform: scale(1.05); }
 
