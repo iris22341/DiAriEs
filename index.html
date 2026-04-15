@@ -78,42 +78,38 @@
 
         .main-content.expanded { margin-left: var(--sidebar-collapsed-width); }
 
-        /* 自介區塊 */
         header {
-            margin-bottom: 40px;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            display: flex;
+            display: flex;       /* 啟用彈性佈局 */
             gap: 30px;
             align-items: center;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
         }
-
-        .header-text { flex: 1; border-left: 5px solid var(--primary-green); padding-left: 20px; }
-        header h1 { color: var(--primary-green); margin: 0 0 15px 0; font-size: 1.8em; }
-        .header-bio { color: #555; line-height: 1.8; font-size: 1em; }
-
-        /* 自介照片牆 */
+        
+        .header-text {
+            flex: 1;             /* 佔用 50% 空間 */
+            border-left: 5px solid var(--primary-green);
+            padding-left: 20px;
+        }
+        
         .header-photos {
+            flex: 1;             /* 讓照片區也佔用 50% 空間，達成對等占比 */
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr); /* 這裡控制欄位數量 */
             gap: 10px;
-            width: 300px;
         }
+        
         .header-photos img {
-            display: grid;
-            /* 改為 2 欄或 3 欄，並使用 1fr 讓它自適應 */
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 10px;
-            flex: 1;      /* 讓照片區塊也佔用 50% 空間 */
             width: 100%;
-            aspect-ratio: 1 / 1; /* 讓照片保持正方形，比例更美 */
-            object-fit: cover;
+            /* 如果不希望照片被裁切，請將 cover 改為 contain */
+            /* 但 contain 會導致照片大小不一，建議維持 cover 並搭配 aspect-ratio */
+            aspect-ratio: 1 / 1; 
+            object-fit: cover;   
             border-radius: 10px;
+            transition: transform 0.3s;
         }
-        .header-photos img:hover { transform: scale(1.05); }
-
+        
         /* 文章區塊 (移除 Banner 後) */
         .category-section {
             display: block;
