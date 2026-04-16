@@ -151,20 +151,16 @@
         .suggestion-list { padding-left: 20px; }
         .suggestion-list li { margin-bottom: 10px; }
 
-       /* 頁尾樣式同步 */
+             /* 頁尾 IG 樣式優化 */
         footer {
             margin-top: auto;
             padding: 40px 0 20px 0;
             text-align: center;
             color: #888;
             font-size: 0.9em;
-            background: none; /* 確保背景不會被覆蓋 */
-        }
-        footer p {
-        margin-bottom: 5px; /* 關鍵：縮小文字下方的外距 (瀏覽器預設通常較大) */
         }
         .ig-link-container {
-            margin-top: 5px;
+            margin-top: 15px;
             display: flex;
             justify-content: center;
         }
@@ -178,18 +174,17 @@
         .ig-link-wrapper:hover {
             transform: scale(1.05);
         }
-        /* 注意：這裡要加上 .ig-icon 的寬高設定 */
         .ig-icon {
-            width: 28px; /* 根據 IG 品牌感建議調整為 24px 較美觀，原本 10px 會太小 */
-            height: 28px;
+            width: 10px;
+            height: 10px;
             object-fit: contain;
-            box-shadow: none !important; /* 移除文章內圖片預設的陰影 */
         }
         .ig-link {
-            color: var(--primary-color);
+            color: var(--primary-green);
             font-weight: bold;
             font-size: 1.1em;
         }
+
         /* 📱 手機版專屬優化 */
         @media (max-width: 768px) {
             body { flex-direction: column; }
@@ -197,6 +192,21 @@
                 width: 100% !important; height: auto; position: sticky; top: 0;
                 background: var(--primary-green);
             }
+            .toggle-btn, .sidebar h2, .sidebar hr { display: none; }
+            .sidebar-inner { padding: 10px; overflow-x: auto; }
+            .sidebar-menu { display: flex; gap: 10px; }
+            .sidebar-menu li { margin: 0; }
+            .sidebar-menu a { padding: 8px 12px; background: rgba(255,255,255,0.1); border-radius: 15px; font-size: 0.85em; }
+            .sidebar-menu a.active { background: white; color: var(--primary-green); }
+
+            .main-content { margin-left: 0 !important; padding: 15px; }
+            
+            header { flex-direction: column; align-items: flex-start; padding: 20px; }
+            .header-photos { width: 100%; grid-template-columns: repeat(4, 1fr); margin-top: 20px; }
+            .header-photos img { height: 70px; }
+
+            .article-list li { flex-direction: column; align-items: flex-start; gap: 5px; }
+        }
     </style>
 </head>
 <body>
@@ -457,7 +467,7 @@
         <p>© 2026 DiAriEs' Blog | Capturing every moment of dopamine.</p>
         <div class="ig-link-container">
             <a href="https://www.instagram.com/agirlwholovesexercise?utm_source=blog&utm_medium=footer&utm_campaign=trip1_xueshan" target="_blank" class="ig-link-wrapper">
-                <img src="https://lh3.googleusercontent.com/pw/AP1GczNZTlD2Xz8PKgxPlr53c6jk_POhNA7RWaVCCw1enQYPgXyQ35ssKBMGAXkBB_RnX7WZLEFVgKUYV1ZS4wuxbWE38I2YGxja7jz8nmq5QaFbvLF3WEI=w135-h135-p-k" alt="Instagram Icon" class="ig-icon">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczNZTlD2Xz8PKgxPlr53c6jk_POhNA7RWaVCCw1enQYPgXyQ35ssKBMGAXkBB_RnX7WZLEFVgKUYV1ZS4wuxbWE38I2YGxja7jz8nmq5QaFbvLF3WEI=w30-h30-p-k" alt="Instagram Icon" class="ig-icon">
                 <span class="ig-link">Follow me on Instagram</span>
             </a>
         </div>
