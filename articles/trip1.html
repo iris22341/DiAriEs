@@ -160,6 +160,9 @@
             font-size: 0.9em;
             background: none; /* 確保背景不會被覆蓋 */
         }
+        footer p {
+        margin-bottom: 5px; /* 關鍵：縮小文字下方的外距 (瀏覽器預設通常較大) */
+        }
         .ig-link-container {
             margin-top: 15px;
             display: flex;
@@ -177,8 +180,8 @@
         }
         /* 注意：這裡要加上 .ig-icon 的寬高設定 */
         .ig-icon {
-            width: 24px; /* 根據 IG 品牌感建議調整為 24px 較美觀，原本 10px 會太小 */
-            height: 24px;
+            width: 28px; /* 根據 IG 品牌感建議調整為 24px 較美觀，原本 10px 會太小 */
+            height: 28px;
             object-fit: contain;
             box-shadow: none !important; /* 移除文章內圖片預設的陰影 */
         }
