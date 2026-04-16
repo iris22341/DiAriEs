@@ -9,7 +9,7 @@
             --sidebar-width: 250px;
             --sidebar-collapsed-width: 70px;
             --primary-green: #2d5a27;
-            --light-green: #f4f7f1; /* 頁面背景淺綠 */
+            --light-green: #f4f7f1;
         }
 
         body {
@@ -75,55 +75,48 @@
             flex-direction: column;
             min-height: 100vh;
         }
+
         .main-content.expanded { margin-left: var(--sidebar-collapsed-width); }
-        
-        /* 上方 Header 卡片 */
+
+        /* 自介區塊 */
         header {
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             display: flex;
             gap: 30px;
             align-items: center;
-            padding: 35px;
-            background: white;       /* 白色底色 */
-            border-radius: 20px;
-            margin-bottom: 30px;     /* 與下方區塊間距 */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 輕微陰影 */
         }
 
-        .header-text h1 {
-            color: var(--primary-green);
-            margin-top: 0; /* 順便取消上方空白，讓排版更緊湊 */
-        }
-        
-        .header-text {
-            flex: 2;                 /* 文字佔 2 */
-            border-left: 5px solid var(--primary-green);
-            padding-left: 20px;
-        }
-        
+        .header-text { flex: 1; border-left: 5px solid var(--primary-green); padding-left: 20px; }
+        header h1 { color: var(--primary-green); margin: 0 0 15px 0; font-size: 1.8em; }
+        .header-bio { color: #555; line-height: 1.8; font-size: 1em; }
+
+        /* 自介照片牆 */
         .header-photos {
-            flex: 1;                 /* 圖片區佔 1 */
             display: grid;
-            grid-template-columns: repeat(2, 1fr); 
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
+            width: 300px;
         }
-        
         .header-photos img {
             width: 100%;
-            height: auto;            /* 不強制正方形 */
-            object-fit: cover;   
+            height: 100px;
+            object-fit: cover;
             border-radius: 10px;
             transition: transform 0.3s;
         }
         .header-photos img:hover { transform: scale(1.05); }
-        
-        /* 下方文章分類卡片 */
+
+        /* 文章區塊 (移除 Banner 後) */
         .category-section {
-            background: white;       /* 白色底色 */
-            border-radius: 20px;
-            margin-bottom: 25px;     /* 區塊間的區隔 */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: block;
+            background: white; border-radius: 20px;
+            margin-bottom: 30px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             animation: fadeIn 0.5s;
-            overflow: hidden;
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -131,22 +124,23 @@
         .category-info { padding: 30px; }
         .category-info h3 { color: var(--primary-green); margin-top: 0; font-size: 1.3em; border-bottom: 2px solid var(--light-green); padding-bottom: 10px;}
 
-        /* 文章列表 */
+        /* 文章列表與連結底線 */
         .article-list { list-style: none; padding: 0; margin-top: 15px; }
         .article-list li {
-            padding: 15px 0; border-bottom: 1px solid #f9f9f9;
+            padding: 15px 0; border-bottom: 1px solid #f0f0f0;
             display: flex; justify-content: space-between; align-items: center;
         }
         .article-list a { 
             text-decoration: underline;
             text-underline-offset: 4px;
-            color: #333; font-size: 1.05em; font-weight: 500;
+            color: #333; font-size: 1.1em; font-weight: 500;
             transition: 0.3s;
         }
-        .article-list a:hover { color: var(--primary-green); }
+        .article-list a:hover { color: var(--primary-green); background-color: rgba(45, 90, 39, 0.05); }
+
         .article-date { color: #aaa; font-size: 0.9em; }
 
-        /* 頁尾 */
+        /* 頁尾 IG 樣式優化 */
         footer {
             margin-top: auto;
             padding: 40px 0 20px 0;
@@ -154,20 +148,53 @@
             color: #888;
             font-size: 0.9em;
         }
+        .ig-link-container {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
         .ig-link-wrapper {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            margin-top: 10px;
+            transition: transform 0.2s ease;
         }
-        .ig-icon { width: 24px; height: 24px; }
-        .ig-link { color: var(--primary-green); font-weight: bold; }
+        .ig-link-wrapper:hover {
+            transform: scale(1.05);
+        }
+        .ig-icon {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+        .ig-link {
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 1.1em;
+        }
 
+        /* 📱 手機版專屬優化 */
         @media (max-width: 768px) {
-            header { flex-direction: column; align-items: flex-start; }
-            .header-photos { grid-template-columns: repeat(3, 1fr); width: 100%; }
-            .main-content { padding: 20px; }
+            body { flex-direction: column; }
+            .sidebar {
+                width: 100% !important; height: auto; position: sticky; top: 0;
+                background: var(--primary-green);
+            }
+            .toggle-btn, .sidebar h2, .sidebar hr { display: none; }
+            .sidebar-inner { padding: 10px; overflow-x: auto; }
+            .sidebar-menu { display: flex; gap: 10px; }
+            .sidebar-menu li { margin: 0; }
+            .sidebar-menu a { padding: 8px 12px; background: rgba(255,255,255,0.1); border-radius: 15px; font-size: 0.85em; }
+            .sidebar-menu a.active { background: white; color: var(--primary-green); }
+
+            .main-content { margin-left: 0 !important; padding: 15px; }
+            
+            header { flex-direction: column; align-items: flex-start; padding: 20px; }
+            .header-photos { width: 100%; grid-template-columns: repeat(4, 1fr); margin-top: 20px; }
+            .header-photos img { height: 70px; }
+
+            .article-list li { flex-direction: column; align-items: flex-start; gap: 5px; }
         }
     </style>
 </head>
@@ -182,7 +209,7 @@
             <li><a onclick="showCategory('sea')" class="menu-item">🌊 潛水</a></li>
             <li><a onclick="showCategory('run')" class="menu-item">🏃 跑步</a></li>
             <li><a onclick="showCategory('travel')" class="menu-item">✈️ 旅行</a></li>
-            <li><a onclick="showAll()" class="menu-item active">全部 DiriEs</a></li>
+            <li><a onclick="showAll()" class="menu-item active">🏠 全部</a></li>
         </ul>
     </div>
 </nav>
@@ -195,14 +222,14 @@
                 喜歡跑河濱 > 跑操場 >>> 跑步機 <br/>
                 佛系完百，享受山頭不同時期的美<br/>
                 山、海都愛，目前還是山系女子<br/>
-                每年都要出國玩 (●'◡'●)
+                目標每年安排一次出國 (●'◡'●)
             </div>
         </div>
         <div class="header-photos">
-            <img src="https://lh3.googleusercontent.com/pw/AP1GczNykMIo8g79_fAAgWeG9gzwh7HCgvai0C64Tge0Bmb6Q2_McY_YS9mYjrqhL09EW4zO31nwFNb08kBNm4V5upEckGMIDqcWozGzWw0PGp68WjnCvy8=w600-h315-p-k" alt="照片1">
-            <img src="https://lh3.googleusercontent.com/pw/AP1GczOTuj4I52CHqTmepYdkUyddjJqDGZ658ZGQGk1RTL9_ofaMoIJjD46GiQf7pxKkyN1BXI058unUE7_4KnKDJYStNKzAcG4Lwr8iNt1OYOoxarNsCxI=w600-h315-p-k" alt="照片2">
-            <img src="https://lh3.googleusercontent.com/pw/AP1GczNCOysH4Erd3E8_uyosXWODh-2RuZ4RhKz2JTExYQOo_c0XP5eN6aXJmYXSBMF1jBDBUiwgHxhYDFLsIfe0ZScWpLOEBwSK7S-L5UDpsvLTVuebdBE=w600-h315-p-k" alt="照片3">
-            <img src="https://lh3.googleusercontent.com/pw/AP1GczMzwJYzr82Hv8WuTx1o3e0feWMS9tXffNZU5YY5XQFFMtGCAKTh2uFTkGSQ7UCCYAMkKtPRJI1zK8Xb1Ous0J1cU2K17hcYpcCLG63T3EAhRPez4Pc=w600-h315-p-k" alt="照片4">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczNykMIo8g79_fAAgWeG9gzwh7HCgvai0C64Tge0Bmb6Q2_McY_YS9mYjrqhL09EW4zO31nwFNb08kBNm4V5upEckGMIDqcWozGzWw0PGp68WjnCvy8=w600-h315-p-k" alt="品池單攻">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczOTuj4I52CHqTmepYdkUyddjJqDGZ658ZGQGk1RTL9_ofaMoIJjD46GiQf7pxKkyN1BXI058unUE7_4KnKDJYStNKzAcG4Lwr8iNt1OYOoxarNsCxI=w600-h315-p-k" alt="綠島潛水">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczNCOysH4Erd3E8_uyosXWODh-2RuZ4RhKz2JTExYQOo_c0XP5eN6aXJmYXSBMF1jBDBUiwgHxhYDFLsIfe0ZScWpLOEBwSK7S-L5UDpsvLTVuebdBE=w600-h315-p-k" alt="夸父追日南部">
+            <img src="https://lh3.googleusercontent.com/pw/AP1GczMzwJYzr82Hv8WuTx1o3e0feWMS9tXffNZU5YY5XQFFMtGCAKTh2uFTkGSQ7UCCYAMkKtPRJI1zK8Xb1Ous0J1cU2K17hcYpcCLG63T3EAhRPez4Pc=w600-h315-p-k" alt="黃刀鎮極光">
         </div>
     </header>
     
@@ -210,8 +237,8 @@
         <div class="category-info">
             <h3>⛰️ DiAriEs about 爬山</h3>
             <ul class="article-list">
-                <li><a href="#">雪山東峰單攻紀錄</a><span class="article-date">2025/11/23</span></li>
-                <li><a href="#">大霸尖山三日行</a><span class="article-date">2026/01/10</span></li>
+                <li><a href="articles/trip1.html" target="_blank" rel="noopener noreferrer">雪山東峰單攻紀錄</a><span class="article-date">2025/11/23</span></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">大霸尖山三日行</a><span class="article-date">2026/01/10</span></li>
             </ul>
         </div>
     </section>
@@ -220,7 +247,7 @@
         <div class="category-info">
             <h3>🌊 DiAriEs about 潛水</h3>
             <ul class="article-list">
-                <li><a href="#">自潛紀錄：小琉球尋龜記</a><span class="article-date">2025/08/15</span></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">自潛紀錄：小琉球尋龜記</a><span class="article-date">2025/08/15</span></li>
             </ul>
         </div>
     </section>
@@ -229,7 +256,7 @@
         <div class="category-info">
             <h3>🏃 DiAriEs about 跑步</h3>
             <ul class="article-list">
-                <li><a href="#">台北馬拉松初半馬心得</a><span class="article-date">2025/12/20</span></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">台北馬拉松初半馬心得</a><span class="article-date">2025/12/20</span></li>
             </ul>
         </div>
     </section>
@@ -238,17 +265,19 @@
         <div class="category-info">
             <h3>✈️ DiAriEs about 旅行</h3>
             <ul class="article-list">
-                <li><a href="#">京都散策：鴨川跳龜</a><span class="article-date">2025/11/01</span></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer">京都散策：鴨川跳龜</a><span class="article-date">2025/11/01</span></li>
             </ul>
         </div>
     </section>
 
     <footer>
-        <p>© DiAriEs' Blog | Capturing every moment of dopamine.</p>
-        <a href="#" class="ig-link-wrapper">
-            <img src="https://lh3.googleusercontent.com/pw/AP1GczMgIiUj5MGrmsU13-PnS9sgwWW2qU-bDXmWmfI2CDO7EeMuOD14fFTyq6MSdnV9T1Eotg4PKW1z5e69wuvu2vx720k1x5SKKyBNWPV-ermm7gUOBZY=w360-h315-p-k" alt="IG" class="ig-icon">
-            <span class="ig-link">Follow me on Instagram</span>
-        </a>
+        <p>© 2026 DiAriEs' Blog | Capturing every moment of dopamine.</p>
+        <div class="ig-link-container">
+            <a href="https://www.instagram.com/agirlwholovesexercise?igsh=MXA2OG84ZHV3NGRhMg%3D%3D&utm_source=qr" target="_blank" class="ig-link-wrapper">
+                <img src="images/IG.png" alt="Instagram Icon" class="ig-icon">
+                <span class="ig-link">Follow me on Instagram</span>
+            </a>
+        </div>
     </footer>
 </main>
 
@@ -265,12 +294,16 @@
         });
         const menuItems = document.querySelectorAll('.menu-item');
         menuItems.forEach(item => item.classList.remove('active'));
+        if (event) event.currentTarget.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function showAll() {
         const sections = document.querySelectorAll('.category-section');
         sections.forEach(sec => sec.style.display = 'block');
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(item => item.classList.remove('active'));
+        if (event) event.currentTarget.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
