@@ -58,15 +58,13 @@
       scroll-margin-top: 80px;
     }
 
-    .hero-img {
-      width: 100%;
-      height: auto;
-      
-      max-height: 100%;
-      object-fit: contain;
+      .hero-img {
+      width: 100%;       /* 寬度撐滿容器 */
+      height: auto;      /* 高度根據比例自動調整，這是關鍵 */
+      display: block;
       border-radius: 12px;
       margin-bottom: 30px;
-      display: block;
+      /* 移除 max-height 和 object-fit */
     }
 
     h1 { color: #222; margin-top: 0; font-size: 2em; }
@@ -209,10 +207,12 @@
       /* .hero-img { max-height: 350px; }  <-- 建議刪除這行，避免裁切 */
       h1 { font-size: 1.6em; }      
     }
-    img[alt="七卡山莊星空"],img[alt="冰淇淋"] {
-    max-height: 100vh; 
-    width: auto;      /* 寬度配合高度縮放 */
+    img[alt="七卡山莊星空"], img[alt="冰淇淋"] {
+    max-width: 100%;   /* 確保圖片寬度不會超過螢幕 */
+    height: auto;      /* 高度按比例縮放 */
     margin: 0 auto;
+    display: block;    /* 確保置中生效 */
+    /* 移除 max-height: 100vh; 或改為更大的數值 */
     }
     .timeline-list {
     list-style: none; /* 移除預設圓點 */
