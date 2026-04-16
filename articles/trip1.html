@@ -9,33 +9,11 @@
             --primary-color: #2d5a27;
             --bg-color: #f4f7f1;
             --white: #ffffff;
-            --table-header-dark: #f9fbf9; /* #b4c7e7 這個是藍色 */
-            --table-header-light: #f9fbf9; /* #d9e1f2 這個是淺藍色 */
-            --table-time-bg: #ffffff; /* #f2f2f2 這個是淺灰色 */
+            --table-header-dark: #f9fbf9; 
+            --table-header-light: #f9fbf9; 
+            --table-time-bg: #ffffff; 
             --shadow: 0 4px 15px rgba(0,0,0,0.1);
             --radius: 12px;
-        }
-
-        /* 圖片與註解樣式 */
-        figure {
-            margin: 30px auto;
-            text-align: center; /* 讓圖片與文字置中 */
-            }
-        
-        figure img {
-            margin: 0 auto 10px auto !important; /* 取消原本 img 的 margin，改用 figure 控制 */
-        }
-        
-        figcaption {
-            font-size: 0.9em;
-            color: #666;
-            font-style: italic; /* 斜體增加質感 */
-            margin-top: 8px;
-        }
-        
-        /* 表格列劃過效果（選用） */
-        .trip-table tbody tr:hover {
-            background-color: var(--table-row-hover);
         }
 
         html { scroll-behavior: smooth; }
@@ -45,6 +23,26 @@
             color: #333;
             background-color: var(--bg-color);
             margin: 0;
+        }
+
+        /* 圖片與註解樣式 (Figure) */
+        figure {
+            margin: 30px auto;
+            text-align: center;
+        }
+        figure img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 10px auto !important;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        figcaption {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+            margin-top: 8px;
         }
 
         /* 導覽列 */
@@ -75,7 +73,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        /* 標題與元數據 */
         h1 { color: #222; margin: 0 0 10px 0; font-size: 2em; line-height: 1.3; }
         h3[id] { scroll-margin-top: 100px; color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px; }
         h4 { margin-top: 30px; color: #444; }
@@ -88,66 +85,43 @@
             padding-bottom: 15px;
         }
 
-        /* 通用圖片樣式 */
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 30px auto;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        .hero-img { width: 100%; margin-bottom: 40px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .hero-img { width: 100%; margin-bottom: 40px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); border-radius: var(--radius); }
 
-        /* 圖片網格 */
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 25px 0;
+        /* 表格優化：解決圓角問題 */
+        .trip-table-wrapper { 
+            overflow-x: auto; 
+            margin: 25px 0; 
         }
-        .image-grid img {
-            width: 100%;
-            height: auto;
-            /* object-fit: cover ;*/
-            margin: 0 !important;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-        
-        /* 1. 取消特定圖片動畫的關鍵 CSS */
-        .image-grid img:not(.no-hover):hover {
-            transform: scale(1.03);
-        }
-        .image-grid img.no-hover {
-            cursor: default;
-        }
-
-        /* 表格優化 */
-        .trip-table-wrapper { overflow-x: auto; margin: 25px 0; border-radius: 8px; }
         .trip-table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate; /* 必須為 separate 圓角才有效 */
+            border-spacing: 0;
             font-size: 0.95em;
             border: 1px solid #ddd;
-            word-break: keep-all; /* 防止文字亂斷行 */
+            border-radius: 8px;
+            overflow: hidden; /* 確保內容不會超出圓角 */
+            word-break: keep-all;
         }
         .trip-table th, .trip-table td {
-            border: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
             padding: 14px 10px;
             text-align: center;
         }
+        /* 移除最後一欄與最後一列的重複邊框 */
+        .trip-table th:last-child, .trip-table td:last-child { border-right: none; }
+        .trip-table tr:last-child td { border-bottom: none; }
+
         .date-header th { background: var(--table-header-dark); color: #333; }
         .column-header th { background: var(--table-header-light); color: #555; }
         
-        /* 固定時間欄位寬度 */
         .trip-table td:nth-child(odd) { 
             background: var(--table-time-bg); 
             font-weight: 600; 
             width: 80px;
         }
 
-        /* 其他區塊 */
+        /* 其他區塊樣式 */
         .gear-box {
             background: #f1f8f1;
             padding: 25px;
@@ -158,11 +132,7 @@
         .toc-list { list-style: none; padding: 0; margin: 0; }
         .toc-list li { margin: 8px 0; }
         .toc-list a { text-decoration: none; color: var(--primary-color); font-weight: 500; }
-        .toc-list a:hover { text-decoration: underline; }
-
-        .suggestion-list { padding-left: 20px; }
-        .suggestion-list li { margin-bottom: 12px; }
-
+        
         .timeline-list { list-style: none; padding: 0; }
         .timeline-list li { 
             margin-bottom: 50px; 
@@ -172,30 +142,13 @@
         .timeline-list li:last-child { border-bottom: none; }
 
         footer { text-align: center; padding: 60px 0; background: #fff; margin-top: 40px; }
-        .ig-link-container { margin-top: 15px; }
-        .ig-link-wrapper { 
-            text-decoration: none; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 10px; 
-        }
-        .ig-link-wrapper img { width: 30px; margin: 0; box-shadow: none; border-radius: 8px; }
+        .ig-link-wrapper { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+        .ig-link-wrapper img { width: 30px; margin: 0; border-radius: 8px; }
         .ig-link { color: var(--primary-color); font-weight: bold; }
 
-        /* RWD 調整 */
         @media (max-width: 600px) {
-        .content-container { margin: 15px; padding: 25px; }
-        h1 { font-size: 1.6em; }
-        .image-grid { 
-        grid-template-columns: repeat(2, 1fr); /* 保持手機版兩列排版 */
-        gap: 10px; 
-        }
-        .image-grid img {
-        width: 100%;
-        height: auto;
-        max-height: 400px; /* 設定一個最大高度限制 */
-        object-fit: contain; /* 確保原比例顯示在限制空間內 */
-        margin: 0 !important;
+            .content-container { margin: 15px; padding: 25px; }
+            h1 { font-size: 1.6em; }
         }
     </style>
 </head>
@@ -255,13 +208,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="padding: 15px; line-height: 2; vertical-align: top;">
+                            <td style="padding: 15px; line-height: 2; vertical-align: top; font-weight: normal;">
                                 身分證/健保卡<br>入山證/入園證<br>丹木斯/紅景天<br>離線地圖 GPX
                             </td>
                             <td style="padding: 15px; line-height: 2; vertical-align: top;">
                                 短袖排汗T<br>GORE-TEX 外套<br>羽絨外套<br>Leggings<br>毛帽<br>圓盤帽<br>羊毛襪<br>圍脖
                             </td>
-                            <td style="padding: 15px; line-height: 2; vertical-align: top;">
+                            <td style="padding: 15px; line-height: 2; vertical-align: top; font-weight: normal;">
                                 隨身小包<br>19L MR攻頂包<br>GORE-TEX 登山鞋<br>登山杖<br>雨衣褲<br>頭燈/備用電池<br>行充<br>衛生紙<br>濕紙巾<br>小塑膠袋<br>護唇膏<br>醫藥包<br>主餐<br>1000ml水+500ml熱水<br>行動糧
                             </td>
                         </tr>
@@ -373,7 +326,7 @@
                     <img src="https://lh3.googleusercontent.com/pw/AP1GczMq_wIeKScBiFs2a9vcY9RRbbDI_5MswYf0pRmYiCqhJL0xf6pm34vzdJf5aZJFNvNI57jt7QQYEjAmEQZmhFRoyxwnZOPSQcMZaIo__Z0IzApcO1o=w1200-h1000-p-k" alt="環清宮環境2" class="no-hover">
                     <figure> 
                         <img src="https://lh3.googleusercontent.com/pw/AP1GczOXgrQPKtv6JzbgnaP-_C_JPFO6KxMx099oY-3OOUPqsRQ2w35nlyFeN9CLGb1cAJ_DXh5U2N-iJQ0gSYXiWx_mZ7C62_EzUPyPMO3WecpfLyMUVpA=w1200-h1000-p-k" alt="環清宮環境3" class="no-hover">
-                        <figcaption>▲ 環清宮前庭有一塊地可停車，可以沖澡，有提供洗髮精、沐浴乳及吹風機。二樓大概有6間房，一間房可住大約25人，為上下舖，每張床有獨立簾子可拉上。</figcaption>
+                        <figcaption>▲ 環清宮前庭有一塊地可停車，一樓有盥洗室，有提供洗髮精、沐浴乳及吹風機。<br>二樓大概有6間房，一間房可住大約25人，為上下舖，每張床有獨立簾子可拉上。</figcaption>
                     </figure>
                 </li>
 
