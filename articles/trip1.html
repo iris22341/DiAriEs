@@ -1,254 +1,153 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>雪山東峰單攻紀錄 - 👧DiAriEs</title>
-  <style>
-  :root {
-    --primary-color: #2d5a27;
-    --bg-color: #f4f7f1;
-    --white: #ffffff;
-    --table-header-dark: #b4c7e7; /* 把後面的 'a' 刪掉 */
-    --table-header-light: #d9e1f2;
-    --table-time-bg: #f2f2f2;
-  }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-      line-height: 1.8;
-      color: #333;
-      background-color: var(--bg-color);
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-bar {
-      background: var(--white);
-      padding: 15px 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .nav-bar a {
-      text-decoration: none;
-      color: var(--primary-color);
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .content-container {
-      max-width: 750px;
-      margin: 40px auto;
-      background: var(--white);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-
-    h3[id] {
-      scroll-margin-top: 80px;
-    }
-
-      .hero-img {
-      width: 100%;       /* 寬度撐滿容器 */
-      height: auto;      /* 高度根據比例自動調整，這是關鍵 */
-      display: block;
-      border-radius: 12px;
-      margin-bottom: 30px;
-      /* 移除 max-height 和 object-fit */
-    }
-
-    h1 { color: #222; margin-top: 0; font-size: 2em; }
-
-    .post-meta {
-      color: #888;
-      font-size: 0.9em;
-      margin-bottom: 30px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 15px;
-    }
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>雪山東峰單攻紀錄 - 👧DiAriEs</title>
+      <style>
+        :root {
+          --primary-color: #2d5a27;
+          --bg-color: #f4f7f1;
+          --white: #ffffff;
+          --table-header-dark: #b4c7e7;
+          --table-header-light: #d9e1f2;
+          --table-time-bg: #f2f2f2;
+          --shadow: 0 4px 10px rgba(0,0,0,0.1);
+          --radius: 12px;
+        }
     
-    .gear-box {
-      background: #f1f8f1;
-      padding: 25px;
-      border-radius: 12px;
-      margin: 30px 0;
-      border-left: 5px solid var(--primary-color);
-    }
-
-    .gear-box h3 { margin-top: 0; color: var(--primary-color); }
-
-    .toc-list {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-    .toc-list li { margin-bottom: 8px; }
-    .toc-list a {
-      text-decoration: none;
-      color: var(--primary-color);
-      font-weight: 500;
-      transition: opacity 0.2s;
-    }
-    .toc-list a:hover {
-      opacity: 0.7;
-      text-decoration: underline;
-    }
-
-    .trip-section h3 {
-      border-bottom: 2px solid #e8f5e9;
-      padding-bottom: 8px;
-      margin-top: 40px;
-      color: #222;
-    }
-
-    .trip-section img {
-      max-width: 100%;       /* 寬度不超過容器 */
-      height: auto;          /* 這是最關鍵的一行，確保直式圖片不會被壓扁或裁切 */
-      display: block;
-      margin: 25px auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      /* 移除 object-fit，因為我們已經用 height: auto 處理比例了 */
-    }
-
-    .trip-table-wrapper {
-      overflow-x: auto;
-      margin: 15px 0 25px 0;
-    }
-
-    .trip-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9em;
-      background: white;
-      border: 1px solid #ccc;
-    }
-
-    .trip-table th, .trip-table td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: center; 
-      vertical-align: middle;
-    }
-
-    .date-header th {
-      background-color: var(--table-header-dark);
-      text-align: center;
-      color: #333;
-      font-weight: bold;
-    }
-
-    .column-header th {
-      background-color: var(--table-header-light);
-      text-align: center;
-      color: #333;
-    }
-
-    .trip-table td:nth-child(odd) {
-      text-align: center;
-      background-color: var(--table-time-bg);
-      font-weight: 500;
-      width: 80px;
-    }
-
-    .text-left { text-align: left !important; }
-
-    .trip-table small {
-      color: #666;
-      display: block;
-      margin-top: 4px;
-      line-height: 1.4;
-    }
-
-    footer {
-      margin-top: auto;
-      padding: 40px 0 20px 0;
-      text-align: center;
-      color: #888;
-      font-size: 0.9em;
-    }
-    .ig-link-container {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-    }
-    .ig-link-wrapper {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      transition: transform 0.2s ease;
-    }
-    .ig-link-wrapper:hover {
-      transform: scale(1.05);
-    }
-    .ig-icon {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
-    }
-    .ig-link {
-      color: var(--primary-color);
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-    @media (max-width: 600px) {
-      .content-container { margin: 15px; padding: 25px; }
-      /* .hero-img { max-height: 350px; }  <-- 建議刪除這行，避免裁切 */
-      h1 { font-size: 1.6em; }      
-    }
-   /* 修正：針對直式圖片的特殊處理 */
-img[alt="七卡山莊星空"], img[alt="冰淇淋"] {
-    width: auto;       /* 關鍵：讓寬度自動配合高度 */
-    max-width: 100%;   /* 確保不寬於螢幕 */
-    max-height: 80vh;  /* 限制最高為螢幕的 80%，避免直式照片太長要滑很久 */
-    height: auto;      /* 確保比例正確 */
-    margin: 20px auto;
-    display: block;    /* 確保置中 */
-    }
-    /* 修正：通用文章圖片 */
-    .trip-section img {
-    width: 100%;       /* 預設讓圖片撐滿寬度 */
-    max-width: 100%;
-    height: auto;      /* 這是維持比例最重要的屬性 */
-    display: block;
-    margin: 25px auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .timeline-list {
-    list-style: none; /* 移除預設圓點 */
-    padding-left: 0;
-    }
-    .timeline-list li {
-    margin-bottom: 40px; /* 增加段落間距 */
-    border-bottom: 1px solid #eee; /* 可選：加一條淡淡的分隔線 */
-    padding-bottom: 20px;
-    }
-    .suggestion-list {
-    list-style: disc; /* 顯示實心圓點 */
-    padding-left: 20px; /* 留出圓點的空間 */
-    }
-  </style>
-</head>
-<body>
-
-  <nav class="nav-bar">
-    <a href="../index.html"><span>←</span> 返回 DiAriEs</a>
-  </nav>
-
-  <article class="content-container">
-    <img src="https://lh3.googleusercontent.com/pw/AP1GczMAcCJUZ_FWuOWV7vqeGO4FybUnFy8c_HxOdGqoR33tvebrfKwONe4IgGtqYMFockP3KtoqR3jitrbxJGa2LEHt-UO0Stywyc6jmsx7HNirJJw8pPo=w600-h315-p-k" alt="雪山東峰" class="hero-img">
+        html { scroll-behavior: smooth; }
+        body {
+          font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+          line-height: 1.8;
+          color: #333;
+          background-color: var(--bg-color);
+          margin: 0;
+        }
+    
+        /* 導覽列 */
+        .nav-bar {
+          background: var(--white);
+          padding: 15px 20px;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+        }
+        .nav-bar a {
+          text-decoration: none;
+          color: var(--primary-color);
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+    
+        /* 內容容器 */
+        .content-container {
+          max-width: 750px;
+          margin: 40px auto;
+          background: var(--white);
+          padding: 40px;
+          border-radius: 20px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+    
+        /* 標題與元數據 */
+        h1 { color: #222; margin: 0 0 10px 0; font-size: 2em; }
+        h3[id] { scroll-margin-top: 80px; }
+        .post-meta {
+          color: #888;
+          font-size: 0.9em;
+          margin-bottom: 30px;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 15px;
+        }
+    
+        /* 通用圖片樣式 */
+        img {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin: 25px auto;
+          border-radius: var(--radius);
+        }
+        .hero-img { width: 100%; margin-bottom: 30px; }
+        .trip-section img { box-shadow: var(--shadow); }
+    
+        /* 針對特殊直式圖片 */
+        img[alt="七卡山莊星空"], img[alt="冰淇淋"] {
+          width: auto;
+          max-height: 80vh;
+        }
+    
+        /* 圖片網格 */
+        .image-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 15px;
+          margin: 20px 0;
+        }
+        .image-grid img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+          margin: 0 !important;
+          transition: transform 0.3s;
+          cursor: pointer;
+        }
+        .image-grid img:hover { transform: scale(1.03); }
+    
+        /* 表格優化 */
+        .trip-table-wrapper { overflow-x: auto; margin: 20px 0; }
+        .trip-table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 0.9em;
+          border: 1px solid #ccc;
+        }
+        .trip-table th, .trip-table td {
+          border: 1px solid #ccc;
+          padding: 12px;
+          text-align: center;
+        }
+        .date-header th { background: var(--table-header-dark); }
+        .column-header th { background: var(--table-header-light); }
+        .trip-table td:nth-child(odd) { background: var(--table-time-bg); font-weight: 500; }
+    
+        /* 其他區塊 */
+        .gear-box {
+          background: #f1f8f1;
+          padding: 25px;
+          border-radius: var(--radius);
+          margin: 30px 0;
+          border-left: 5px solid var(--primary-color);
+        }
+        .toc-list { list-style: none; padding: 0; }
+        .toc-list a { text-decoration: none; color: var(--primary-color); font-weight: 500; }
+        .timeline-list { list-style: none; padding: 0; }
+        .timeline-list li { margin-bottom: 40px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+    
+        footer { text-align: center; padding: 40px 0; color: #888; }
+        .ig-link { color: var(--primary-color); font-weight: bold; text-decoration: none; }
+    
+        /* RWD 調整 */
+        @media (max-width: 600px) {
+          .content-container { margin: 15px; padding: 25px; }
+          h1 { font-size: 1.6em; }
+          .image-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+          .image-grid img { height: 150px; }
+        }
+      </style>
+    </head>
+    <body>
+    
+      <header class="nav-bar">
+        <a href="../index.html"><span>←</span> 返回 DiAriEs</a>
+      </header>
+    
+      <article class="content-container">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczMAcCJUZ_FWuOWV7vqeGO4FybUnFy8c_HxOdGqoR33tvebrfKwONe4IgGtqYMFockP3KtoqR3jitrbxJGa2LEHt-UO0Stywyc6jmsx7HNirJJw8pPo=w600-h315-p-k" alt="雪山東峰" class="hero-img">
 
     <h1>雪山東峰單攻｜百岳新手入門首選 展望+百岳一次收</h1>
     <div class="post-meta">
@@ -406,13 +305,13 @@ img[alt="七卡山莊星空"], img[alt="冰淇淋"] {
       </li>
         
       <li>
-        <p><strong>18:30 抵達環清宮</strong>，宮內停車場位置已停滿，便停在斜坡下來左前方民宅前的小空地。明天 02:30 要起床，趕緊洗漱整理裝備，20:00 準時躺床睡覺。
-          </br>整體睡眠品質還不錯，雖然有鼾聲也聽得到隔壁間的對話，不過床位乾淨，床跟床之間有獨立簾子可拉上，棉被也有南部陽光的香味，
-          比起睡七卡山莊，環清宮也是不錯的選擇，要爬雪霸系列山頭的山友，像是志佳陽、桃山喀拉業等等，也可列入考慮，不過建議先電話預訂，一晚一人500元現場付現，缺點就是到登山口大概還需要 20分鐘車程，規劃行程記得預留一點時間~
-        </p>
-          <img src="https://lh3.googleusercontent.com/pw/AP1GczOiRWbVubabnkRQP6R2oLHNdEWhzxbqfGp1CT19R5q_NOOuyDE26ithsdZfKr7gXeTVQkxZZxx-LMPCQ3QYJTf2oL9Y3_P8M3h9PZfj8KYgmP7E7m8=w600-h315-p-k" alt="環清宮環境1">
-          <img src="https://lh3.googleusercontent.com/pw/AP1GczMq_wIeKScBiFs2a9vcY9RRbbDI_5MswYf0pRmYiCqhJL0xf6pm34vzdJf5aZJFNvNI57jt7QQYEjAmEQZmhFRoyxwnZOPSQcMZaIo__Z0IzApcO1o=w600-h315-p-k" alt="環清宮環境2">
-          <img src="https://lh3.googleusercontent.com/pw/AP1GczOXgrQPKtv6JzbgnaP-_C_JPFO6KxMx099oY-3OOUPqsRQ2w35nlyFeN9CLGb1cAJ_DXh5U2N-iJQ0gSYXiWx_mZ7C62_EzUPyPMO3WecpfLyMUVpA=w600-h315-p-k" alt="環清宮環境3">
+          <p><strong>18:30 抵達環清宮</strong>，宮內停車場位置已停滿...（中間文字省略）...規劃行程記得預留一點時間~</p>
+          
+          <div class="image-grid">
+              <img src="https://lh3.googleusercontent.com/pw/AP1GczOiRWbVubabnkRQP6R2oLHNdEWhzxbqfGp1CT19R5q_NOOuyDE26ithsdZfKr7gXeTVQkxZZxx-LMPCQ3QYJTf2oL9Y3_P8M3h9PZfj8KYgmP7E7m8=w600-h315-p-k" alt="環清宮環境1">
+              <img src="https://lh3.googleusercontent.com/pw/AP1GczMq_wIeKScBiFs2a9vcY9RRbbDI_5MswYf0pRmYiCqhJL0xf6pm34vzdJf5aZJFNvNI57jt7QQYEjAmEQZmhFRoyxwnZOPSQcMZaIo__Z0IzApcO1o=w600-h315-p-k" alt="環清宮環境2">
+              <img src="https://lh3.googleusercontent.com/pw/AP1GczOXgrQPKtv6JzbgnaP-_C_JPFO6KxMx099oY-3OOUPqsRQ2w35nlyFeN9CLGb1cAJ_DXh5U2N-iJQ0gSYXiWx_mZ7C62_EzUPyPMO3WecpfLyMUVpA=w600-h315-p-k" alt="環清宮環境3">
+          </div>
       </li>
 
       <li>
