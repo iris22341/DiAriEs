@@ -25,27 +25,41 @@
             margin: 0;
         }
 
-        /* 圖片與註解樣式 (Figure) */
-        figure {
-            margin: 30px auto;
-            text-align: center;
-        }
-        figure img {
+        /* --- 圖片核心修正區 --- */
+        /* 1. 確保所有圖片都不會超過螢幕 */
+        img {
             max-width: 100%;
             height: auto;
             display: block;
-            margin: 0 auto 10px auto !important;
+            margin: 20px auto;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
         }
+
+        /* 2. 移除 figure 的預設間距，防止手機版破版 */
+        figure {
+            margin: 30px 0; /* 左右設為 0 */
+            padding: 0;
+            text-align: center;
+        }
+
+        /* 3. figure 內的圖片間距微調 */
+        figure img {
+            margin: 0 auto 10px auto !important;
+        }
+
         figcaption {
             font-size: 0.9em;
             color: #666;
             font-style: italic;
             margin-top: 8px;
+            line-height: 1.5;
         }
 
-        /* 導覽列 */
+        /* 取消特定圖片的懸停效果或陰影 (如有需要可使用) */
+        .no-hover { cursor: default; }
+        /* -------------------- */
+
         .nav-bar {
             background: var(--white);
             padding: 15px 20px;
@@ -63,7 +77,6 @@
             gap: 5px;
         }
 
-        /* 內容容器 */
         .content-container {
             max-width: 750px;
             margin: 40px auto;
@@ -85,21 +98,17 @@
             padding-bottom: 15px;
         }
 
-        .hero-img { width: 100%; margin-bottom: 40px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); border-radius: var(--radius); }
+        .hero-img { width: 100%; margin-bottom: 40px; }
 
-        /* 表格優化：解決圓角問題 */
-        .trip-table-wrapper { 
-            overflow-x: auto; 
-            margin: 25px 0; 
-        }
+        .trip-table-wrapper { overflow-x: auto; margin: 25px 0; }
         .trip-table {
             width: 100%;
-            border-collapse: separate; /* 必須為 separate 圓角才有效 */
+            border-collapse: separate;
             border-spacing: 0;
             font-size: 0.95em;
             border: 1px solid #ddd;
             border-radius: 8px;
-            overflow: hidden; /* 確保內容不會超出圓角 */
+            overflow: hidden;
             word-break: keep-all;
         }
         .trip-table th, .trip-table td {
@@ -108,20 +117,18 @@
             padding: 14px 10px;
             text-align: center;
         }
-        /* 移除最後一欄與最後一列的重複邊框 */
         .trip-table th:last-child, .trip-table td:last-child { border-right: none; }
         .trip-table tr:last-child td { border-bottom: none; }
-
         .date-header th { background: var(--table-header-dark); color: #333; }
         .column-header th { background: var(--table-header-light); color: #555; }
         
-        .trip-table td:nth-child(odd) { 
+        /* 避免裝備表被強制加粗，僅針對四欄式紀錄表 */
+        .timeline-table td:nth-child(odd) { 
             background: var(--table-time-bg); 
             font-weight: 600; 
             width: 80px;
         }
 
-        /* 其他區塊樣式 */
         .gear-box {
             background: #f1f8f1;
             padding: 25px;
@@ -141,14 +148,18 @@
         }
         .timeline-list li:last-child { border-bottom: none; }
 
+        .suggestion-list { padding-left: 20px; }
+        .suggestion-list li { margin-bottom: 10px; }
+
         footer { text-align: center; padding: 60px 0; background: #fff; margin-top: 40px; }
         .ig-link-wrapper { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
-        .ig-link-wrapper img { width: 30px; margin: 0; border-radius: 8px; }
+        .ig-link-wrapper img { width: 30px; margin: 0; border-radius: 8px; box-shadow: none; }
         .ig-link { color: var(--primary-color); font-weight: bold; }
 
         @media (max-width: 600px) {
-            .content-container { margin: 15px; padding: 25px; }
-            h1 { font-size: 1.6em; }
+            .content-container { margin: 10px; padding: 20px; }
+            h1 { font-size: 1.5em; }
+            .trip-table { font-size: 0.85em; }
         }
     </style>
 </head>
