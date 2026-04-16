@@ -151,19 +151,25 @@
         .suggestion-list { padding-left: 20px; }
         .suggestion-list li { margin-bottom: 10px; }
 
-             /* 頁尾 IG 樣式優化 */
+        /* 頁尾 */
         footer {
             margin-top: auto;
-            padding: 40px 0 20px 0;
+            padding: 20px 0; /* 縮小整個 footer 的上下內距 */
             text-align: center;
             color: #888;
             font-size: 0.9em;
         }
+        
+        footer p {
+            margin-bottom: 5px; /* 縮短版權文字下方的距離 */
+        }
+        
         .ig-link-container {
-            margin-top: 15px;
+            margin-top: 0px; /* 移除容器上方的推擠間距 */
             display: flex;
             justify-content: center;
         }
+        
         .ig-link-wrapper {
             display: flex;
             align-items: center;
@@ -171,16 +177,20 @@
             text-decoration: none;
             transition: transform 0.2s ease;
         }
+        
         .ig-link-wrapper:hover {
             transform: scale(1.05);
         }
+        
         .ig-icon {
-            width: 10px;
-            height: 10px;
+            width: 24px;   /* 修正：從 10px 改回 24px */
+            height: 24px;  /* 修正：從 10px 改回 24px */
             object-fit: contain;
+            box-shadow: none !important; /* 確保不會吃到文章圖片的陰影 */
         }
+        
         .ig-link {
-            color: var(--primary-green);
+            color: var(--primary-color); /* 修正：變數名稱要跟 :root 一致 */
             font-weight: bold;
             font-size: 1.1em;
         }
