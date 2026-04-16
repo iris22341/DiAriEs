@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>雪山東峰單攻紀錄 - 👧DiAriEs</title>
   <style>
-    :root {
-      --primary-color: #2d5a27;
-      --bg-color: #f4f7f1;
-      --white: #ffffff;
-      --table-header-dark: #b4c7e7;
-      --table-header-light: #d9e1f2;
-      --table-time-bg: #f2f2f2;
-    }
+  :root {
+    --primary-color: #2d5a27;
+    --bg-color: #f4f7f1;
+    --white: #ffffff;
+    --table-header-dark: #b4c7e7; /* 把後面的 'a' 刪掉 */
+    --table-header-light: #d9e1f2;
+    --table-time-bg: #f2f2f2;
+  }
 
     html {
       scroll-behavior: smooth;
@@ -207,12 +207,24 @@
       /* .hero-img { max-height: 350px; }  <-- 建議刪除這行，避免裁切 */
       h1 { font-size: 1.6em; }      
     }
-    img[alt="七卡山莊星空"], img[alt="冰淇淋"] {
-    max-width: 100%;   /* 確保圖片寬度不會超過螢幕 */
-    height: auto;      /* 高度按比例縮放 */
-    margin: 0 auto;
-    display: block;    /* 確保置中生效 */
-    /* 移除 max-height: 100vh; 或改為更大的數值 */
+   /* 修正：針對直式圖片的特殊處理 */
+img[alt="七卡山莊星空"], img[alt="冰淇淋"] {
+    width: auto;       /* 關鍵：讓寬度自動配合高度 */
+    max-width: 100%;   /* 確保不寬於螢幕 */
+    max-height: 80vh;  /* 限制最高為螢幕的 80%，避免直式照片太長要滑很久 */
+    height: auto;      /* 確保比例正確 */
+    margin: 20px auto;
+    display: block;    /* 確保置中 */
+    }
+    /* 修正：通用文章圖片 */
+    .trip-section img {
+    width: 100%;       /* 預設讓圖片撐滿寬度 */
+    max-width: 100%;
+    height: auto;      /* 這是維持比例最重要的屬性 */
+    display: block;
+    margin: 25px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     .timeline-list {
     list-style: none; /* 移除預設圓點 */
@@ -227,7 +239,6 @@
     list-style: disc; /* 顯示實心圓點 */
     padding-left: 20px; /* 留出圓點的空間 */
     }
-    
   </style>
 </head>
 <body>
