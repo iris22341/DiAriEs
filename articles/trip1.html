@@ -9,11 +9,33 @@
             --primary-color: #2d5a27;
             --bg-color: #f4f7f1;
             --white: #ffffff;
-            --table-header-dark: #b4c7e7;
-            --table-header-light: #d9e1f2;
-            --table-time-bg: #f2f2f2;
+            --table-header-dark: #f9fbf9; /* #b4c7e7 這個是藍色 */
+            --table-header-light: #f9fbf9; /* #d9e1f2 這個是淺藍色 */
+            --table-time-bg: #ffffff; /* #f2f2f2 這個是淺灰色 */
             --shadow: 0 4px 15px rgba(0,0,0,0.1);
             --radius: 12px;
+        }
+
+        /* 圖片與註解樣式 */
+        figure {
+            margin: 30px auto;
+            text-align: center; /* 讓圖片與文字置中 */
+            }
+        
+        figure img {
+            margin: 0 auto 10px auto !important; /* 取消原本 img 的 margin，改用 figure 控制 */
+        }
+        
+        figcaption {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic; /* 斜體增加質感 */
+            margin-top: 8px;
+        }
+        
+        /* 表格列劃過效果（選用） */
+        .trip-table tbody tr:hover {
+            background-color: var(--table-row-hover);
         }
 
         html { scroll-behavior: smooth; }
@@ -349,15 +371,21 @@
                     </p>
                     <img src="https://lh3.googleusercontent.com/pw/AP1GczOiRWbVubabnkRQP6R2oLHNdEWhzxbqfGp1CT19R5q_NOOuyDE26ithsdZfKr7gXeTVQkxZZxx-LMPCQ3QYJTf2oL9Y3_P8M3h9PZfj8KYgmP7E7m8=w1200-h1000-p-k" alt="環清宮環境1" class="no-hover">
                     <img src="https://lh3.googleusercontent.com/pw/AP1GczMq_wIeKScBiFs2a9vcY9RRbbDI_5MswYf0pRmYiCqhJL0xf6pm34vzdJf5aZJFNvNI57jt7QQYEjAmEQZmhFRoyxwnZOPSQcMZaIo__Z0IzApcO1o=w1200-h1000-p-k" alt="環清宮環境2" class="no-hover">
-                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOXgrQPKtv6JzbgnaP-_C_JPFO6KxMx099oY-3OOUPqsRQ2w35nlyFeN9CLGb1cAJ_DXh5U2N-iJQ0gSYXiWx_mZ7C62_EzUPyPMO3WecpfLyMUVpA=w1200-h1000-p-k" alt="環清宮環境3" class="no-hover">
+                    <figure> 
+                        <img src="https://lh3.googleusercontent.com/pw/AP1GczOXgrQPKtv6JzbgnaP-_C_JPFO6KxMx099oY-3OOUPqsRQ2w35nlyFeN9CLGb1cAJ_DXh5U2N-iJQ0gSYXiWx_mZ7C62_EzUPyPMO3WecpfLyMUVpA=w1200-h1000-p-k" alt="環清宮環境3" class="no-hover">
+                        <figcaption>▲ 環清宮前庭有一塊地可停車，可以沖澡，有提供洗髮精、沐浴乳及吹風機。二樓大概有6間房，一間房可住大約25人，為上下舖，每張床有獨立簾子可拉上。</figcaption>
+                    </figure>
                 </li>
 
                 <li>
                     <p><strong>03:30 抵達停車場</strong>，沿途有看到兩個停車場，不過爬文說有三個，我們停在第一停車場，很幸運還有空位，這是離雪山登山服務站最近的地方，走一小段木棧階梯便來到服務站，大家可能還沒睡醒，3個女孩都沒發現上到男廁，下山才發現走錯棚，溫馨提醒女廁在轉角轉過去那側喔。
                     </br>儀錶板顯示雪山東峰目前3.9度，投遞入園證意外瞥見一旁販售冰淇淋的標誌，但商店還沒開，心凍心動同時，只能等下山再吃惹。
                     </p>
+                <figure> 
                     <img src="https://lh3.googleusercontent.com/pw/AP1GczNZiWUgUTjlNr1az3b0qnLGuwqx-59Oe_Z1Nj1eO3rGHJDGF6PB3j4MGwHCOBq1ftp7KBveBDB2qCn5vrS9VwdL0Y2r1a00mCFvsSFvME_hKuD5mSU=w1200-h1000-p-k" alt="雪山服務站1">
                     <img src="https://lh3.googleusercontent.com/pw/AP1GczPtSK7aaJWrhDgTcWFw5yDP4I0e5bzpws9NcnAa2AgNqOBvYEcohLmVTvC5ZhCh6D595GUVDYMzGtqtVTbmopL9-NIhuKB8hjQuDIaWhhHBxA1dbbE=w1200-h1000-p-k" alt="雪山服務站2">
+                    <figcaption>▲ 天未亮的服務站。</figcaption>
+                </figure>
                 </li>
 
                 <li>
@@ -365,7 +393,10 @@
                     </p>
                     <p><strong>04:30 抵達七卡山莊</strong>，星空超美，不過山屋的鼾聲提醒我們得降低音量，小休一下拍個照，便繼續前行。
                     </p>
+                <figure> 
                     <img src="https://lh3.googleusercontent.com/pw/AP1GczMGa0wHn8hNtVrpiMXJRb6Gd4TtYqV5rfhs1Ba1zboh7aAztXqRSiFpxBmvhf-IECbyDiUDHU5KxpOhsTk7A-8nooFu9vfToV0ceTshuS4updtyX2s=w1200-h1000-p-k" alt="七卡山莊星空">
+                    <figcaption>▲ 在七卡小休一下，一抬頭滿天星星，佐山友的帳篷拍起來很有fu~</figcaption>
+                </figure>
                 </li>
 
                 <li>
