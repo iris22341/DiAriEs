@@ -151,16 +151,47 @@
         .suggestion-list { padding-left: 20px; }
         .suggestion-list li { margin-bottom: 10px; }
 
-        footer { text-align: center; padding: 60px 0; background: #fff; margin-top: 40px; }
-        .ig-link-wrapper { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
-        .ig-link-wrapper img { width: 30px; margin: 0; border-radius: 8px; box-shadow: none; }
-        .ig-link { color: var(--primary-color); font-weight: bold; }
-
-        @media (max-width: 600px) {
-            .content-container { margin: 10px; padding: 20px; }
-            h1 { font-size: 1.5em; }
-            .trip-table { font-size: 0.85em; }
+        /* 頁尾 IG 樣式優化 */
+        footer {
+            margin-top: auto;
+            padding: 40px 0 20px 0;
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
         }
+        .ig-link-container {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+        .ig-link-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        .ig-link-wrapper:hover {
+            transform: scale(1.05);
+        }
+        .ig-icon {
+            width: 10px;
+            height: 10px;
+            object-fit: contain;
+        }
+        .ig-link {
+            color: var(--primary-green);
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* 📱 手機版專屬優化 */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar {
+                width: 100% !important; height: auto; position: sticky; top: 0;
+                background: var(--primary-green);
+            }
     </style>
 </head>
 <body>
