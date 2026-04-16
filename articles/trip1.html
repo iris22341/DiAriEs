@@ -151,13 +151,14 @@
         .suggestion-list { padding-left: 20px; }
         .suggestion-list li { margin-bottom: 10px; }
 
-        /* 頁尾 IG 樣式優化 */
+       /* 頁尾樣式同步 */
         footer {
             margin-top: auto;
             padding: 40px 0 20px 0;
             text-align: center;
             color: #888;
             font-size: 0.9em;
+            background: none; /* 確保背景不會被覆蓋 */
         }
         .ig-link-container {
             margin-top: 15px;
@@ -174,17 +175,18 @@
         .ig-link-wrapper:hover {
             transform: scale(1.05);
         }
+        /* 注意：這裡要加上 .ig-icon 的寬高設定 */
         .ig-icon {
-            width: 10px;
-            height: 10px;
+            width: 24px; /* 根據 IG 品牌感建議調整為 24px 較美觀，原本 10px 會太小 */
+            height: 24px;
             object-fit: contain;
+            box-shadow: none !important; /* 移除文章內圖片預設的陰影 */
         }
         .ig-link {
-            color: var(--primary-green);
+            color: var(--primary-color);
             font-weight: bold;
             font-size: 1.1em;
         }
-
         /* 📱 手機版專屬優化 */
         @media (max-width: 768px) {
             body { flex-direction: column; }
@@ -448,11 +450,11 @@
         </section>
     </article>
 
-    <footer>
-        <p>© DiAriEs' Blog | Capturing every moment of dopamine.</p>
+<footer>
+        <p>© 2026 DiAriEs' Blog | Capturing every moment of dopamine.</p>
         <div class="ig-link-container">
-            <a href="https://www.instagram.com/agirlwholovesexercise" target="_blank" class="ig-link-wrapper">
-                <img src="https://lh3.googleusercontent.com/pw/AP1GczNZTlD2Xz8PKgxPlr53c6jk_POhNA7RWaVCCw1enQYPgXyQ35ssKBMGAXkBB_RnX7WZLEFVgKUYV1ZS4wuxbWE38I2YGxja7jz8nmq5QaFbvLF3WEI=w360-h315-p-k" alt="Instagram Icon">
+            <a href="https://www.instagram.com/agirlwholovesexercise?utm_source=blog&utm_medium=footer&utm_campaign=trip1_xueshan" target="_blank" class="ig-link-wrapper">
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczNZTlD2Xz8PKgxPlr53c6jk_POhNA7RWaVCCw1enQYPgXyQ35ssKBMGAXkBB_RnX7WZLEFVgKUYV1ZS4wuxbWE38I2YGxja7jz8nmq5QaFbvLF3WEI=w135-h135-p-k" alt="Instagram Icon" class="ig-icon">
                 <span class="ig-link">Follow me on Instagram</span>
             </a>
         </div>
