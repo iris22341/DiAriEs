@@ -474,27 +474,27 @@
     </article>
 
 
-    <div class="content-container" style="margin-top: 5px;">
-            <h3 style="color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px;">
-                💬 留言區
-            </h3>
-            <div id="waline"></div>
-        </div>
-    
-        <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css"/>
-        <script type="module">
-            import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-    
-            init({
-                el: '#waline',
-                serverURL: 'https://diaries-eta.vercel.app', // 更換成部署後的網址
-                lang: 'zh-TW',
-                placeholder: '歡迎留言交流！(可匿名)',
-                search: false, // 關閉表情搜尋
-                imageUploader: false, // 關閉圖片上傳（節省空間）
-                copyright: false, // 隱藏版權宣告
-            });
+    <div class="content-container" style="margin-top: 10px;">
+        <h3 style="color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px;">
+            💬 留言區
+        </h3>
+        
+        <script src="https://giscus.app/client.js"
+                data-repo="iris22341/DiAriEs"
+                data-repo-id="R_kgDORwJ7pQ"
+                data-category="Announcements" 
+                data-category-id="DIC_kwDORwJ7pc4C7U-4"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-TW"
+                crossorigin="anonymous"
+                async>
         </script>
+    </div>
 
     <footer>
             <p>© 2026 DiAriEs' Blog | Capturing every moment of dopamine.</p>
