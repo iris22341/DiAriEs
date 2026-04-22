@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 CRUFU RUN 北台灣站 - 👧DiAriEs</title>
+    <style>
+        :root {
+            --primary-color: #2d5a27;
+            --bg-color: #f4f7f1;
+            --white: #ffffff;
+            --table-header-dark: #f9fbf9; 
+            --table-header-light: #f9fbf9; 
+            --table-time-bg: #ffffff; 
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: var(--bg-color);
+            margin: 0;
+        }
+
+        /* --- 圖片核心修正區 --- */
+        /* 1. 確保所有圖片都不會超過螢幕 */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* 2. 移除 figure 的預設間距，防止手機版破版 */
+        figure {
+            margin: 30px 0; /* 左右設為 0 */
+            padding: 0;
+            text-align: center;
+        }
+
+        /* 3. figure 內的圖片間距微調 */
+        figure img {
+            margin: 0 auto 10px auto !important;
+        }
+
+        figcaption {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        /* 取消特定圖片的懸停效果或陰影 (如有需要可使用) */
+        .no-hover { cursor: default; }
+        /* -------------------- */
+
+        .nav-bar {
+            background: var(--white);
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-bar a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .content-container {
+            max-width: 750px;
+            margin: 40px auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        h1 { color: #222; margin: 0 0 10px 0; font-size: 2em; line-height: 1.3; }
+        h3[id] { scroll-margin-top: 100px; color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h4 { margin-top: 30px; color: #444; }
+        
+        .post-meta {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .hero-img { width: 100%; margin-bottom: 40px; }
+
+        .trip-table-wrapper { overflow-x: auto; margin: 25px 0; }
+        .trip-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.95em;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            word-break: keep-all;
+        }
+        .trip-table th, .trip-table td {
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 14px 10px;
+            text-align: center;
+        }
+        .trip-table th:last-child, .trip-table td:last-child { border-right: none; }
+        .trip-table tr:last-child td { border-bottom: none; }
+        .date-header th { background: var(--table-header-dark); color: #333; }
+        .column-header th { background: var(--table-header-light); color: #555; }
+        
+        /* 避免裝備表被強制加粗，僅針對四欄式紀錄表 */
+        .timeline-table td:nth-child(odd) { 
+            background: var(--table-time-bg); 
+            font-weight: 600; 
+            width: 80px;
+        }
+
+        .gear-box {
+            background: #f1f8f1;
+            padding: 25px;
+            border-radius: var(--radius);
+            margin: 30px 0;
+            border-left: 5px solid var(--primary-color);
+        }
+        .toc-list { list-style: none; padding: 0; margin: 0; }
+        .toc-list li { margin: 8px 0; }
+        .toc-list a { text-decoration: none; color: var(--primary-color); font-weight: 500; }
+        
+        .timeline-list { list-style: none; padding: 0; }
+        .timeline-list li { 
+            margin-bottom: 50px; 
+            border-bottom: 1px solid #f0f0f0; 
+            padding-bottom: 30px; 
+        }
+        .timeline-list li:last-child { border-bottom: none; }
+
+        .suggestion-list { padding-left: 20px; }
+        .suggestion-list li { margin-bottom: 10px; }
+
+        /* 頁尾 */
+        footer {
+            margin-top: auto;
+            padding: 20px 0; /* 縮小整個 footer 的上下內距 */
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+        }
+        
+        footer p {
+            margin-bottom: 5px; /* 縮短版權文字下方的距離 */
+        }
+        
+        .ig-link-container {
+            margin-top: 0px; /* 移除容器上方的推擠間距 */
+            display: flex;
+            justify-content: center;
+        }
+        
+        .ig-link-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        
+        .ig-link-wrapper:hover {
+            transform: scale(1.05);
+        }
+        
+        .ig-icon {
+            width: 24px;   /* 修正：從 10px 改回 24px */
+            height: 24px;  /* 修正：從 10px 改回 24px */
+            object-fit: contain;
+            box-shadow: none !important; /* 確保不會吃到文章圖片的陰影 */
+        }
+        
+        .ig-link {
+            color: var(--primary-color); /* 修正：變數名稱要跟 :root 一致 */
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* 📱 手機版專屬優化 */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar {
+                width: 100% !important; height: auto; position: sticky; top: 0;
+                background: var(--primary-color);
+            }
+            .toggle-btn, .sidebar h2, .sidebar hr { display: none; }
+            .sidebar-inner { padding: 10px; overflow-x: auto; }
+            .sidebar-menu { display: flex; gap: 10px; }
+            .sidebar-menu li { margin: 0; }
+            .sidebar-menu a { padding: 8px 12px; background: rgba(255,255,255,0.1); border-radius: 15px; font-size: 0.85em; }
+            .sidebar-menu a.active { background: white; color: var(--primary-green); }
+
+            .main-content { margin-left: 0 !important; padding: 15px; }
+            
+            header { flex-direction: column; align-items: flex-start; padding: 20px; }
+            .header-photos { width: 100%; grid-template-columns: repeat(4, 1fr); margin-top: 20px; }
+            .header-photos img { height: 70px; }
+
+            .article-list li { flex-direction: column; align-items: flex-start; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nav-bar">
+        <a href="../index.html"><span>←</span> 返回 DiAriEs</a>
+    </header>
+
+    <article class="content-container">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczMAcCJUZ_FWuOWV7vqeGO4FybUnFy8c_HxOdGqoR33tvebrfKwONe4IgGtqYMFockP3KtoqR3jitrbxJGa2LEHt-UO0Stywyc6jmsx7HNirJJw8pPo=w1200-h1000-p-k" alt="雪山東峰" class="hero-img">
+
+        <h1>挑戰拚一個台灣第三站｜2026 夸父追日北台灣站 10 人接力從蘇澳跑到淡水 熱累盈眶！</h1>
+        <div class="post-meta">
+            📅 日期：2026/4/11-4/12 | 👤 作者：ㄚ純
+        </div>
+
+        <div class="gear-box">
+            <h3>目錄 Table of Contents</h3>
+            <ul class="toc-list">
+                <li><a href="#intro">一、賽事簡介</a></li>
+                <li><a href="#plan">二、行前規劃</a></li> 
+                <li><a href="#actual-trip">三、實際行程紀錄</a></li>
+            </ul>
+        </div>
+
+        <section class="trip-section">
+            <h3 id="intro">一、 賽事簡介</h3>
+            <p>2026 夸父追日北台灣站是第七屆 CRUFU RUN 系列賽事的第二站，起點是宜蘭蘇澳的武荖坑風景區，終點是新北淡水漁人碼頭，總長約 210 km，路線<a href="https://www.google.com/maps/d/u/0/viewer?hl=en&mid=14B20fqLkgBoQm_a_WkC3HHTKhhU&ll=24.943945291756176%2C121.70586499999997&z=9">點我看</a>。
+                <br>組別有 1 人組、2 人組、5 人組以及 10 人組，我們這次是報 10 人組，會拆成兩台車 CAR1、CAR2 移動，1 Round 一台車 5 人輪流接力，跑 6 Round 總共 30 棒，一人要跑 3 棒，一棒大約 7 k。
+                <br>有鑑上次南夸 111222 模式跑日棒的隊友們跑到快中暑，夜棒也是體力消耗殆盡，這次改跑 112212 模式，保留讓兩車有充分休息的機會，也讓大家都能跑到日、夜棒。
+            </p>
+
+            <h3 id="plan">二、 行前規劃</h3>
+            <p><strong>※ 賽事開始日為T</strong></p>
+            <div class="trip-table-wrapper">
+                <table class="trip-table">
+                    <thead class="column-header">
+                        <tr>
+                            <th style="width: 25%;">預計時間</th>
+                            <th style="width: 25%;">項目</th>
+                            <th style="width: 50%;">備註</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 15px; line-height: 2; vertical-align: top; font-weight: normal;">
+                            T-6個月
+                            </td>
+                            <td style="padding: 15px; line-height: 2; vertical-align: top;">
+                            報名
+                            </td>
+                            <td style="padding: 15px; line-height: 2; vertical-align: top;">
+                            1. 隊長到活動報名網頁創一個隊伍，隊員先填自己，再把報名連結分享給隊友們各自填資料<br>
+                            2. 建一個隊友資訊的google sheet，由隊長統一報名
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">T-2個月
+                            </td>
+                            <td class="content-cell">官方行前線上說明會+把活動資訊pass給隊友們
+                            </td>
+                            <td class="content-cell">隊長上線即可<br>(若有其他隊員想聽，一隊以3人為限，不然怕影響會議品質)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">T-2個月
+                            </td>
+                            <td class="content-cell">組內調查問卷
+                            </td>
+                            <td class="content-cell">這次我們團隊自己的習慣<br>主要會調查大家賽前一天的住宿、抵達時間跟偏好的棒次等等
+                                <br>問卷內容會長這樣，<a href="https://forms.gle/ZYZyJpWRqGWs1P5L8" target="_blank">請點我看~</a>(順便看看大家是不是都在狀況內XD)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">T-1.5個月
+                            </td>
+                            <td class="content-cell">訂D0、D1住宿、租車
+                            </td>
+                            <td class="content-cell">以之前的經驗，報名後其實就可以開始找住宿了，拖到 1 個月前再開始找都被訂完ㄌ
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">T-1.5個月
+                            </td>
+                            <td class="content-cell">繳交棒次表給大會
+                            </td>
+                            <td class="content-cell">
+                                1. 下載空白棒次表寄信給大會
+                                2. 回填線上 google 表單(最方便，有調整的話再重送，大會會抓最新一筆)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">T-1個月
+                            </td>
+                            <td class="content-cell">組內行前會
+                            </td>
+                            <td class="content-cell">
+                                1. 確認待辦事項(D0集合時間地點、住宿、交通、必備物品分配、沖澡區、慶功宴餐廳等等)
+                                <br>2. 賽事重點提醒
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">T-2週
+                            </td>
+                            <td class="content-cell">確認是否收到大會郵寄物資
+                            </td>
+                            <td class="content-cell">
+                                1. 衣服、毛巾/包包、實體手冊會先用郵寄方式寄出，建議收件地址以離會場近或有車可載的團員代收
+                                <br>2. 其他補給物資會在賽事前一天開放給各組至會場領取(資訊以官方公告為主)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">T-1天
+                            </td>
+                            <td class="content-cell">至會場領取補給物資
+                            </td>
+                            <td class="content-cell">
+                                通常會有2箱礦泉水、2箱運動飲料、2包餅乾、2串香蕉、選手號碼布、4張車貼、紋身貼紙、餐券
+                                <br>建議前一天就先過去領，才不會賽事當天手忙腳亂
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="time-cell">T
+                            </td>
+                            <td class="content-cell">賽事開始
+                            </td>
+                            <td class="content-cell">
+                                1. 確認自己開跑梯次，提前 40 分至會場集合(會先拍團體照)
+                                <br>2. 開跑後就靠隊友們凱瑞惹~~~
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 id="actual-trip">三、 實際行程紀錄</h3>
+            <p style="background: #f1f8f1; padding: 15px; border-radius: 8px;">
+                👤 <strong>成員：</strong>CAR1 ㄚ純、Emma、達哥、陳律、Hugo；<br>
+                CAR2 Spncer、Amber、Lion、Sam、小萬，共10人<br>
+                👣 <strong>總距離：</strong>210 k<br>
+                ⌚ <strong>總時間：</strong>24:32:00<br>
+            </p>
+
+        <div class="tables-parallel-container" style="display: flex; gap: 20px; overflow-x: auto;">
+            
+            <div class="trip-table-wrapper" style="flex: 1; min-width: 400px;">
+                <table class="trip-table">
+                    <thead>
+                        <tr class="column-header">
+                            <th>棒次</th><th>距離</th><th>升降</th><th>選手</th><th>時間</th><th>地點</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>01</td><td>6.7 k</td><td>+67/-87</td><td>陳律</td><td>04:30</td><td>宜蘭蘇澳武荖坑</td></tr>
+                        <tr><td>02</td><td>7.7 k</td><td>+23/-29</td><td>ㄚ純</td><td></td><td></td></tr>
+                        <tr><td>03</td><td>6.6 k</td><td>+19/-199</td><td>Emma</td><td></td><td></td></tr>
+                        <tr><td>04</td><td>7.1 k</td><td>+24/-25</td><td>Hugo</td><td></td><td></td></tr>
+                        <tr><td>05</td><td>6.2 k</td><td>+37/-36</td><td>達哥</td><td>4/11 7:22</td><td>宜蘭頭城</td></tr>
+                        <tr><td>06</td><td>6.2 k</td><td>+38/-36</td><td>陳律</td><td>4/11 8:19</td><td>宜蘭頭城</td></tr>
+                        <tr><td>07</td><td>6.2 k</td><td>+39/-39</td><td>Emma</td><td></td><td></td></tr>
+                        <tr><td>08</td><td>7.2 k</td><td>+67/-49</td><td>ㄚ純</td><td></td><td></td></tr>
+                        <tr><td>09</td><td>6.8 k</td><td>+82/-81</td><td>達哥</td><td></td><td></td></tr>
+                        <tr><td>10</td><td>8.2 k</td><td>+75/-96</td><td>Hugo</td><td>11:32-12:23</td><td>新北福隆</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="trip-table-wrapper" style="flex: 1; min-width: 400px;">
+                <table class="trip-table">
+                    <thead>
+                        <tr class="column-header">
+                            <th>棒次</th><th>距離</th><th>升降</th><th>選手</th><th>時間</th><th>地點</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>11</td><td>7.4 k</td><td>+108/-94</td><td>Lion</td><td>13:02</td><td>新北福隆</td></tr>
+                        <tr><td>12</td><td>6.4 k</td><td>+112/-43</td><td>Spencer</td><td></td><td></td></tr>
+                        <tr><td>13</td><td>6.6 k</td><td>+355/-188</td><td>小萬</td><td></td><td></td></tr>
+                        <tr><td>14</td><td>8.2 k</td><td>+107/-303</td><td>Sam</td><td></td><td></td></tr>
+                        <tr><td>15</td><td>6.7 k</td><td>+66/-107</td><td>Amber</td><td>16:22-17:05</td><td>基隆八斗子</td></tr>
+                        <tr><td>16</td><td>5.4 k</td><td>+87/-85</td><td>Lion</td><td>18:22</td><td>基隆八斗子</td></tr>
+                        <tr><td>17</td><td>6.7 k</td><td>+97/-90</td><td>小萬</td><td></td><td></td></tr>
+                        <tr><td>18</td><td>7.3 k</td><td>+98/-107</td><td>Sam</td><td></td><td></td></tr>
+                        <tr><td>19</td><td>6.6 k</td><td>+208/-39</td><td>Spencer</td><td></td><td></td></tr>
+                        <tr><td>20</td><td>7.1 k</td><td>+106/-286</td><td>Amber</td><td>20:29</td><td>新北金山</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="trip-table-wrapper" style="flex: 1; min-width: 400px;">
+                <table class="trip-table">
+                    <thead>
+                        <tr class="column-header">
+                            <th>棒次</th><th>距離</th><th>升降</th><th>選手</th><th>時間</th><th>地點</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>21</td><td>6.6 k</td><td>+102/-41</td><td>ㄚ純</td><td>23:58</td><td>新北金山</td></tr>
+                        <tr><td>22</td><td>6.9 k</td><td>+284/-102</td><td>Hugo</td><td>4/12 00:58</td><td></td></tr>
+                        <tr><td>23</td><td>7.6 k</td><td>+64/-306</td><td>陳律</td><td></td><td></td></tr>
+                        <tr><td>24</td><td>7.0 k</td><td>+295/-50</td><td>達哥</td><td></td><td></td></tr>
+                        <tr><td>25</td><td>7.1 k</td><td>+50/-292</td><td>Emma</td><td>03:37-04:38</td><td>新北石門</td></tr>
+                        <tr><td>26</td><td>7.0 k</td><td>+95/-98</td><td>小萬</td><td>05:12</td><td>新北石門</td></tr>
+                        <tr><td>27</td><td>7.6 k</td><td>+319/-11</td><td>Sam</td><td></td><td></td></tr>
+                        <tr><td>28</td><td>6.7 k</td><td>+4/-314</td><td>Spencer</td><td></td><td></td></tr>
+                        <tr><td>29</td><td>8.7 k</td><td>+121/-85</td><td>Lion</td><td></td><td></td></tr>
+                        <tr><td>30</td><td>5.4 k</td><td>+19/-51</td><td>Amber</td><td>10:00</td><td>新北淡水魚人碼頭</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+<!-- 
+            <div class="trip-table-wrapper">
+                <table class="trip-table">
+                    <thead>
+                        <tr class="column-header">
+                            <th>棒次</th>
+                            <th>距離</th>
+                            <th>升降</th>
+                            <th>選手</th>
+                            <th>時間</th>
+                            <th>地點</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01</td>
+                            <td>6.7 k</td>
+                            <td>+67/-87</td>
+                            <td>陳律</td>
+                            <td>4/11 04:30</td>
+                            <td>宜蘭蘇澳武荖坑風景區</td>
+                        </tr>
+                        <tr>
+                            <td>02</td>
+                            <td>7.7 k</td>
+                            <td>+23/-29</td>
+                            <td>ㄚ純</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>03</td>
+                            <td>6.6 k</td>
+                            <td>+19/-199</td>
+                            <td>Emma</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>04</td>
+                            <td>7.1 k</td>
+                            <td>+24/-25</td>
+                            <td>Hugo</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>05</td>
+                            <td>6.2 k</td>
+                            <td>+37/-36</td>
+                            <td>達哥</td>
+                            <td>4/11 7:22</td>
+                            <td>宜蘭頭城</td>
+                        </tr>
+                        <tr>
+                            <td>06</td>
+                            <td>6.2 k</td>
+                            <td>+38/-36</td>
+                            <td>陳律</td>
+                            <td>4/11 8:19</td>
+                            <td>宜蘭頭城</td>
+                        </tr>
+                        <tr>
+                            <td>07</td>
+                            <td>6.2 k</td>
+                            <td>+39/-39</td>
+                            <td>Emma</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>08</td>
+                            <td>7.2 k</td>
+                            <td>+67/-49</td>
+                            <td>ㄚ純</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>09</td>
+                            <td>6.8 k</td>
+                            <td>+82/-81</td>
+                            <td>達哥</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>8.2 k</td>
+                            <td>+75/-96</td>
+                            <td>Hugo</td>
+                            <td>11:32-12:23</td>
+                            <td>新北福隆</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> -->
+
+            <ul class="timeline-list">
+                <li>
+                    <p>我們是 4/11 4:30 起跑梯次，因為很早就要起跑，所以前一晚大家就陸續抵達民宿。<br>
+                    民宿大概在行前會開完就開始找，打了三間都被訂完了，意外接到一通電話，老闆娘說還有另一棟民宿<a href="https://maps.app.goo.gl/QAJbAnZzWKBJChBV6" target="_blank">愛幸福小棧</a>會優先留給我們，包棟5,600元這麼佛的價格當然先訂再說。
+                    </br>房間配置是一間5人房、3人房以及2人房，後來老闆娘還有幫我們在5人房加睡墊，整體空間寬敞、乾淨，3個女生住3人房，兩張床床頭都有插頭，浴室有提供沐浴乳、洗髮精，還有一個小冰箱，床躺起來蠻舒服的，大概 23:30 大家已躺平，但有沒有睡著又是另一回事 XD
+                    </p>
+                </li>
+                
+                <li>
+                    <p><strong>02:50 起床，整理一下 03:30 樓下集合準備前往會場。</strong>因為出發梯次算早，到會場時還沒有什麼人潮，移動動線、停車還算順利。
+                    <br>兩車集合後，開始在會場東拍西拍，這次團隊有很多台大砲跟相機，真的都是大片~~順便蹭了幾張大會攝影師的團體照。很快就叫到 1036，我們大概 4:15 就拍完官方的拱門大合照，不過這次只拍了兩張(之前會拍三張)，最後看官方相簿甚至只有一張，難怪這次沒讓我們選放在證書的照片嗚嗚。
+                    <br>趁等待空檔聊個天認識一下新隊友，發現大家都是大 E 人呢，偷偷在旁邊觀察大家的互動也蠻有趣的 XD
+                    </p>
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPA6r-lnNNXP95T1lp8C-dxStv4N9tNcbRVE-tKX46EBBfcC7Evk7BfhpO-haSU2OBxxKmOy0q0qv2oH7AnYFMj-zqTaJQ8If0voj1oiVZJ3mnFiCM=w1200-h1000-p-k" alt="會場環境1" class="no-hover">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczNL52QDt-CFmpcDyHUKYnUpgbCVTALY6pJ4Q3cZMskQ0sBr0giheCFOAt5HhlBXKL-Ah4DvIsE-kxaZqNWKknkGmT13kl1qwAQgLm4qzPMX5i3U2Ko=w1200-h1000-p-k" alt="會場環境2" class="no-hover">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczMM2aDXCb8vXs-HkY1qunBImsOjHAXl7Xnut-ncBk2OZMJxfJbbOm9uHXGeZguCco7xem_pT_WRDOO_LuYr7EBctZDNeLNcFddgwip1NTDyKc3niTY=w1200-h1000-p-k" alt="會場大合照" class="no-hover">
+                    <figure> 
+                        <img src="https://lh3.googleusercontent.com/pw/AP1GczPM30oBsCdbg1nwhGlJz12F6iuTG8EXYMVM8J_I1xA0_OIZPwpJtdFVGSG4F65vX0fEBoQUGXUrVsPqbp5hXCSMef8EzK0Ppi4FFDGfF6u0HEVKUPA=w1200-h1000-p-k" alt="會場拱門起跑照" class="no-hover">
+                        <figcaption>▲ 會場代表 CRUFU RUN 的背板、裝飾都很值得拍，還有大會攝影師幫拍的合照以及拱門合照，也是這次唯一的官方起跑團體照QQ</figcaption>
+                    </figure>
+                </li>
+
+                <li>
+                    <p><strong>04:30 第一棒出花</strong>。接下來會以 CAR1 的紀錄為主，因為 CAR2 奮戰的時候另一車的我們都在睡還有吃東西 XD
+                        <br>第一棒都還在蘇澳，跑到要上天橋的陳律，遠遠看想說怎麼頭上怎麼沒亮光，原來是因為太熱把頭燈摘了...爬完很喘的樓梯後很快就來到第一接力區。
+                    </p>
+                <figure> 
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczNk5E6npAoQa7QxI8XwvqddcXZu3WvBSiFPvwFwMqTq3ngQn212VeZ06xwCUqNDvfRHU_zPd0J7ZLP3CN6TPEYuk-IgCUKG3FKtuOg7l_Ew2HWduo0=w1200-h1000-p-k" alt="第一接力區">
+                    <figcaption>▲ 交給第二棒ㄚ純。</figcaption>
+                </figure>
+                </li>
+
+                <li>
+                    <p><strong>05:18 第二棒出花</strong>。印象中就是跟在一位肌肉男後面，後面因為休息補給，肌肉男就不見了...便開始靠皮克敏 & 隊友的精神幹話(?)撐下去，隊友還不知道從哪生出喇叭哈哈哈
+                        <br>太陽還沒升起，整段跑起來涼涼的蠻舒服的，意外跑出 5:27 的配速，雖然能講話但心率還是飆到Zone4。
+                <figure> 
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOZR9-4LGu1ry1WJNIXrSSscaS1WDBuQ-1OJUsUlETupAIeDAE908wn_rX-3cdjRpMnnYraC48WPY-YgDFGVwbbyTjRWI873W8R_bsP3Tr6jsmO9wI=w1200-h1000-p-k" alt="第二接力區">
+                    <figcaption>▲ 交給第三棒 Emma。</figcaption>
+                </figure>
+                </li>
+
+                <li>
+                    <p><strong>06:00 第三棒出花</strong>。Emma 可以開始盡情種花惹，行前一直打預防針說她跑不快，沒關係那就讓大家一起慢。
+                        <br>陳律出了一個鬼點子，霹靂卡霹靂拉拉波波莉娜卡皮巴拉，直接請各位跑友吹泡泡，跑得氣喘吁吁還要吹泡泡，這招真狠，意外地跑友們很配合，還有人錯過後繞回來吹一口，在一旁真的笑到歪掉 XD
+                    </p>
+                    <figure>
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczP6go-Zu1zuyzkpD7_r94ouS0AmrX_XLaIk3Eo9VvjSqLx1VDoanUQLCs8FfaUUWhLiKyzRGH31dm4_AlsULJEmrIYKXYDyNUZagsi1vBOZCJcrWj4=w1200-h1000-p-k" alt="Emma 玩泡泡">
+                    <figcaption>▲ 聰明如 Emma，不用吹的用撥的，保留體力 XD。</figcaption>
+                    </figure>
+                    <figure>
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPgi01X_0grAj5iStigMFcT52LqSNe4zorITO_bBhB_d2tCbRhpllrlv6EqDNPmmLXchySj5NgYn_hgCIrMw3nNTNNYeQG2vGCODMnkATHNE6ydZJc=w600-h1000-p-k" alt="跑友吹泡泡">
+                    <figcaption>▲ 跑過頭還掉頭回來吹泡泡的跑友，重點人家跑的是 5人組...完全 Respect。</figcaption>
+                    </figure>
+                    <figure>
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczOEHcuEVtvjHt4bl4VdyELO3NyRxrcNS7kOkr4EmjIHxVvme7iy_r3wZ5T_6_5pTZZyZyUzuFIiunjjHBJ8iCm_UtW4YYhqJ9zfhxqAAqDFkfn2In8=w600-h1000-p-k" alt="第三接力區">
+                    <figcaption>▲ 竟然沒拍到第三接力區交接照，只能用拍拍尺代替。</figcaption>
+                    </figure>
+                </li>
+
+                <li>
+                    <p><strong>06:45 第四棒出花</strong>。Hugo 根本跟火箭一樣，完全看不到車尾燈，陳律還開玩笑說我們在玩尋找 Hugo 遊戲 XD 
+                        <br>這一棒跑得太快，補給車追不上，在車上太無聊只能猛傳大便貼圖攻擊，順帶一提我們都有額外下載 whoo APP，可以看隊友定位，也可以適時的傳貼圖鼓勵^^
+                    </p>
+                    <figure>
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczNmygJjKRT4a7veIGN0WiWeHnPoXRafGO7Gu6hxI2rvueIQVW_YDSsRojR65PEIPtPfPbU3uiRD3b6ji6g1lWJUCe0Hiy2cySjlg_bOojvyYmGhix4=w600-h1000-p-k" alt="大便貼圖攻擊">
+                    <figcaption>▲ 滿滿的大便貼圖攻擊。</figcaption>    
+                    /figure>
+                    <figure>
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczM77s4BDQN5CJicfyu5N4XPgkwFUMkmMwKNkRkGxJwe0bNqN1DvfYLd-pXgO5MDtojSmdgPkWWjMoZIIRgHdPUri1se_Qgykjnb-6DqAiXGw-avlqc=w600-h1000-p-k" alt="第四接力區">
+                    <figcaption>▲ 交給第五棒達哥，第 1 Round 要結束囉。</figcaption>
+                    </figure>
+                </li>
+        </ul>
+
+        </section>
+    </article>
+
+
+    <div class="content-container" style="margin-top: 10px;">
+        <h3 style="color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px;">
+            💬 留言區
+        </h3>
+        
+        <script src="https://giscus.app/client.js"
+                data-repo="iris22341/DiAriEs"
+                data-repo-id="R_kgDORwJ7pQ"
+                data-category="Announcements" 
+                data-category-id="DIC_kwDORwJ7pc4C7U-4"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-TW"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </div>
+
+    <footer>
+            <p>© 2026 DiAriEs' Blog | Capturing every moment of dopamine.</p>
+            <div class="ig-link-container">
+                <a href="https://www.instagram.com/agirlwholovesexercise?utm_source=blog&utm_medium=footer&utm_campaign=trip1_xueshan" target="_blank" class="ig-link-wrapper">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczNZTlD2Xz8PKgxPlr53c6jk_POhNA7RWaVCCw1enQYPgXyQ35ssKBMGAXkBB_RnX7WZLEFVgKUYV1ZS4wuxbWE38I2YGxja7jz8nmq5QaFbvLF3WEI=w30-h30-p-k" alt="Instagram Icon" class="ig-icon">
+                    <span class="ig-link">Follow me on Instagram</span>
+                </a>
+            </div>
+        </footer>
+
+</body>
+</html>
