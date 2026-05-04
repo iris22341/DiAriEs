@@ -195,28 +195,45 @@
             font-size: 1.1em;
         }
 
-        /* 📱 手機版專屬優化 */
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .sidebar {
-                width: 100% !important; height: auto; position: sticky; top: 0;
-                background: var(--primary-color);
-            }
-            .toggle-btn, .sidebar h2, .sidebar hr { display: none; }
-            .sidebar-inner { padding: 10px; overflow-x: auto; }
-            .sidebar-menu { display: flex; gap: 10px; }
-            .sidebar-menu li { margin: 0; }
-            .sidebar-menu a { padding: 8px 12px; background: rgba(255,255,255,0.1); border-radius: 15px; font-size: 0.85em; }
-            .sidebar-menu a.active { background: white; color: var(--primary-green); }
+/* 📱 手機版專屬優化更新 */
+@media (max-width: 768px) {
+    /* 讓內容容器邊距縮小，增加表格可用空間 */
+    .content-container {
+        padding: 15px;
+        margin: 10px auto;
+    }
 
-            .main-content { margin-left: 0 !important; padding: 15px; }
-            
-            header { flex-direction: column; align-items: flex-start; padding: 20px; }
-            .header-photos { width: 100%; grid-template-columns: repeat(4, 1fr); margin-top: 20px; }
-            .header-photos img { height: 70px; }
+    /* 修正併排容器：在手機上改為垂直排列 */
+    .tables-parallel-container {
+        flex-direction: column;
+        gap: 0px !important;
+    }
 
-            .article-list li { flex-direction: column; align-items: flex-start; gap: 5px; }
-        }
+    /* 移除強制的最小寬度，讓表格能根據螢幕縮放 */
+    .trip-table-wrapper {
+        min-width: 0 !important;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* 縮小手機版表格字體與間距 */
+    .trip-table {
+        font-size: 0.8em; /* 稍微縮小字體 */
+    }
+
+    .trip-table th, .trip-table td {
+        padding: 8px 4px; /* 縮小內距，避免換行過多 */
+    }
+
+    /* 針對行程記錄表格的特定寬度調整 */
+    .timeline-table td:nth-child(odd) {
+        width: 60px; /* 縮小時間欄位寬度 */
+    }
+
+    /* 導覽列與標題調整 */
+    h1 { font-size: 1.5em; }
+    .hero-img { margin-bottom: 20px; }
+}
     </style>
 </head>
 <body>
