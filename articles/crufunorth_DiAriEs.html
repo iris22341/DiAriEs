@@ -109,7 +109,7 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             overflow: hidden;
-            word-break: keep-all;
+            word-wrap: break-word;
         }
         .trip-table th, .trip-table td {
             border-right: 1px solid #ddd;
@@ -117,11 +117,15 @@
             padding: 14px 10px;
             text-align: center;
         }
+        .trip-table th:first-child {
+            width: 80px; /* 或是使用 white-space: nowrap 讓寬度剛好包裹文字 */
+            white-space: nowrap;
+        }
         .trip-table th:last-child, .trip-table td:last-child { border-right: none; }
         .trip-table tr:last-child td { border-bottom: none; }
         .date-header th { background: var(--table-header-dark); color: #333; }
         .column-header th { background: var(--table-header-light); color: #555; }
-        
+
         /* 避免裝備表被強制加粗，僅針對四欄式紀錄表 */
         .timeline-table td:nth-child(odd) { 
             background: var(--table-time-bg); 
@@ -197,37 +201,33 @@
 
 /* 📱 手機版專屬優化更新 */
 @media (max-width: 768px) {
-    /* 讓內容容器邊距縮小，增加表格可用空間 */
-    .content-container {
-        padding: 15px;
-        margin: 10px auto;
-    }
-
-    /* 修正併排容器：在手機上改為垂直排列 */
-    .tables-parallel-container {
-        flex-direction: column;
-        gap: 0px !important;
-    }
-
-    /* 移除強制的最小寬度，讓表格能根據螢幕縮放 */
-    .trip-table-wrapper {
-        min-width: 0 !important;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    /* 縮小手機版表格字體與間距 */
     .trip-table {
-        font-size: 0.8em; /* 稍微縮小字體 */
+        table-layout: auto; /* 讓瀏覽器根據最小寬度設定自動計算 */
+        width: 100%;
     }
 
-    .trip-table th, .trip-table td {
-        padding: 8px 4px; /* 縮小內距，避免換行過多 */
+    /* 欄 1：時間欄 (設定最小寬度，確保不換行) */
+    .timeline-table td:nth-child(1) {
+        width: 18%;           /* 佔比最小 */
+        min-width: 65px;      /* 確保時間如 "09:00" 能橫向排完 */
+        white-space: nowrap; 
+        padding: 8px 4px;
     }
 
-    /* 針對行程記錄表格的特定寬度調整 */
-    .timeline-table td:nth-child(odd) {
-        width: 60px; /* 縮小時間欄位寬度 */
+    /* 欄 2：地點/項目欄 (確保比欄 1 寬) */
+    .timeline-table td:nth-child(2) {
+        width: 25%;           /* 寬度明確大於欄 1 */
+        min-width: 85px;      /* 確保地點名稱不會過度斷行 */
+        background: #f9f9f9;  /* 稍微做顏色區隔增加層次感 */
+    }
+
+    /* 欄 3：行程紀錄/內容 (剩餘空間的主角) */
+    .timeline-table td:nth-child(3) {
+        width: auto;          /* 自動吸收剩下的所有寬度 */
+        text-align: left;     /* 內容多時靠左對齊較舒適 */
+        word-wrap: break-word;
+        word-break: break-all;
+        line-height: 1.4;     /* 增加行距，減緩多段行帶來的壓迫感 */
     }
 
     /* 導覽列與標題調整 */
